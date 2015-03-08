@@ -1,0 +1,1 @@
+lsts.~RepListOmitTrailingNulls( _field; lsts.RepeatingFieldRepetitionCount( _field ); 1; Count( _field ) )

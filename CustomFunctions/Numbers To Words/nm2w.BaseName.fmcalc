@@ -1,0 +1,30 @@
+Case(
+  _base = 1;
+  "<invalid>";
+  _base = 100;
+  "hundred";
+  Choose(
+    Div( Log( _base ); 3 ) - 1;
+    "thousand";
+    "million";
+    "billion";
+    "trillion";
+    "quadrillion";
+    "quintillion";
+    "sextillion";
+    "septillion";
+    "octillion";
+    "nonillion";
+    "decillion";
+    "undecillion";
+    "duodecillion";
+    "tredecillion";
+    "quattuerdecillion";
+    "quindecillion";
+    "sexdecillion";
+    "septendecillion";
+    "octodecillion";
+    "novemdecillion";
+    "vigintillion"
+  )
+)

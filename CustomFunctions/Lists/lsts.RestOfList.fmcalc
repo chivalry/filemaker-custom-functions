@@ -1,0 +1,6 @@
+// Returns the list without the first item. Usually used to loop through a list
+//   of items.
+//
+// Written by Charles Ross
+
+RightValues( _list; ValueCount( _list ) - 1 )

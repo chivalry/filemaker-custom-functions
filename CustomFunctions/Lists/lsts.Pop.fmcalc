@@ -1,0 +1,15 @@
+// Pops the virst value off of the named variable and returns it.
+//
+// Written by Geoff Coffey
+//   http://sixfriedrice.com/wp/pop-goes-the%E2%80%A6um%E2%80%A6variable/
+
+Evaluate(
+   "Let(
+      [
+        _firstItem = GetValue( " & _variableName & "; 1 );
+    " & _variableName & " = RestOfList( " & _variableName & " )
+      ];
+
+      _firstItem
+    )"
+)

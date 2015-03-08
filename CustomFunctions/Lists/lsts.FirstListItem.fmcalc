@@ -1,0 +1,7 @@
+// Returns the first value in a list, including the ending paragraph mark. Often
+//   used to loop through a list of items. Returns the item without the trailing
+//   carriage return.
+//
+// Written by Charles Ross
+
+GetValue( _list; 1 )

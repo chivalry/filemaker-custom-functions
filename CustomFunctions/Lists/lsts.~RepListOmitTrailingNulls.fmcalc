@@ -1,0 +1,12 @@
+Case(
+  _rep > _repMax or _maxValues = 0; "";
+  Let( [
+    _value = GetRepetition( _field; _rep );
+    _maxValues = Case( IsEmpty( _value ); _maxValues; _maxValues - 1 )
+  ];
+
+  Case( _rep = 1; ""; ¶ )
+  & _value
+  & lsts.~RepListOmitTrailingNulls( _field; _repMax; _rep + 1; _maxValues )
+  )
+)

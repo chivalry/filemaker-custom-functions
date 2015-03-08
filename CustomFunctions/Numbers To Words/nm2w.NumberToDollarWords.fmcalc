@@ -1,0 +1,23 @@
+Let(
+  [
+    RoundedAmount = Round( _amount; 2 );
+    Dollars = Int( RoundedAmount );
+    Cents = ( ( RoundedAmount - Dollars ) * 100)
+  ];
+
+  Case(
+    Dollars = 0;
+    "zero";
+    nm2w.IntegerToWords( Dollars; 10 ^ 63 )
+  )
+  
+  & " dollars and " & 
+  
+  Case(
+    Cents = 0;
+    "no";
+    Cents
+  )
+  
+  & "/100"
+)

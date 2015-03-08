@@ -1,0 +1,30 @@
+Let(
+  [
+    Tenth = _num / 10;
+    Tens = Int( Tenth ) * 10;
+    UnderTwenty = Choose(
+      _num;
+      "zero"; "one"; "two"; "three"; "four"; "five"; "six"; "seven"; "eight";
+        "nine"; "ten"; "eleven"; "twelve"; "thirteen"; "fourteen"; "fifteen";
+        "sixteen"; "seventeen"; "eighteen"; "nineteen"
+    );
+    OverTwenty = Choose(
+      Int( Tenth ) - 2;
+      "twenty"; "thirty"; "fourty"; "fifty"; "sixty"; "seventy"; "eighty";
+        "ninety"
+    )
+  ];
+
+  Case(
+    _num ≥ 100;
+    "<error - too large number in ConvertSmallIntToWords: " & _num & ">";
+
+    _num < 20;
+    UnderTwenty;
+
+    OverTwenty & Case(
+      Tens ≠ Tenth * 10;
+      "-" & nm2w.Under100ToWords( _num - Tens )
+    )
+  )
+)

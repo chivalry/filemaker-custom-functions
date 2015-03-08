@@ -1,0 +1,9 @@
+// Returns whether or not the binary bit in the given number is turned on. i.e.,
+//   ~BitIsSet( 16; 5 ) would return True as 16 is 10000 in binary. Similarly,
+//   ~BitIsSet( 18; 2 ) would also return True as 18 is 10010 in binary. This
+//   calculation is thanks to Mikhail Edoshin and is found at
+//   http://edoshin.skeletonkey.com/2005/11/custom_function.html.
+//
+// Written by Mikhail Edoshin
+
+Mod( Div( _number; 2 ^ ( _bit - 1 ) ); 2 )

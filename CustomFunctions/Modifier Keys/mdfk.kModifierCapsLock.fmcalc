@@ -1,0 +1,6 @@
+// Used as a named constant. Should have a value such that ModifierKeyIsActive(
+//   kModifierCapsLock ) = True when the shift key is held down.
+//
+// Written by Charles Ross.
+
+2

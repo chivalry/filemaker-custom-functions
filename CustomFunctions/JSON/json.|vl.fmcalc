@@ -1,0 +1,7 @@
+/* converts from FMP value lists 2 Lists OR from Lists 2 FMP value lists  - checks first three characters "<|-" */
+
+If ( Left ( _input ; 3 ) = "<|-" ;   Substitute( Middle ( _input ; 4 ; Length ( _input ) - 6 ) ; ["|-"; "¶"] ; ["/|/" ; "|" ] ) ;
+
+If ( IsEmpty ( _input ) ; "<|->" ; "<|-" & Substitute ( _input ; ["|" ; "/|/" ] ; ["¶" ; "|-"] ) & "|->" )
+
+)

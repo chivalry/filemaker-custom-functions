@@ -1,0 +1,1 @@
+GetAsNumber( FieldType( Get( FileName ); GetFieldName( _repeating_field ) ) )

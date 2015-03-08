@@ -1,0 +1,13 @@
+// Returns which occurrence in the list the given item is at. In other words,
+//   MiddleValues( TheList; ItemPosition( Item; TheList ); 1 ) = TheItem & "¶"
+//   (since MiddleValues appends a carriage return to the end of it's return
+//   value).
+
+Let(
+  [
+    _bracketedList = "¶" & _list & "¶";
+    _searchPosition = Position( _bracketedList; "¶" & _item & "¶"; 1; 1 )
+  ];
+
+  PatternCount( Left( _bracketedList; _searchPosition ); "¶" )
+)

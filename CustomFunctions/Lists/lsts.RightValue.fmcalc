@@ -1,0 +1,1 @@
+GetValue( _list; ValueCount( _list ) )

@@ -1,0 +1,16 @@
+// Returns the intersection of the two lists, that is, returns the members of
+//   the lists that exist in both. For example, Intersection( "1¶2¶3"; "2¶3¶4¶5"
+//   ) = "2¶3".
+//
+// Written by Charles Ross
+
+
+Case(
+  ValueCount( _list1 ) = 0; // The exit condition
+  "";
+
+  lsts.IsMember( lsts.FirstListItem( _list1 ); _list2 );
+  List( lsts.FirstListItem( _list1 ); lsts.Intersection( lsts.RestOfList( _list1 ); _list2 ) );
+
+  lsts.Intersection( lsts.RestOfList( _list1 ); _list2 )
+)
