@@ -1,0 +1,33 @@
+// Converts a dictionary into a string with the given format.
+//
+// Written by Jesse Antunes
+//   http://sixfriedrice.com/wp/filemaker-dictionary-functions/
+
+Let(
+  [
+    _firstName = dict.DictFirst ( _dict );
+    _rawData   = dict.DictGet( _dict; _firstName);
+
+    _data      = Case(
+      not IsEmpty( dict.DictFirst( _rawData ) );
+      dict.DictToString( _rawData ; _format );
+      _rawData
+    );
+
+    _rest = dict.DictRemove( _dict; _firstName )
+  ];
+  
+  Case(
+    not IsEmpty( _firstName );
+    Substitute( 
+      _format;
+      [ "$name"; _firstName  ]; 
+      [ "$value"; _data ]
+    ) & Case (
+      not IsEmpty( _rest ); 
+      dict.DictToString(_rest; _format)
+    );
+  // Else
+    _dict
+  )
+)

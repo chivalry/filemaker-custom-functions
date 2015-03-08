@@ -1,0 +1,24 @@
+// Returns the value for the named key in the passed dictionary.
+//
+// Written by Jesse Antunes
+//   http://sixfriedrice.com/wp/filemaker-dictionary-functions/
+
+Let(
+  [
+    _match  = "<:" & dict.DictEscape( _key ) & ":=";
+    _pStart = Position( _dict; _match; 1; 1 );
+    _start  = _pStart + Length( _match );
+    _end    = Position( _dict ; ":>"; _start; 1 );
+    _len    = Case(
+      _end = 0;
+      999999999;
+      _end - _start
+    )
+  ];
+
+  Case(
+    _pStart = 0;
+    devp.Nil; 
+    dict.DictUnescape( Middle( _dict; _start; _len ) )
+  )
+)

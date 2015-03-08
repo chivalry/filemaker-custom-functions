@@ -1,0 +1,7 @@
+// Returns the appropriate file reference protocol for the current platform.
+
+Case(
+  Get( SystemPlatform ) = sysk.kCurrentPlatformMac;
+  "filemac:";
+  "filewin:"
+)

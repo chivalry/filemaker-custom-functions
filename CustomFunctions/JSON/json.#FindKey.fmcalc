@@ -1,0 +1,9 @@
+Let (
+[
+_dictV = json.#Values ( _dict ) ;
+_dictK = json.#Keys ( _dict )
+] ;
+
+json.#Get ( _dictK ; json.|Index( _dictV ; _value ) )
+
+)

@@ -1,0 +1,6 @@
+// Adds a key/value pair to a dictionary.
+//
+// Written by Jesse Antunes
+//   http://sixfriedrice.com/wp/filemaker-dictionary-functions/
+
+_dict & dict.DictEntry( _key ; _value )

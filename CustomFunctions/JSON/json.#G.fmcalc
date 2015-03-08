@@ -1,0 +1,40 @@
+Let ( [
+_vType = json.#VarType ( _name ) ;
+_brackets_match = PatternCount ( _name ; "[" ) and Exact ( PatternCount ( _name ; "[" ) ; PatternCount ( _name ; "]" ) ) ] ;
+//---------- basic error checking bit - r there brackets and do they match - if so this boy is a multi-dimensional
+
+Case (
+
+_vType = "List" ; Let ( _split = Position ( _name ; "|->" ; 0 ; 1 ) + 2 ;  json.#Get ( Left ( _name ; _split ) ; Right ( _name ; Length ( _name ) - _split ) ) ) ;
+_vType = "Dict" ; Let ( _split = Position ( _name ; ":>" ; Length ( _name ) ; -1 ) + 1 ;  json.#Get ( Left ( _name ; _split ) ; Right ( _name ; Length ( _name ) - _split ) ) )  ;
+
+_brackets_match ; 
+
+Let (
+[
+_pos1 = Position ( _name ; "[" ; 0 ; 1 ) ;
+_pos2 = Position ( _name ; "]" ; _pos1 ; 1 ) ;
+_varName = Trim ( Left ( _name ; _pos1 - 1 ) ) ;
+_var = ( Left ( _varName ; 1 ) = "$" ) ;
+
+_md_array = Case (
+      _varName ="P" ; Get(ScriptParameter) ;
+      _varName = "R" ; Get(ScriptResult) ; 
+      Evaluate (      If (      _var ; _varName ; "GetField (  GetFieldName ( " & _varName & " )  )"     )     )
+) ;
+_result = json.#Get ( _md_array ; Trim ( Middle ( _name ; _pos1 + 1 ; _pos2 - _pos1 -1 ) ) &  Trim ( Middle ( _name ; _pos2 + 1 ; Length ( _name ) ) )   )
+]
+;
+
+/* BUG TEST  
+"_varName: " & _varName & "¶_var: " & _var & "¶_pos1: " & _pos1 & "¶_pos2: " & _pos2 & "¶_md_array: " & _md_array &  */
+
+_result
+/*--------------
+ if it's a _var just set the var, don't return it; else it's a field, *assume* they know wot they are doing and using this in a 'set field' context thus: SetField ( Table::MyArray ; #(  MyArray[one][7][anyKeyWill Do]; "anyvalue will do- brackets ignored here" ) )
+----------------*/
+)
+
+)
+
+) // end let

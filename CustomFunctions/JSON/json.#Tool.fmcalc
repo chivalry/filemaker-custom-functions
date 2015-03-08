@@ -1,0 +1,29 @@
+// DICT helper function, called by #Items, #Keys, #Values... they have so much in common that it should be run from here...
+
+// these are stolen from python, handy functions cos they turn Dict formats into List formats with all the joys that can be obtained from them...
+
+
+
+Case ( json.#VarType (_dict) = "dict" ;
+
+
+
+Let (
+[
+$cf_Dict_i = ( 1+$cf_Dict_i ) ;
+_k1 = Position ( _dict ; "<:" ; 0 ; 1 ) ;
+_m1 = Position ( _dict ; ":=" ; _k1+2 ; 1 ) ;
+_e1 = Position ( _dict ; ":>" ; _m1+2 ; 1 ) ;
+_key = json.#Escape ( Middle ( _dict ; _k1 + 2; _m1-_k1 -2) ; -1 ; json.Null ) ;
+_value = json.#Escape ( Middle ( _dict ; _m1 + 2; _e1-_m1 -2) ; -1 ; json.Null ) ;
+_this = If ( _k1 ; Case ( _com = "keys" ; _key ; _com = "values" ; _value ; _com = "items" ; json.|List ( _key & json.… & _value ) ) ) ;
+// 'if k1' in above line is in case badly formatted dict passed there will be no error just a clean result
+_rest = Middle ( _dict ; _e1 + 2 ; Length ( _dict ) )
+] ;
+
+If ( $cf_Dict_i = 1 ; "<|-" ) & json.#Escape ( _this ; json.Null ; 1 ) & If ( _k1 and not IsEmpty ( _rest ) ; "|-" & json.#Tool ( _rest ; _com ) ) & If ( IsEmpty (_rest) ; Let ( $cf_Dict_i = "";  "|->" ) )
+
+)
+
+
+)

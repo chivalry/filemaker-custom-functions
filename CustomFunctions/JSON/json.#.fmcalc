@@ -1,0 +1,82 @@
+/* Thomas' hacked version of the fine  original by SixFriedRice.com
+
+basically for my multi-dimensional ease of access and setting functionality, i need to detect $ at front, and if so do some truly funky tings:
+  i. check for variable or not, if so set result of recrusive setting checking
+
+never use [ or ] in your keys... it'll bust right up...
+
+# and #D never return anything when used dynamically with variables, they just invisibly set the variables...
+
+
+Sllice insertion works thus:
+  List[a:] - replaces from Index 'a'
+  List[:z] - replaces up to (but not including) Index 'z'
+  List[a:z] - replaces from Index 'a' up to but not including Index 'z'
+     i.e. stride does not apply
+Default behaviour:
+  if a or z is outside of range is to set to max Index point
+  if a=z it will 'insert' at that point
+The inserted artifact has to be a list
+
+ */
+
+
+Let ( [
+  _vType = json.#VarType ( _name ) ; // so i can quickly know if they've passed a raw dict/list
+  _var = (Left ( _name ; 1 ) = "$");
+  _splitPos = Case ( _vType = "list" ; Position ( _name ; "|->" ; Length(_name) ; -1 ) + 2 ; _vType = "dict" ; Position ( _name ; ":>" ; Length(_name) ; -1 ) + 1 ) ;
+  _pos1 = Position ( _name ; "[" ;_splitPos ; 1 ) ;  // first bracket
+  _emptyWithBrackets = (_pos1=1); // EMPTY DICT/LIST SUPPLIED PROBABLY or poor terming... [name] in either case just strips first brackets
+  _splitPos = Case ( _splitPos ; _splitPos ; _pos1 > 1 ; _pos1 - 1 ; 0 )
+] ;
+
+
+Case ( ((_vType = "text") or (_vType = "number")) and not _var  ; // SIMPLEST CASE
+"<:" &    json.#Escape ( _name ; 1 ; json.Null ) &  ":=" &   json.#Escape ( _value ; 1 ; json.Null ) &  ":>"  ;  
+
+Let ( [
+  _pos2 = Position ( _name ; "]" ; _pos1 ; 1 ) ;
+  _List_Dict_REF = Trim (  Left ( _name ; _splitPos )  ) ;  // this will either rip $hello from $hello[key] or <|-list|-> from <|-list|->key or <|-list|->[key]
+  _key = Trim ( Right ( _name ; Length(_name)-_splitPos) );
+  _key = Case ( Left ( _key ; 1 ) ≠"[" ; _key ; _pos1 and _pos2 ; Trim ( Middle ( _name ; _pos1 + 1 ; _pos2 - _pos1 -1 ) ) &  Trim ( Middle ( _name ; _pos2 + 1 ; Length ( _name ) ) ) ) ;  // guarantees keys are key1[key2] or key1 but never [key1]
+  _brackets_OK = not PatternCount ( _key ; "[" ) or Exact ( PatternCount ( _name ; "[" ) ; PatternCount ( _name ; "]" ) ) // either 0 or matching numbers of []s
+];
+
+
+If ( _brackets_OK ; 
+
+  Let (
+  [
+    $cf_|Tool_error = ""; // this needed! - if the ting breaks don't TOUCH array, return as is, unbroken...? or handle on basis of error number?
+
+    _md_array = Case ( (_vType = "list") or (_vType = "dict") or _emptyWithBrackets ; _List_Dict_REF ; Evaluate (      Case (   _var  ; _List_Dict_REF ; "GetField ( GetFieldName ( " & _List_Dict_REF & " ) )"     )     ) );
+
+
+/* ERROR behaviour question - could just then set it as a level, e.g. lev0[lev1] - lev0 not field, so make it a two level dict? */
+    _md_arrayType = json.#VarType ( _md_array ) ;
+    _error = Case (   _md_arrayType = "List" or _md_arrayType = "Dict" or _md_arrayType ="empty" ; json.Null ; _md_array = "?" ; "Field reference did not evaluate (probably - or it could have been a '?' in the target content)." ; "Invalid Target Content Type" );  // UNREPORTED ATM
+
+
+    /* BUG TEST 
+    $$bug_result =  "¶¶_List_Dict_REF: " & _List_Dict_REF & "¶_var: " & _var &  "¶_splitpos: " & _splitPos & "¶_pos1: " & _pos1 & "¶_pos2: " & _pos2 & "¶_md_array: " & _md_array & "¶_key: "& _key & "¶_error: " & _error & "¶¶" ; */
+    _result = If ( Length(_error)  ; _error ; json.|Tool ( "SET_insert" ; _md_array ; 0 ; _value ; _key ; 0 ; json.Null ) ) 
+  ] ;
+
+    If ( _var ; Evaluate ( "Let ( " & _List_Dict_REF & " = " & Quote ( _result ) & " ; _ )" ) ; _result )
+    /*--------------
+     if it's a _var just set the var, don't return it; else it's a field, *assume* they know wot they are doing and using this in a 'set field' context thus: SetField ( Table::MyArray ; #(  MyArray[one][7][anyKeyWill Do]; "anyvalue will do- brackets ignored here" ) )
+    ----------------*/
+  ) ;
+
+// ELSE - syntax failure so leave untouched
+If ( not _var ; _List_Dict_REF )
+
+) // end if brackets OK
+
+) // end Let
+
+) // end if not SPLIT name required (into var & keys etc)
+
+
+
+) // end let

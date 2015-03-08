@@ -1,0 +1,26 @@
+/* 
+_dictOrList - can be just that - handle JSON style mixed objects
+
+
+|Tool ( _action ; _list ; _level ; _value ; _i ; _c ; _e )
+*/
+
+
+
+Let ( [
+$cf_|tool_error = "";
+_vType = json.#VarType ( _dictOrList ) ;
+
+_result = Case (
+  (( _vType ≠ "list" ) and ( _vType ≠ "dict" )) or (_i="") ; json.Null ; // exit if not list or dict
+
+  PatternCount( _i ; "¶" ) ; json.|Comp ( "#Get (" & Quote(_dictOrList)  & " ; _q )"  ; "_q" ; json.|vl(_i) ; json.Null ) ;
+  // if ¶ separated list, then it will return a list separated format of query
+
+  json.|Tool ( "GET" ; _dictOrList ; 0 ; _i ; json.Null ; If ( _vType = "list" ; json.#Count ( _dictOrList ) ) ; _vType )
+  )
+];
+
+If ( json.IsNumber (_result ) ; GetAsNumber(_result) ; _result )
+
+)

@@ -1,0 +1,13 @@
+// returns value
+Let ( [
+_c = If ( json.#VarType ( _list ) = "list" ; json.#Count ( _list ); 0) ;
+_result = Case (
+                       not _c ; json.Null ;
+                       _c = 1 ; json.#Get ( _list ; 0 ) ;
+                       Evaluate ( "Min ( " & Substitute(json.|vl(_list); "¶"; "; ") & ")" )
+                       )
+] ;
+
+_result
+
+)

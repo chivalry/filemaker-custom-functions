@@ -1,0 +1,3 @@
+/* list separator for internal usage - gets switched from ^_^ to |-, so that u can have nested lists as items */
+
+"^_^"

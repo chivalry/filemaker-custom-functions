@@ -1,0 +1,6 @@
+// Outputs a dictionary in a pseudo-XML format.
+//
+// Written by Jesse Antunes
+//   http://sixfriedrice.com/wp/filemaker-dictionary-functions/
+
+dict.DictToString( _dict; "<$name>¶$value¶</$name>¶" )

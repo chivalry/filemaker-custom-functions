@@ -1,0 +1,33 @@
+/* to create a key value array from list supplied assuming they are equal length - else error...
+
+will accept in valueList format, or custom list syntax => both get converted to custom list syntax for simplicity
+
+_values can be blank
+
+
+
+
+*/
+Case ( 
+
+IsEmpty( $cf_Lists2Dict_i ) ; // --- first run so fix it up
+Let ( [
+_keys = If ( json.#VarType ( _keys ) = "list" ; _keys ; json.|vl ( _keys ) ) ;
+_values = Case ( IsEmpty ( _values ) or (json.#VarType ( _values ) = "list") ; _values ; json.|vl ( _values ) ) ;
+_kc = json.#Count ( _keys ) ;
+_vc = json.#Count ( _values ) ] ; 
+Case ( ( _kc ≠_vc )and not IsEmpty ( _values ) ; "Error: " & _kc & " keys ≠ & " & _vc & " values"; _kc ; Let ( $cf_Lists2Dict_i = 0 ; json.#Lists2Dict ( _keys ; _values ) ) )
+) ; // end let
+
+
+// LAST RUN wipe var
+$cf_Lists2Dict_i = json.#Count ( _keys  ) ;  Let ( $cf_Lists2Dict_i = json.Null ; json.Null ) ;
+
+
+// already run so just loop thru to end
+Let ( 
+  $cf_Lists2Dict_i = $cf_Lists2Dict_i + 1 ;
+  json.#(  json.#Get ( _keys ; $cf_Lists2Dict_i - 1 ) ; If ( not IsEmpty (_values ) ; json.#Get ( _values ; $cf_Lists2Dict_i - 1 ) ) )  &   json.#Lists2Dict(_keys; _values )
+) // end let
+
+) // end case

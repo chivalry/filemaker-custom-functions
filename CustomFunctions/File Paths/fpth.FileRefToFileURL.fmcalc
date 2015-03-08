@@ -1,0 +1,17 @@
+// Converts a file reference (as used by some FileMaker script steps) into a
+//   file URL.
+
+Let(
+  [
+    _startupDrive = Case(
+      Abs( Get( SystemPlatform ) ) = 1;
+      Get( SystemDrive );
+      ""
+    );
+
+    _searchStr = fpth.OSProtocol & _startupDrive;
+    _replStr = "file://"
+  ];
+
+  Substitute( _fileRef; _searchStr; _replStr )
+)

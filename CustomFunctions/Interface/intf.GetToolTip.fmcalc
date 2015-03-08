@@ -1,0 +1,11 @@
+// Checks a global preference for whether to show a passed tip or not.
+//
+// EXTERNAL REQUIREMENTS: The presence of the $$ShowToolTips global variable.
+//
+// Written by Charles Ross
+
+Case(
+  $$ShowToolTips;
+  _tip;
+  ""
+)

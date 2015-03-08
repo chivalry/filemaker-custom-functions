@@ -1,0 +1,20 @@
+/*  a negative quantity "unescapes" a positive quantity "escapes"
+        unescape is to bring it back N number of levels,
+        to escape is to sink it N number of levels...
+designed to escape both dict & lists to given levels
+this works nicely because they escape 2 different characters  | and :   */
+
+Let ( [
+  _echar = Case ( _listNumber ; "|" ; _dictNumber ; ":" ) ;  // it will do lists first
+  _thisVal = Case ( _listNumber ; _listNumber ; _dictNumber ; _dictNumber ) ;
+  _thisVal = Case ( _thisVal > 0 ; _thisVal ; (_thisVal < 0) and Position ( _value ; "/" & _eChar & "/" ; 0 ; 1 ) ;  _thisVal ; 0 ) ; // if it isn't there and we're negative no need to even try it...
+
+  _escapedListOrDict = Case ( _thisVal = 0 ; _value ; IsEmpty ( _eChar ) ; _value ; _thisVal < 0 ; Substitute ( _value ; "/" & _eChar & "/"; _eChar ) ; _thisVal > 0 ; Substitute ( _value ; _eChar ; Let ( _escaped = json.Repeat ( "/"  ; _thisVal ) ; _escaped & _eChar & _escaped )   ) ) ;
+  _listNumber = If ( _echar = "|" ; Case ( _thisVal = 0 ; 0 ; _listNumber > 0 ; 0 ; _listNumber < 0 ; _listNumber + 1 ) ; _listNumber ) ;
+  _dictNumber = If ( _echar = ":" ; Case ( _thisVal = 0 ; 0 ; _dictNumber > 0 ; 0 ; _dictNumber < 0 ; _dictNumber + 1) ; _dictNumber ) ;
+  _iterate = (( Abs(_dictNumber) + Abs( _listNumber) ) > 0 ) // still layers to go
+] ;
+  
+Case ( _iterate ; json.#Escape ( _escapedListOrDict ; _dictNumber ; _listNumber ) ; _escapedListOrDict )
+
+)

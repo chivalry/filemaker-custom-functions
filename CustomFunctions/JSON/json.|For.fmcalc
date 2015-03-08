@@ -1,0 +1,64 @@
+/*
+_list can be syntactic list or ValueList (will be converted on first run)
+
+Loop
+	exit if [ |For ( _vars ; _list ) ]
+	process script steps
+End Loop
+
+_VARS:  a  OR a…b OR d…fred…<|-subList|-subList2|->    Fred etc - any name that be a $local_variable...
+
+infinite nesting of foreach - List of FOR Dicts in $$cf_For[1...N] - always use N if in loop, create N+1 if start
+
+ON END = create new local $foreach if still something left in global foreach
+*/
+
+
+Let ( [
+  
+  _UID = _vars & _list  ;
+/* possibly not always an exact UID - if u had same keys and same _list it would think it was the same, not quite sure how you could do that!! */
+
+  _for = json.#Get ( $$cf_For ; -1 ) ;
+  _curUID = json.#Get ( _for ; "UID" ) ;
+  _for = If ( _UID = _curUID ; _for ; // same FOR
+           // else create new and return it
+           json.#("$$cf_For[]";
+                         json.#( "list" ; If(json.#VarType(_list)="List"; _list ; json.|vl ( _list )) ) &
+                         json.# ( "vars" ; If ( Position (_vars ; "…" ; 0 ; 1 ) or Position (_vars ; json.… ; 0 ; 1) ; json.|List ( Substitute ( _vars ; "…"; json.… ) ) ; _vars )   ) & 
+                         json.# ( "UID" ; _UID ) & 
+                         json.#( "position"; 0 )
+                        ) & json.#Get ( $$cf_For ; -1 )
+           ) ; // end if
+
+  _list = json.#Get ( _for ; "list" ) ;
+  _pos = GetAsNumber ( json.#Get ( _for ; "position" ) ) ;
+  _vars = json.#Get ( _for ; "vars" ) ;
+  $cf_|Tool_error = "" ;
+  _varList = json.|Tool ( "COMP_vars_in_list" ; json.#Get ( _list ; _pos ) ; json.#VarType ( _vars ) ; _vars ; 0 ; json.Null ; "$" )
+] ;
+
+
+If ( not IsEmpty ( $cf_|Tool_error ) or _pos >= json.#Count ( _list ) ;  // CONTROL EXIT IF
+
+//  EXIT: delete/wipe if last $$cf_FOR
+If (    json.#Count ( $$cf_For ) > 1 ;    json.#D ( "$$cf_For[-1]" )    ;    Let ( $$cf_For=json.Null; json.Null )    ) & 
+// kill local key vars & true to exit loop
+Evaluate ( "Let ( [ " & json.|Tool ( "COMP_vars_in_list" ; json.Null ; json.#VarType ( _vars ) ; _vars ; 0 ; 1 ; "$" ) &  " ] ; true )" ) ;
+
+
+// ELSE SET USER DEFINED KEY / VALUE VARIABLES TO WOT THEY NEED TO BE and false to not exit loop yet
+Evaluate (  "Let ( [ " & _varList & " ] ; false )"  )
+/*
+& Let ( $$bug_result = $$bug_result & "¶¶_pos: " & _pos & "¶_vars: " & _vars & "¶_list: " & _list & "¶¶_for: " & _for & "¶¶_varList: " & Substitute(_varList ; "¶"; "  " ) & "¶¶"; _ ) */
+
+&
+
+// ITERATION HANDLER
+json.# ( "$$cf_For[-1][position]" ; _pos + 1 )
+
+)  // end CONTROL EXIT IF
+
+
+)  // end LET
+

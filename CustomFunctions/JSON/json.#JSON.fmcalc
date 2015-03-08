@@ -1,0 +1,42 @@
+/*
+_input can be JSON, or DictList (my name for my format in want of anything better)... this function will recognise it
+
+if u input JSON, it will out put DictList
+if u input DictList, it will out put JSON
+exception: if u add "num" to end of DictList format it will output JSON + array/list index
+
+
+Example:
+
+  Let ( [
+    _DictList = $someDictList ;
+    _DictList_2_JSON = #JSON ( _DictList ) ;  // converts to JSON
+    _DictList_2_JSON_2_DictList = #JSON ( _DictList_2_JSON )  // converts JSON back to DictList
+  ] ; 
+    Exact ( _DictList ; _DictList_2_JSON_2_DictList )  // will *almost* always return 1
+  )
+
+
+*/
+
+
+Case ( 
+
+// if JSON or part of a JSON section
+Let ( _lc = Left ( Trim(_input) ; 1 ) ; (_lc = "{") or (_lc = "[") ) ; json.|Tool ( "Read_JSON" ; json.Null ; json.Null ; _input ; json.Null ; json.Null ; json.Null ) ;
+
+Let ( 
+[
+_vType = json.#VarType ( _input ) ;
+_c = json.#Count ( _input )
+];
+
+Case (
+
+IsEmpty ( _c ) ; json.Null ;
+_vType = "list" or _vType = "dict" ; json.|Tool ( "print" & If ( Right ( _input ; 3 ) = "num" ; json.Null ; "JSON" ) ; _input ; 0 ; json.Null ; 1 ; _c ; _vType ) 
+)
+
+)
+
+)

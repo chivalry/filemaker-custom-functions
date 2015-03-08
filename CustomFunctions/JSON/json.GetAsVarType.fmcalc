@@ -1,0 +1,11 @@
+Let ( _vartype = json.#VarType ( _var ) ;
+
+Case (
+	_varType = "date" ; GetAsDate ( _var ) ;
+	_varType = "time" ; GetAsTime ( _var ) ;
+	_varType = "timestamp" ; GetAsTimestamp ( _var ) ;
+	_varType = "number" ; GetAsNumber ( _var ) ;
+	GetAsText ( _var )
+)
+
+)

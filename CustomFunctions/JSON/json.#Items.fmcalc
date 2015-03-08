@@ -1,0 +1,9 @@
+/*
+expecting standard dict <:name:=value:> or nested
+
+converts a dictionary of any length made from pairs thus <:name:=value:> into <|-</|/-name/|/-value/|/->|-> cos there may be many many, 
+
+for use in conjunction with |For statements to obtain ForEach equivalence
+*/
+
+json.#Tool ( _dict ; "items" )
