@@ -1,0 +1,10 @@
+Let ( [ 
+   theInt = Int ( _number ) ; 
+   theIntFormatted = NumToJText ( theInt ; 1 ; 0 ) ; 
+   theDec = Mod ( _number ; 1 ) ; 
+   theDecFormatted = Right ( "00" & 100 * Round ( theDec ; 2 ) ; 2 ) 
+] ; 
+
+  theIntFormatted & "." & theDecFormatted
+
+)   //   end let

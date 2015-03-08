@@ -1,0 +1,1 @@
+TextStyleAdd( TextColor( _text; txtf.Red ); Bold )

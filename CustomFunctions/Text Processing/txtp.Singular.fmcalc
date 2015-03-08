@@ -1,0 +1,10 @@
+// Returns the singular version of the noun passed.
+//
+// Written by Charles Ross
+
+Case(
+  _plural = "People";
+  "Person";
+  _plural = "Companies";
+  "Company"
+)

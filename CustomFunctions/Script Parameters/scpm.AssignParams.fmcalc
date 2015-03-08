@@ -1,0 +1,119 @@
+// A rather complicated function that not only assigns parameters to local
+//   script variables, but also validates them given the template provided by
+//   the called script's name. Returns True if required parameters are passed
+//   and at least one of the alternative parameters are included. Returns False
+//   otherwise. But in the process of determining the return result, also
+//   assigns the parameters to local script variables.
+//
+// Known Bug: Parameter names cannot have underscores in them.
+//
+// EXTERNAL REQUIREMENTS: A number of custom functions that perform many sub
+//   parts, such as actually assigning the local script variables and setting up
+//   the local variables needed to operate: SetAssignParamVars, WordsToList,
+//   ParamToVars, SingleParamToVar.
+//
+// Written by Charles Ross. Inspired by Alexander Zueiv.
+
+Let ( [
+  //----------------------------------------------------------------------------
+  _ = scpm.SetAssignParamVars;    // Set up the local script variables used in
+                                  //   this custom function set.
+
+  //----------------------------------------------------------------------------
+  _ = scpm.ParamToVars( $ParamList );  // Convert the script parameter passed and
+                                       //   $Parsed into local script variables.
+
+  //----------------------------------------------------------------------------
+  $Troubleshoot = False;          // If troubleshoot is false, clear out the
+                                  // script variables when finished processing.
+
+  //----------------------------------------------------------------------------
+  $Parsable = Substitute(         // Ease parsing by removing spaces. We'll add
+                                  //   the dollar sign ourselves.
+    $ParamTemplate;
+    [ " "  ; "" ];
+    [ "$" ; "" ]
+  );
+
+  //----------------------------------------------------------------------------
+  $ReqParams = Case(              // Remove optional parameters.
+    PatternCount( $Parsable; $OptionalChar );
+    Left( $Parsable; Position( $Parsable; $OptionalChar; 1; 1 ) - 1 );
+    $Parsable
+  );
+
+  //----------------------------------------------------------------------------
+  $Parsed = "$" & Substitute(     // Enclose alternate possibilities in
+                                  //   parentheses and prepend parameter names
+                                  //   with the dollar sign.
+    $ReqParams;
+    [ $BreakChar & $AltOpenChar ;   ";( $"                       ];
+                                  // Enclose the optional parameters in
+                                  //   parentheses.
+    [ $AltChar                               ;   $AltChar & "$"  ];
+                                  // Add dollar signs before each optional
+                                  //   parameter after the first.
+    [ $AltCloseChar                       ;   " )"               ]
+                                  // Close the optional parameters parentheses.
+  );
+
+  //----------------------------------------------------------------------------
+  $Parsed = Substitute(           // Handle the possible special case with the
+                                  //   break character is followed by
+                                  //   alternative parameters.
+    $Parsed;
+    [ $BreakChar & "("; "^^^^"                 ];
+                                  // Substitute an unlikely string for the break
+                                  //   sequence we want to keep.
+    [ $BreakChar        ; $BreakChar & "$" ];
+    [ "^^^^"               ; $BreakChar & "("  ] );
+                                  // Substitute the break sequence we want to
+                                  //   keep back in.
+
+  //----------------------------------------------------------------------------
+  // Add in the FileMaker code to ensure that the appropriate strings are not
+  //   empty, thus validating that each parameter that is required is present.
+  $FMCode = "( not IsEmpty( " & Substitute(
+    $Parsed;
+    [ $BreakChar; " ) ) and ( not IsEmpty( " ];
+    [ $AltChar; " & " ]
+  ) & " ) )";
+
+  //----------------------------------------------------------------------------
+  // Store the result before we possibly clear the variables.
+  _result = ( $FMCode = $EmptyParamTemplate ) or Evaluate( $FMCode );
+
+  //----------------------------------------------------------------------------
+  // Clear out the script variables if we're not troubleshooting the function.  
+  _ = Case(
+    not $Troubleshoot;
+    Let(
+      [
+        $Troubleshoot       = devp.Nil;
+        $Parsable           = devp.Nil;
+        $ReqParams          = devp.Nil;
+        $Parsed             = devp.Nil;
+        $Script             = devp.Nil;
+        $RawParams          = devp.Nil;
+        $Params             = devp.Nil;
+        $OpenChar           = devp.Nil;
+        $CloseChar          = devp.Nil;
+        $BreakChar          = devp.Nil;
+        $AltOpenChar        = devp.Nil;
+        $AltCloseChar       = devp.Nil;
+        $AltChar            = devp.Nil;
+        $OptionalChar       = devp.Nil;
+        $ParamTemplate      = devp.Nil;
+        $ParamList          = devp.Nil;
+        $FMCode             = devp.Nil;
+        $EmptyParamTemplate = devp.Nil
+     ];
+
+     devp.Nil
+    )
+  )
+
+  ];
+
+  _result
+)

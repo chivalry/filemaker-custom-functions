@@ -1,0 +1,32 @@
+/* FMNID_Script ( _Name_ID )
+
+if _Name_ID is an ID, returns the name
+if _Name_ID is a name, returns the ID
+
+Author: Fabrice Nordmann
+Minor Changes: Kevin Frank (created generic CFs for each object type)
+
+*/
+
+Let ([
+
+    _fileName = Get ( FileName ) ; 
+    _p = _Name_ID ;
+    _names = ScriptNames ( _fileName ) ; 
+    _ids = ScriptIDs ( _fileName ) 
+];
+
+Case ( _p = GetAsNumber ( _p ) ;
+
+    // ID -> Name
+    Case ( not IsEmpty ( FilterValues ( _p ; _ids )) ;
+        GetValue ( _names ; Let ([ _text = _ids ; _item = _p ; _adj = ¶ & _text & ¶ ] ; PatternCount ( Left ( _adj ; Position ( _adj ; ¶ & _item & ¶ ; 1 ; 1 ) + 1 ) ; ¶ )))
+    ) ;
+
+// Name -> ID
+    Case ( not IsEmpty ( FilterValues ( _p ; _names )) ;
+        GetValue ( _ids ; Let ([ _text = _names ; _item = _p ; _adj = ¶ & _text & ¶ ] ; PatternCount ( Left ( _adj ; Position ( _adj ; ¶ & _item & ¶ ; 1 ; 1 ) + 1 ) ; ¶ )))
+    )
+
+)
+)

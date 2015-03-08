@@ -1,0 +1,3 @@
+( Abs( Get( SystemPlatform ) ) = sysk.kCurrentPlatformMac )
+  and ( not $$PLATFORM_OVERRIDE_IPAD )
+  and ( not $$PLATFORM_OVERRIDE_IPHONE )

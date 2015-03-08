@@ -1,0 +1,1 @@
+Right( _path; 1 ) = path.Separator( path.Type( _path ) )

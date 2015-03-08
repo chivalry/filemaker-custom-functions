@@ -1,0 +1,1 @@
+"$" & nump.FormatNumber( _number; 2; "," )

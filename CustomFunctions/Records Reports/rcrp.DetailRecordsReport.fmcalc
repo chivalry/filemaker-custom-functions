@@ -1,0 +1,21 @@
+// Returns a report of the current record, found set and total records for the
+//   current table. Designed to be used on detail layouts.
+//
+// Written by Charles Ross
+
+Let(
+  [
+    FoundCount = Get( FoundCount );
+    RecordNumber = Get( RecordNumber );
+    RecordCount = Get( TotalRecordCount )
+  ];
+
+  "Record " & nump.FormatNumber( RecordNumber; 0; "," ) & " of " &
+  Case(
+    FoundCount = RecordCount;
+    nump.FormatNumber( RecordCount; 0; "," ) & " record" & Case( RecordCount = 1; ""; "s" );
+    nump.FormatNumber( FoundCount; 0; "," ) & " record" & Case( FoundCount = 1; ""; "s" ) & " found; " &
+      nump.FormatNumber( RecordCount; 0; "," ) & " record" &
+      Case( RecordCount = 1; ""; "s" ) & " in database"
+  )
+)

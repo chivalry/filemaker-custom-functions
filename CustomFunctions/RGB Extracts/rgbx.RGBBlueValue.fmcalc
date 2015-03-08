@@ -1,0 +1,5 @@
+// Returns the blue value (0-255) of a given RGB value.
+//
+// Written by Charles Ross
+
+Mod( _rgb; 256 )

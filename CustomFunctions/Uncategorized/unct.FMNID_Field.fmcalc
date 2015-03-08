@@ -1,0 +1,34 @@
+/* FMNID_Field ( _Name_ID )
+
+if _Name_ID is an ID, returns the name
+if _Name_ID is a name, returns the ID
+
+Author: Fabrice Nordmann
+Minor Changes: Kevin Frank (created generic CFs for each object type)
+
+Note: since FileMaker 10 and the GetFieldName function, this function is almost useless for fields. It remains valid for other items.
+
+*/
+
+Let ([
+
+    _fileName = Get ( FileName ) ; 
+    _p = _name_id ;
+    _names = FieldNames ( _fileName ; Get ( LayoutTableName ) ) ; 
+    _ids = FieldIDs ( _fileName ; Get ( LayoutTableName ) ) 
+];
+
+Case ( _p = GetAsNumber ( _p ) ;
+
+    // ID -> Name
+    Case ( not IsEmpty ( FilterValues ( _p ; _ids )) ;
+        GetValue ( _names ; Let ([ _text = _ids ; _item = _p ; _adj = ¶ & _text & ¶ ] ; PatternCount ( Left ( _adj ; Position ( _adj ; ¶ & _item & ¶ ; 1 ; 1 ) + 1 ) ; ¶ )))
+    ) ;
+
+// Name -> ID
+    Case ( not IsEmpty ( FilterValues ( _p ; _names )) ;
+        GetValue ( _ids ; Let ([ _text = _names ; _item = _p ; _adj = ¶ & _text & ¶ ] ; PatternCount ( Left ( _adj ; Position ( _adj ; ¶ & _item & ¶ ; 1 ; 1 ) + 1 ) ; ¶ )))
+    )
+
+)
+)

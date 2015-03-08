@@ -1,0 +1,6 @@
+// Used as a named constant. Must have a value such that Get( SystemPlatform ) =
+//   kCurrentPlatformMac when running on a Mac.
+//
+// Written by Charles Ross
+
+1

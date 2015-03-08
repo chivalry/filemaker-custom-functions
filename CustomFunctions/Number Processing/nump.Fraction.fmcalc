@@ -1,0 +1,2 @@
+// http://edoshin.typepad.com/bits_and_pieces/2006/01/fraction_approx.html#more
+nump.Convergent( _number - Int( _number ); 1; 0; Int( _number ); 1; _max_denominator )

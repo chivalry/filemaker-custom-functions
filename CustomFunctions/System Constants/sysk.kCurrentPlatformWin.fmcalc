@@ -1,0 +1,6 @@
+// Used as a named constant. Must have a value such that Get( SystemPlatform ) =
+//   kCurrentPlatformWin when running on Windows.
+//
+// Written by Charles Ross
+
+2

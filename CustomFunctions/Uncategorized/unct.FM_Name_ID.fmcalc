@@ -1,0 +1,67 @@
+/* FM_Name_ID ( _Name_ID ; _TLFSV ; _fileName ; _layoutName )
+
+Fabrice Nordmann
+
+if _Name_ID is an ID, returns the name
+if _Name_ID is a name, returns the ID
+
+_Name_ID is the name or the ID of a Table occurrence, a layout, or a field, a script or a value list
+_TLFSV can be set to "Table", "Layout", "Field", "Script", or "ValueList". Or only the first character (T,L,F,S,V)
+_fileName is optional (empty means current file)
+_layoutName is valid only if _TLFSV contains "Field". Empty means current layout (or the field table occurrence, read the note below). The layout should be tied to the table occurrence of the field.
+
+Note: for fields (_TLFSV = "F"), if you use the full field name (table::fieldname) AND an empty _layoutName parameter, the function will assume you are referring not to current layout but to the table occurrence found in the _TLFSV.
+
+Note: since FileMaker 10 and the GetFieldName function, this function is almost useless with a F (field) parameter. It remains valid for other items.
+
+*/
+
+
+
+Let ([
+
+    // _fileName is optional
+    _fileName = Case ( IsEmpty ( _fileName ) ; Get ( FileName ) ; _fileName ) ;
+    _layoutName = Case ( IsEmpty ( _layoutName ) ; Case ( PatternCount ( _Name_ID ; "::" ) ; GetValue ( Substitute ( _Name_ID ; "::" ; ¶ ) ; 1 ) ; Get ( LayoutName )) ; _layoutName ) ;
+    _layoutName = Case ( Int ( _layoutName ) = _layoutName and Length ( _layoutName ) = 7 ; unct.FM_Name_ID ( _layoutName ; "T" ; _fileName ; "" ) ; _layoutName ) ;
+    _p = _Name_ID ;
+
+    _t = Left ( _TLFSV ; 1 ) ;     // allow _TLFSV to be only the first character (T,L,F,S,V)
+    _t = Case ( _t = "T" ; "Table" ; _t = "L" ; "Layout" ; _t = "F" ; "Field" ; _t = "S" ; "Script" ; _t = "V" ; "ValueList" ) ;
+    _p = Case ( _t = "Field" and PatternCount ( _p ; "[" ) ; Left ( _p ; Position ( _p ; "[" ; 10000 ; -1 ) -1 ) ; _p ) ; // remove the repetition number
+    _p = Case ( _t = "Field" and PatternCount ( _p ; "::" ) ; Replace ( _p ; 1 ; Position ( _p ; "::" ; 1 ; 1 ) + 1 ; "" ) ; _p ) ; // for fields, do not take TO
+    _p = Case ( _t = "Table" and PatternCount ( _p ; "::" ) ; Replace ( _p ; Position ( _p ; "::" ; 1 ; 1 ) ; 99999 ; "" ) ; _p ) ; // for TO, do not take field name
+    _endOfString = "( \"" & _fileName & "\"" & Case ( _t = "field" ; "; \"" & _layoutName & "\"" ) & ")" ;
+    _names = Evaluate ( _t & "Names" & _endOfString ) ;
+    _ids = Evaluate ( _t & "IDs" & _endOfString )
+];
+
+Case ( _p = GetAsNumber ( _p ) ;
+
+    // ID -> Name
+    Case ( not IsEmpty ( FilterValues ( _p ; _ids )) ;
+        GetValue ( _names ; Let ([ _text = _ids ; _item = _p ; _adj = ¶ & _text & ¶ ] ; PatternCount ( Left ( _adj ; Position ( _adj ; ¶ & _item & ¶ ; 1 ; 1 ) + 1 ) ; ¶ )))
+    ) ;
+
+// Name -> ID
+    Case ( not IsEmpty ( FilterValues ( _p ; _names )) ;
+        GetValue ( _ids ; Let ([ _text = _names ; _item = _p ; _adj = ¶ & _text & ¶ ] ; PatternCount ( Left ( _adj ; Position ( _adj ; ¶ & _item & ¶ ; 1 ; 1 ) + 1 ) ; ¶ )))
+    )
+
+)
+)
+
+// ===================================
+/*
+
+    This function is published on FileMaker Custom Functions
+    to check for updates and provide feedback and bug reports
+    please visit http://www.fmfunctions.com/fid/82
+
+    Prototype: FM_Name_ID( _Name_ID; _TLFSV; _fileName; _layoutName )
+    Function Author: Fabrice (http://www.fmfunctions.com/mid/37)
+    Last updated: 09 December 2010
+    Version: 2
+
+*/
+// ===================================*/

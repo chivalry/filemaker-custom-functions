@@ -1,0 +1,7 @@
+// Pads the given string with the specified number of spaces.
+//
+// EXTERNAL REQUIREMENTS: The Pad custom function.
+//
+// Written by Charles Ross
+
+padd.Pad( _text; " "; _space_count; padd.kLeft )

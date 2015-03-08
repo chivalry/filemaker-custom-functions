@@ -1,0 +1,28 @@
+// http://www.kegebein.net/blog/2009/06/manage-parameters/
+
+Case(
+  IsEmpty( _key ) or IsEmpty( _params );
+  devp.Nil;
+
+  Let(
+    [
+      _params = ¶ & _params & ¶;
+      _key = ¶ & Substitute( _key; [ "="; "^=" ]; [ "\¶"; "^\¶" ]; [ ¶; "\¶\¶" ] ) & "==";
+      _pos = Position( _params; _key; 1; 1 )
+    ];
+
+    Case(
+      _pos = 0;
+      devp.Nil;
+
+      Let(
+        [
+          _start = _pos + Length( _key );
+          _end = Position( _params; ¶; _start; 1 )
+        ];
+
+        Substitute( Middle( _params; _start; _end - _start ); [ "\¶\¶"; ¶ ]; [ "^\¶"; "\¶" ]; [ "^="; "=" ] )
+      )
+    )
+  )
+)

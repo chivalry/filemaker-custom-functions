@@ -1,0 +1,7 @@
+// Returns the separator character appropriate to the path's type.
+
+Case(
+  _type = path.TypeHFS;				":";
+  _type = path.TypeWinBackslash;		"\\";
+								"/"
+)

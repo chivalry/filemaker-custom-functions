@@ -1,0 +1,19 @@
+// http://edoshin.typepad.com/bits_and_pieces/2006/01/greatest_common.html#more
+
+Let(
+  [ 
+    _greater = GetAsNumber( _greater_number );
+    _smaller = GetAsNumber( _smaller_number )
+  ];
+
+  Case( 
+    IsEmpty( _greater ) or IsEmpty( _smaller );
+    devp.Nil;
+
+
+    _smaller = 0;
+    _greater;
+
+    nump.GreatestCommonDivisor( _smaller; Mod( _greater; _smaller ) )
+  )
+)

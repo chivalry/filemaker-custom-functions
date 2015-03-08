@@ -1,0 +1,1 @@
+Get( WindowContentWidth ) > Get( WindowContentHeight )

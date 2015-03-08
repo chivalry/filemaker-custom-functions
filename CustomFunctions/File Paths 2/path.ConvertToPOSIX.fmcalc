@@ -1,0 +1,46 @@
+// Converts the provided path into a POSIX format. The POSIX format is used with path.Convert as a
+//   common denominator.
+
+Let(
+  [
+    _type			= path.Type( _path );
+    _list			= path.List( _path );
+    _drive_name		= path.DriveName( _path );
+
+    // Calculate how many path items to skip to get to the POSIX version.
+    _skip_words = Case(
+      _type = path.TypeFileMakerWinNetwork;		3;
+      path.TypeIsFileMaker( path.Type( _path ) );	2;
+      ( _type = path.TypeHFS )
+        or ( _type = path.TypeWin )
+        or ( _type = path.TypeWinBackslash );		1
+    );
+
+    _new_list = RightValues( _list; ValueCount( _list ) - _skip_words );
+
+    // Account for keeping the drive name but in a POSIX-compatible format.
+    _result_1 = Case(
+      GetValue( _new_list; 1 ) = "Volumes";	_new_list;
+      List(
+        "Volumes"; _drive_name; _new_list
+      )
+    );
+
+    // Convert back from a list and escape the spaces
+    _result_2 = "/" & Substitute(
+      _result_1;
+      [ "¶"; "/" ];
+      [ "\ "; " " ];
+      [ " "; "\ " ]
+    );
+
+    // Account for no converstion from POSIX and for if the original path was not a directory.
+    _result = Case(
+      _type = path.TypePOSIX;	_path;
+      path.IsDirectory( _path );	_result_2;
+						Left( _result_2; Length( _result_2 ) - 1 )
+   )
+  ];
+
+  _result
+)

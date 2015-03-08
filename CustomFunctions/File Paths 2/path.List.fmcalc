@@ -1,0 +1,4 @@
+// Returns a list of the directory structure. Windows network paths, which use a double backslash,
+//   will have an empty list item in them.
+
+Substitute( _path; path.Separator( path.Type( _path ) ); ¶ )

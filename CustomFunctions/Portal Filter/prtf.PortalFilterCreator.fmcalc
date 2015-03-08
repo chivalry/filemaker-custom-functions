@@ -1,0 +1,9 @@
+// Creates a field that can be used to filter portals. The actual work is done
+//   by the recursive function ~PortalFilterCreator, with this function acting
+//   as a non-recursive wrapper to that function.
+//
+// EXTERNAL REQUIREMENTS: The ~PortalFilterCreator function.
+//
+// Written by Charles Ross
+
+prtf.PortalFilterCreator_( _field_list ) & "¶All"

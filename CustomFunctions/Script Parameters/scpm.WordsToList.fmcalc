@@ -1,0 +1,11 @@
+// Converts the text passed into a list of words. For example, WordsToList(
+//   "one two>three;four" ) = "one¶two¶three¶four¶".
+//
+// Written by Charles Ross
+
+Case(
+  WordCount( _words ) = 0;
+  "";
+  txtp.LeftWord( _words ) & "¶" &
+    scpm.WordsToList( RightWords( _words; WordCount( _words ) - 1 ) )
+)

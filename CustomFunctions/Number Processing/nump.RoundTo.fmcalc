@@ -1,0 +1,19 @@
+// http://edoshin.typepad.com/bits_and_pieces/2006/01/rounding_to_a_g.html#more
+
+Round( _number / _precision; 0 ) * _precision
+
+/*Don't calculate the number of seconds: use the Time() function instead. For example, to round to an hour:
+
+Round To( Time Field, Time( 1, 0, 0 ) )
+to 15 minutes:
+
+Round To( Time Field, Time( 0, 15, 0 ) )
+You might also want to make a few constant custom functions: HOURS and MINUTES. These function must return Time( 1, 0, 0 ), Time( 0, 1, 0 ) respectively. (You could make a function for seconds, if you need them, but you'll need to select a name carefully, because Seconds is taken already.) With such functions your code will be more readable, like this:
+
+Round To( Time Field, 2 * HOURS )
+
+Round To( Time Field, 0.5 * HOURS )
+
+Round To( Time Field, 15 * MINUTES )
+
+Round To( Time Field, 1/2 * MINUTES )*/

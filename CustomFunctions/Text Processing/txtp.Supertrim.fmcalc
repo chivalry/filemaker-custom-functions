@@ -1,0 +1,30 @@
+// Speedily (and with no recursion) remove leading and trailing white space,
+//   including spacing, tabs and returns, from a text string.
+//
+// Created by Debi Fuchs, debi@aptworks.com
+
+Let(
+  [
+    // Determine value of original string with ALL whitespace removed.  
+    Text2 = Substitute(
+      _text;
+      [ " "; "" ];
+      [ " "; "" ];
+      [ "	"; "" ];
+      [ "¶"; "" ]
+    );
+    
+    // Determine position of first non-ws character in original string.
+    FirstChar = Position( _text; Left( Text2; 1 ); 0; 1 );
+    
+    // Determine position of last non-ww character in original string.
+    LastChar = Position( _text; Right( Text2; 1 ); Length( _text ); -1 )
+  ];
+  
+  // If any non-whitespace characters exist return appropriate middle portion of
+  // original Text.
+  Case(
+    FirstChar;
+    Middle( _text; FirstChar; LastChar - FirstChar + 1 )
+  )
+)

@@ -1,0 +1,20 @@
+// Recursively formats a phone number given the format mask provided.
+//
+// Written by Charles Ross
+
+Case(
+  not IsEmpty( _format );
+  Let(
+    [
+      NumbersOnly = Filter ( _phone; txtf.kDigits );
+      NewFormat = Left( _format; Length( _format ) - 1);
+      NewNumber = Left( NumbersOnly; Length( NumbersOnly ) - 1)
+    ];
+
+    Case(
+      Right( _format; 1 ) = "#";
+      txtf.~PhoneFormat( NewNumber; NewFormat ) & Right( NumbersOnly; 1 ); 
+      txtf.~PhoneFormat( NumbersOnly; NewFormat ) & Right( _format; 1 ) 
+    )
+  )
+)

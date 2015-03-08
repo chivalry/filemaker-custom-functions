@@ -1,0 +1,14 @@
+/*// Returns the name of the file stored by SuperContainer given the folder path
+//   passed.
+//
+// EXTERNAL REQUIREMENTS: The SuperContainer plugin.
+//
+// Written by Charles Ross
+
+Let(
+  [
+    TheValue = LeftValues( <Function Missing>( FolderPath ); 1 )
+  ];
+
+  Left( TheValue; Length( TheValue ) - 1 )
+)*/

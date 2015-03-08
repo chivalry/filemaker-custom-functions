@@ -1,0 +1,28 @@
+//   Date: 26 Feb 2011
+//   Based on GetNthRecordSet by Jonathan Mickelson; modifications by Kevin Frank and Geoff Gerhard
+//   Explanation:  generates a comma-delimited list of primary keys, with each list item wrapped in single quotes 
+//                         to be used with the SQL "IN" command... allows SQL to be aware of FileMaker's current found set
+//   Usage: FoundSetToSQL ( primaryKey )
+
+
+Let (
+[   end = Get ( FoundCount ) ; 
+    $cfFSTS =  $cfFSTS + 1 ; 
+    nextStart = $cfFSTS + 1 
+] ;
+
+
+"'" & GetNthRecord ( _primaryKey ; $cfFSTS ) & 
+
+Case ( 
+
+    Length ( GetNthRecord ( _primaryKey ; nextStart ) ) > 0 and nextStart <= end  ;
+
+    "'," & unct.FoundSetToSQL ( _primaryKey ) ;
+
+     Let ( $cfFSTS = "" ; "'" )
+
+)   //   end case
+
+)   //   end let
+

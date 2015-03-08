@@ -1,0 +1,10 @@
+// Returns a report of the found set and total records for the passed values.
+//   Designed to be used on list (i.e., portal) layouts.
+//
+// Written by Charles Ross
+
+Case(
+  _found = _total;
+  nump.FormatNumber( _found; 0; "," ) & " record" & Case( _found = 1; ""; "s" );
+  nump.FormatNumber( _found; 0; "," ) & " of " & nump.FormatNumber( _total; 0; "," ) & " record" & Case( _total = 1; ""; "s" )
+)

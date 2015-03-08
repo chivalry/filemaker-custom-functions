@@ -1,0 +1,12 @@
+// Creates a filter field for a single field by taking successively longer
+//   beginnings of the passed string. For example, calling SingleFieldFilter(
+//   "ABC" ) = "ABC¶AB¶A".
+//
+// Written by Charles Ross
+
+Case(
+  Length( _field ) ≤ 1;
+  _field;
+  prtf.SingleFieldFilter( Left( _field; Length( _field ) - 1 ) ) & "¶" &
+    Case( Right( _field; 1 ) ≠ "¶"; _field; "" )
+)

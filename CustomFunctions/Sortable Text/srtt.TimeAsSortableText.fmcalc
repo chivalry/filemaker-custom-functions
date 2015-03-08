@@ -1,0 +1,9 @@
+// Returns a textual version of a time so that when converted to text and sorted
+//   the sorting occurs correctly given the time values. For example, "10:01:01
+//   am" would sort, textually, before "2:01:01 am". This converts both to a
+//   text representation that will sort correctly.
+//
+// Written by Charles Ross
+
+Right( "0" & Hour( _time ); 2 ) & Right( "0" & Minute( _time ); 2 ) &
+  Right( "0" & Seconds( _time); 2 )

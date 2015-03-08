@@ -1,0 +1,9 @@
+// Returns a textual version of a date so that when converted to text and sorted
+//   the sorting occurs correctly given the date values. For example, "10/1/08"
+//   would sort, textually, before "2/1/08". This converts both to a text
+//   representation that will sort correctly.
+//
+// Written by Charles Ross
+
+Year( _date ) & Right( "0" & Month( _date ); 2 )
+  & Right( "0" & Day( _date ); 2 )

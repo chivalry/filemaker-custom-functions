@@ -1,0 +1,9 @@
+Case(
+  _curr_field = _sort_field;
+  Case(
+    _sort_order = "asc";
+    $$_GRA_Sort_Ascending;
+    $$_GRA_Sort_Descending
+  );
+  ""
+)

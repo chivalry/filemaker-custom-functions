@@ -1,0 +1,36 @@
+// NumberFormat ( Number ; DecimalPrecision ; ThousandSeparator ) v3.1
+
+               /*
+              to format numbers
+               */
+// NumberFormat is not recursive
+//---------------------------------- Exemple
+/*
+NumberFormat ( "1021001,00125" ; 3 ; "." ) > Result : 1.021.001,001
+NumberFormat ( "69584" ; 2 ; " " ) > Result : 69 584,00
+*/
+//----------------------------------
+// @ Agnès -Octobre 2008- BugReport barouh.agnes@wanadoo.fr
+//----------------------------------
+
+Let(
+  [
+    _n = _number;  
+    _p = _precision;
+    _sep = _thousand_separator ;
+    _nbr = Abs( Round( _n; _p ) )
+  ];
+  
+  Case(
+    not IsEmpty ( _n );
+    Case(
+      GetAsNumber( _n ) < 0;
+      "-"
+    ) & Substitute( NumToJText( Int( _nbr ); 1; 0 ); ","; _sep ) &
+    Choose(
+      _p ≤ 0;
+      Filter( 1 / 2; ".," ) &
+      Middle( _nbr - Int( _nbr ) & Substitute( ( 10 ^ _p ) - 1; 9; 0 ); 2; _p )
+    )
+ )
+)

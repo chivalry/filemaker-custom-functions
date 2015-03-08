@@ -1,0 +1,12 @@
+/*   Date:  8 May 2012
+      Explanation:  generates a comma-delimited list, with each list item wrapped in single quotes 
+      to be used with the SQL "IN" operator when the field you are querying is a TEXT field
+      Usage:  FormatListForIn ( theList )
+      Example:  given a value list "ABC" containing A¶B¶C,  
+
+            FormatListForIn ( ValueListItems ( Get ( FileName ) ; "ABC" ) ) 
+
+     ...will return    'A','B','C'
+*/      
+
+"'" & Substitute ( _theList ; ¶ ; "','" ) & "'"

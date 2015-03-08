@@ -1,0 +1,1 @@
+Int( Random * ( _maximum - _minimum + 1 ) ) + _minimum

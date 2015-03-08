@@ -1,0 +1,36 @@
+// http://edoshin.typepad.com/bits_and_pieces/2005/11/merge_expressio.html
+
+Case(
+  IsEmpty( _text );
+  devp.Nil;
+
+  Let(
+    [ 
+      _s = "<<" ;
+      _e = ">>"; 
+      _start = Position( _text; _s; 1; 1 );
+      _end = Position( _text; _e; _start; 1 )
+    ];
+
+    Case(
+      _start = 0 or _end = 0;
+      _text;
+
+      Let(
+        [
+          contents = Middle( _text; _start + Length( _s ); _end - _start - Length( _s ) )
+        ];
+
+        Case(
+          IsValidExpression ( contents );
+          Left( _text; _start - 1 )
+            & Replace( Middle( _text; _start; 1 ); 1; 1; Evaluate( contents ) )
+            & nump.MergeExpressions( Right( _text; Length( _text ) - _end - Length( _e ) + 1 ) );
+
+          Left( _text; _start + Length( _s ) - 1 )
+            & nump.MergeExpressions( Right( _text; Length( _text ) - _start - Length( _s ) + 1 ) )
+        )
+      )
+    )
+  )
+)

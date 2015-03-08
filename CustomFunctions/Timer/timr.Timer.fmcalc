@@ -1,0 +1,53 @@
+// http://www.kegebein.net/blog/2010/06/unlimited-timer/
+
+Let(
+  [
+    _name = Case(
+      IsEmpty( _name );
+      devp.Nil;
+      _name
+    ); // This seems superfluous.
+
+    _action = Upper( _action );
+
+    _now = Get( CurrentTimeStamp );
+    _timer = scpm.kegebein_ParamGet( _name; $$_TIMER );
+
+    _start = scpm.kegebein_ParamGet( timr.TimerActionStart; _timer );
+    _stop = scpm.kegebein_ParamGet( timr.TimerActionStop; _timer );
+    _stop = Case(
+      IsEmpty( _stop );
+      _now;
+      _stop
+    );
+
+    _diff = Case(
+      IsEmpty( _start );
+      devp.Nil;
+      GetAsTimestamp( _stop ) - GetAsTimestamp( _start )
+    );
+
+    _timer = Case(
+      _action = timr.TimerActionStart;
+      scpm.kegebein_Param( timr.TimerActionStart; _now );
+
+      _action = timr.TimerActionStop and IsEmpty( _start );
+      scpm.kegebein_Param( timr.TimerActionStart; _stop ) & scpm.kegebein_Param( timr.TimerActionStop; _stop );
+
+      _action = timr.TimerActionStop;
+      scpm.kegebein_Param( timr.TimerActionStart; _start ) & scpm.kegebein_Param( timr.TimerActionStop; _stop )
+    );
+
+    $$_TIMER = Case(
+      _action = timr.TimerActionStart or _action = timr.TimerActionStop;
+      scpm.kegebein_ParamDelete( _name; $$_TIMER ) & scpm.kegebein_Param( _name; _timer );
+
+      _action = timr.TimerActionDelete;
+      scpm.kegebein_ParamDelete( _name; $$_TIMER );
+
+      $$_TIMER
+    )
+  ];
+
+  _diff
+)

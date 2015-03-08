@@ -1,0 +1,33 @@
+/* Purpose:  converts a FileMaker date to a SQL-friendly date 
+    Author:  Kevin Frank w/ help from Koen Van Hulle
+
+    Note 1:  this CF handles US-style (MM/DD/YYYY) and European-style (DD/MM/YYYY) date formats, 
+    as well as the date returned by a SQL SELECT statement ('YYYY-MM-DD')
+    Note 2:  this CF works with all versions of FileMaker >= 8.0
+
+    Usage:  DateToSQL ( pDate ) 
+
+    Example 1:  DateToSQL ( Get ( CurrentDate ) )  =  
+         DATE '2010-05-25'   ...assuming today's date is 25 May 2010
+    Example 2:  DateToSQL ( $sqlDate )  =  
+         DATE '2010-12-31'   ...assuming $sqlDate = '2010-12-31' or 2010-12-31 (i.e., with or without the single quotes)
+*/
+
+
+Let ( a = Substitute ( _date ; "'" ; "" ) ;      //   strip off single quotes, if any, in case this is a SQL-style date
+
+If ( Middle ( a ; 5 ; 1 ) = "-" and Middle ( a ; 8 ; 1 ) = "-" ; 
+
+   "DATE '" & a & "'" ; 
+
+Let ( [  
+   m = Right ( "00" & Month ( _date ) ; 2 ) ; 
+   d = Right ( "00" & Day ( _date ) ; 2 ) ; 
+   y = Year ( _date ) 
+] ; 
+ 
+   "DATE '" & y & "-" & m & "-" & d & "'"
+
+)   //   end let 
+)   //   end if
+)   //   end let

@@ -1,0 +1,17 @@
+// Concatenate the parts of a person's full name.
+//
+// EXTERNAL REQUIREMENTS: The presence of the ContentsWithSpaceIfNotEmpty
+//   function.
+//
+// Written by Charles Ross
+
+Trim( devp.ContentsWithSpaceIfNotEmpty( _prefix ) &
+      devp.ContentsWithSpaceIfNotEmpty( _first_name ) &
+      devp.ContentsWithSpaceIfNotEmpty( _middle_name ) &
+      devp.ContentsWithSpaceIfNotEmpty( _last_name ) &
+      Case(
+        _suffix ≠ "";
+        ", " & _suffix;
+        ""
+      )
+)

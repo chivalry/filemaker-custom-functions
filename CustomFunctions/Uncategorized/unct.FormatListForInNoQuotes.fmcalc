@@ -1,0 +1,13 @@
+/*   Date:  12 May 2012
+      Explanation:  generates a comma-delimited list, with no quotes
+      to be used with the SQL "IN" operator when the field you are querying is a NUMBER field
+      Usage:  FormatListForInNoQuotes ( theList )
+      Example:  given a value list "123" containing 1¶2¶3,  
+
+            FormatListForIn ( ValueListItems ( Get ( FileName ) ; "123" ) ) 
+
+     ...will return    1,2,3
+
+*/      
+
+Substitute ( _numericList ; ¶ ; "," )

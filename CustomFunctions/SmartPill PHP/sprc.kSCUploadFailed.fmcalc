@@ -1,0 +1,8 @@
+// A named constant to store the error code returned by the SuperContainer
+//   plugin when an upload fails.
+//
+// EXTERNAL REQUIREMENTS: The SuperContainer plugin.
+//
+// Written by Charles Ross
+
+-1

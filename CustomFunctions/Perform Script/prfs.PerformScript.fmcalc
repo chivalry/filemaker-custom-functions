@@ -1,0 +1,7 @@
+/*// A wrapper for executing a script in a calculation with no parameter to pass.
+//
+// EXTERNAL REQUIREMENTS: The zippScript plugin.
+//
+// Written by Charles Ross
+
+<Function Missing>( Get( FileName ); _script )*/

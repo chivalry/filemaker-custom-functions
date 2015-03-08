@@ -1,0 +1,16 @@
+Case(
+  _base < 2 or _base > 36 or IsEmpty( _base );
+  "";
+
+  Let(
+    [
+      _current_digit = Middle ( "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"; 
+        Mod ( _number; _base ) + 1; 1 )
+    ];
+    
+    Case(
+      _number ≥ _base;
+      nump.NumberToBase( Div ( _number; _base ); _base )
+    )  & _current_digit
+  )
+)

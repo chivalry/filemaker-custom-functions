@@ -1,0 +1,13 @@
+// Returns a three-letter word indicating the human-readable version of the
+//   current platform.
+//
+// EXTERNAL REQUIREMENTS: The custom function constant kCurrentPlatformMac.
+//
+// Written by Charles Ross
+
+Case(
+  Abs( Get( SystemPlatform ) ) = sysk.kCurrentPlatformMac;
+  "Mac";
+  Abs( Get( SystemPlatform ) ) = sysk.kCurrentPlatformWin;
+  "Win"
+)
