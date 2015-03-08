@@ -1,0 +1,22 @@
+// Recursive subroutine for devp.FrontTabNumber
+
+Case(
+  _index ≥ 100;
+  devp.Nil;
+
+  Let(
+    [
+      _suffix1 = Right( "0" & _index; 2 );
+      _suffix2 = Right( "00" & _index; 3 )
+    ];
+
+    Case(
+      devp.TabPanelIsFront( _tab_prefix & _index )
+        or devp.TabPanelIsFront( _tab_prefix & _suffix1 )
+        or devp.TabPanelIsFront( _tab_prefix & _suffix2 );
+      _index;
+
+      devp.FrontTabNumber~( _tab_prefix; _index + 1 )
+    )
+  )
+)

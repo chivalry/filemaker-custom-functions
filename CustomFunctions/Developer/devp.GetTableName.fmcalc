@@ -1,0 +1,16 @@
+// Returns only the relationship, i.e., the table occurrence name, as opposed to GetFieldName(),
+// which returns the relationship plus the field name. This is to be used in SQL queries to protext
+//  the table occurrence references from breaking if the TO is renamed.
+
+// The Quote() funciton "escapes" problematic characters and SQL reserved words, if any — otherwise, no harm done.
+
+// Source: http://www.filemakerhacks.com/filemakerhacks/4924
+
+Let(
+  [
+    _a = GetFieldName( _field );
+    _b = Substitute( _a; "::"; ¶ )
+  ];
+
+  Quote( GetValue( _b; 1 ) )
+)

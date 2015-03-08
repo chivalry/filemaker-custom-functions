@@ -1,0 +1,5 @@
+Case(
+  sysk.PlatformIsGo;
+  devp.GetiPadCheckmark( _test );
+  devp.GetMacRadiobutton( _test )
+)

@@ -1,0 +1,65 @@
+/*
+ * =====================================================
+ * WindowActiveTabs ()
+ *    https://github.com/petrowsky/fmpstandards/blob/master/Functions/WindowActiveTabs.fmfn
+ * 
+ * PARAMETERS: none
+ * RETURNS:
+ *    (list) List of all active frontmost tabs
+ * DEPENDENCIES:
+ *    none
+ * NOTES:
+ *    Original by Koen Van Hulle (SHpartners.com)
+ * =====================================================
+ */
+
+Let(
+  [
+    $_i         = $_i + 1; // increment counter, previxed to avoid script variable override
+    $_objects   = LayoutObjectNames( Get( FileName ); Get( LayoutName ) );
+    _tabToCheck = GetValue( $_objects; $_i );
+    _parentTab  = GetLayoutObjectAttribute( _tabToCheck; "enclosingObject" );
+    _isFront    = GetLayoutObjectAttribute( _tabToCheck ; "isFrontTabPanel" );
+
+    _isCurrentTab = Case(
+      IsEmpty( _tabToCheck ); // there's no tab name
+      False;
+
+      _isFront
+        and IsEmpty( _parentTab ); // does not have a parent
+      True;
+
+      _isFront
+        and PatternCount( ¶ & $_tabList & ¶; ¶ & _parentTab & ¶ ); // parent is already in $_tabList
+      True;
+
+    /*Else*/
+      False
+    );
+    
+    $_tabList = List(
+      $_tabList;
+      Case(
+        _isCurrentTab;
+        _tabToCheck
+      )
+    )
+  ];
+
+  Case(
+    not IsEmpty( _tabToCheck );
+    devp.WindowActiveTabs;
+    
+  /*Else*/
+    $_tabList
+    & Let(
+      [
+        // purge variables
+        $_i       = devp.Nil;
+        $_objects = devp.Nil;
+        $_tabList = devp.Nil
+      ];
+      devp.Nil
+    )
+  )
+)

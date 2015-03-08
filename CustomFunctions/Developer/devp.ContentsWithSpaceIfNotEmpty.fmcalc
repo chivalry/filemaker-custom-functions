@@ -1,0 +1,10 @@
+// If the Contents are empty, returns an empty string. Otherwise returns the
+//   original contents with a space appended.
+//
+// Written by Charles Ross
+
+Case(
+  _contents ≠ "";
+  _contents & " ";
+  ""
+)

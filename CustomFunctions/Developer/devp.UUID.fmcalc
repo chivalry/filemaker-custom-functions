@@ -1,0 +1,72 @@
+/*
+Generate a Universally Unique Identifier (UUID)
+
+Parameters:
+  1    Generate a version 1 (MAC address) UUID with no hyphens
+  1h   Generate a version 1 UUID with hyphens
+  4    Generate a version 4 (random) UUID with no hyphens
+  4h   Generate a version 4 UUID with hyphens
+
+Requires:
+  The NumToHex custom function by Jeremiah Small <http://www.briandunning.com/cf/216>
+
+Version 1 UUIDs are based on the current timestamp and MAC address and are in the form xxxxxxxx-xxxx-1xxx-yxxx-xxxxxxxxxxxx, where x is 0–F and y is 8–B.  e.g. 7f23c000-b6fa-11ad-802a-136a8c2f7100.
+
+Version 4 UUIDs are randomly generated and in the form xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx.  e.g. f47ac10b-58cc-4372-a567-0e02b2c3d479.
+
+The advantages of using a UUID over a serial number is there’s no need to worry about the next value of a serial number or a serial number collision, forinstance when importing records.  The downside is they’re not appropriate to expose to a user.
+
+UUID example:  Dick and Harry both create records in their own copies of a database.  Each record needs a unique serial number so they can be combined at a later date.  After a total of 68,719,476,736 (2^36) records are created the probability of a collision is 0.0000000000000004 (4 × 10^−16)
+
+Further reading:  <http://en.wikipedia.org/wiki/UUID>
+
+Caveats:
+- Because FileMaker’s clock resolution is only in seconds the version 1 UUID can return duplicates if called multiple times a second (there’s a 14-bit random number included which usually prevents this).
+- FileMaker 8.5–10.0v2 (and maybe earlier) have a bug where on some machines the random function returns the same sequence of random numbers every time FileMaker is restarted!  This obviously corrupts the generation of unique identifiers.  Using a version 1 UUID is safer in this instance.  10.0v3 fixes this.
+- I *think* I have the version 1 UUIDs correctly following the spec.  Note they include local time (not UTC) and clock sequence is always random—both allowed but not recommended.
+
+Author:
+  2009-02-01 Tom Robinson <http://www.tomrobinson.co.nz/>
+
+Change History:
+  2009-02-06
+    Add patch parameter after discovery of FileMaker bug causing client’s machine to create duplicate UUIDs
+    Generate lowercase UUIDs per RFC 4122
+  2009-02-11
+    Remove patch code and add generation of version 1 UUIDs as patch parameter was still returning duplicates
+    Utilise DecToHex custom function
+  2009-08-07
+    Update docs to note random bug is fixed in 10.0v3
+  2010-05-12
+    DecToHex is now NumToHex
+    Split last group in 4/4h from Random*281474976710656 (12 digits) to 2 × Random*16777216 (6+6 digits) as random function in 10.0v3 appears to have less precision—UUIDs were always ending in 0000 or ffff
+*/
+
+Let(
+  [
+    _h = Case( Right( _type; 1 ) = "h"; "-"; devp.Nil );
+    _typeIs1 = Left( _type; 1 ) = "1";
+    
+    /* Subtract to move timestamp epoch from 0001-01-01T00:00:00 to 1582-10-15T00:00:00, multiply to get from seconds to hundred-nanosecond intervals */
+    _t = nump.NumToHex ( ( Get( CurrentTimeStamp ) - 49916304000 ) * 10000000 );
+    
+    _randChar = Middle( "89abb"; Random * 4 + 1; 1 )
+  ];
+  
+  Lower( Case(
+    _typeIs1;
+    Right( _t; 8 )                                                & _h &   /* RFC 4122 time_low */
+    Middle( _t; 4; 4 )                                            & _h &   /* time_mid */
+    "1" & Left( _t; 3 )                                           & _h &   /* time_hi_and_version */
+    _randChar & Right( "00" & nump.NumToHex( Random * 4096 ); 3 ) & _h &
+    Substitute( GetValue( Get( SystemNICAddress ); 1 ); ":" ; devp.Nil );   /* node */
+
+    // Else
+    Right( "0000000"  & nump.NumToHex( Random * 4294967296 ); 8 ) & _h &
+    Right( "000"      & nump.NumToHex( Random * 65536 ); 4 )      & _h &
+    "4" & Right( "00" & nump.NumToHex( Random * 4096 ); 3 )       & _h &
+    _randChar & Right( "00" & nump.NumToHex( Random * 4096 ); 3 ) & _h &
+    Right( "00000"    & nump.NumToHex( Random * 16777216 ); 6 ) &
+      Right( "00000"  & nump.NumToHex( Random * 16777216 ); 6 )
+  ) )
+)

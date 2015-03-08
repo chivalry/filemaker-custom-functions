@@ -1,0 +1,24 @@
+// Accepts a version number of the form X.XxX, where the Xs are integers and x
+//   is either a (for alpha version), b (for beta version) or v (for release
+//   version) and returns the next version. It does this by keeping the X.Xx
+//   portion and adding one to the last X.
+//
+// Written by Charles Ross.
+
+Let(
+  [
+    _letter = Case(
+      PatternCount( _currentVersion; "a" ); "a";
+      PatternCount( _currentVersion; "b" ); "b";
+      PatternCount( _currentVersion; "v" ); "v"
+    );
+    
+    _letterPosition     = Position( _currentVersion; _letter; 1; 1 );
+    _baseVersionString  = Left( _currentVersion; _letterPosition );
+    _numberToIncrement  = Right( _currentVersion; Length( _currentVersion ) -
+                            _letterPosition );
+    _incrementedVersion = GetAsNumber( _numberToIncrement ) + 1
+  ];
+
+  _baseVersionString & _incrementedVersion
+)

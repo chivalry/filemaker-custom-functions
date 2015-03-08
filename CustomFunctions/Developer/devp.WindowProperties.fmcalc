@@ -1,0 +1,65 @@
+/*
+ * =====================================================
+ * WindowProperties ( method )
+ * 
+ * PARAMETERS:
+ *    @method (enum) default, piped, let, variables
+ *
+ * RETURNS:
+ *    (list) window properties according to specified method
+ *
+ * DEPENDENCIES:
+ *    VariableList()
+ *
+ * NOTES:
+ *    Provides multiple methods for returning the
+ *    properties of the current window
+ *    See the WindowCenter companion function
+ * =====================================================
+ * 
+ */
+
+Let(
+  [
+    _keys = List( "name"; "layout"; "id"; "top"; "left"; "width"; "height");
+
+    _parent = List(
+      "parentWindowName";
+      "parentWindowLayout";
+      "parentWindowID";
+      "parentWindowTop";
+      "parentWindowLeft";
+      "parentWindowWidth";
+      "parentWindowHeight";
+    );
+
+    _values = List (
+      Get( WindowName );
+      Get( LayoutName );
+      GetValue( LayoutIDs( Get( FileName ) ); Get( LayoutNumber ) );
+      Get( WindowTop );
+      Get( WindowLeft );
+      Get( WindowWidth );
+      Get( WindowHeight )
+    )
+  ];
+
+  // returns
+  Case(
+    ( _method = devp.Nil ) or ( _method = "default" );
+    _values;
+
+    _method = "piped";
+    Substitute( _values; ¶; "|" );
+
+    // global variables are returned by VariableList() - use Substitute ( properties ; "$$" ; "$" ) to make local
+    _method = "let";
+    devp.VariableList( _keys; _values ; "global" );
+
+    ( _method = "parentVars" ) or ( _method = "parent" );
+    devp.VariableList( _parent; _values ; "local" );
+
+    // default
+    _values
+  )
+)

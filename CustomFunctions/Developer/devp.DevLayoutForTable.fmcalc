@@ -1,0 +1,5 @@
+// Returns the name of the developer layout given a table name.
+//
+// Written by Charles Ross
+
+$$_STG_Dev_Layout_Prefix & $$_STG_Layout_Name_Separator & _tableName

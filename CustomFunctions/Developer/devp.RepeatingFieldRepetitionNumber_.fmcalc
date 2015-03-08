@@ -1,0 +1,32 @@
+Let(
+  [
+    _repetition_value = GetRepetition( _repeating_field; _repetition );
+
+    _match = Case(
+      IsEmpty( _value ) and IsEmpty( _repetition_value );
+      True;
+
+      _value = "*" and not IsEmpty( _repetition_value );
+      True;
+
+      False
+    );
+
+    _match_count = _match_count + _match
+  ];
+
+  Case(
+    _match and _match_target = "*";
+    _repetition // syntax: we found a value, but should continue to look for more.
+      & Case(
+        _match_count = _match_max;
+        devp.Nil;
+
+        ¶ & devp.RepeatingFieldRepetitionNumber_( _repeating_field; _value; _match_target; _match_max; _match_count; _repetition + 1 )
+      );
+
+      _match_count = _match_target;
+      _repetition; // We found the value we're looking for.
+      devp.RepeatingFieldRepetitionNumber_ (_repeating_field; _value; _match_target; _match_max; _match_count; _repetition + 1 )
+    )
+)

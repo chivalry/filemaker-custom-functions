@@ -1,0 +1,14 @@
+// Layouts are named so that the major section a layout belongs to is found
+//   before the layout separator. Return everything before this separator.
+//
+// EXTERNAL REQUIREMENTS: A global variable $$_STG_Layout_Name_Separator must be
+//   set.
+
+Let(
+  [
+    _layoutSeparatorPos =
+      Position( Get( LayoutName ); $$_STG_Layout_Name_Separator; 1; 1 )
+  ];
+  
+  Left( Get( LayoutName ); _layoutSeparatorPos - 1 )
+)

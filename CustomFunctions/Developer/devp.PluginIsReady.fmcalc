@@ -1,0 +1,41 @@
+// Returns True if the named plugin is installed and enabled.
+
+Let(
+  [
+    _plugins = Get( InstalledFMPlugins );
+
+    _installed = PatternCount(
+      _plugins;
+      _plugin_name
+    );
+
+    // No need to continue if the plugin is not installed.
+    _result = _installed and Let(
+      [
+        // Figure out where in the list the plugin is so we can count the
+        //  carriage returns before it appears.
+        _plugin_pos = Position( _plugins; _plugin_name; 1; 1 );
+
+        _before_name = Left( _plugins; _plugin_pos );
+
+        _pos_in_list = PatternCount(
+          _before_name; ¶
+        ) + 1;
+
+        // Now get the line it's in within the list and convert that to another list.
+        _line = GetValue(
+          _plugins;
+          _pos_in_list
+        );
+
+        _list = Substitute( _line; ";"; ¶ );
+
+        _enabled = GetValue( _list; 3 ) = "Enabled"
+      ];
+
+      _enabled
+    ) // Close inner Let
+  ];
+
+  _result
+)

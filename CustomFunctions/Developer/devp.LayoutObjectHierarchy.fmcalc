@@ -1,0 +1,84 @@
+/**
+ * =====================================================
+ * LayoutObjectHierarchy( content )
+ * 
+ * PURPOSE:
+ *                Display indented version of LayoutObjectNames
+ * 
+ * PARAMETERS:
+ *                @content = LayoutObjectNames
+ * 
+ * RETURNS:
+ *                (list) Indented version of LayoutObjectNames
+ * 
+ * DEPENDENCIES:
+ *                none
+ * 
+ * NOTES:
+ *                This is a special use function for showing
+ *                a developer the hierarchy of Layout objects
+ * =====================================================
+ * 
+ */
+
+Let(
+  [
+    _content = Case(
+      IsEmpty( _content );
+      LayoutObjectNames( Get( FileName ); Get( LayoutName ) );
+      _content
+    );
+    
+    _topRow        = GetValue( _content; 1 );
+    _remainingData = RightValues( _content; ValueCount( _content ) - 1 );
+    _prefixChar    = "» ";
+    _indentChars   = "                                                          ";
+    _isIndent      = _topRow = "<";
+    _isOutdent     = _topRow = ">";
+
+    $$FUNCTION.LAYOUTOBJECTHIERARCHY = Case(
+      _isIndent;
+      Left( _indentChars; Length( $$FUNCTION.LAYOUTOBJECTHIERARCHY ) + 1 );
+
+      _isOutdent;
+      Left( _indentChars; Length( $$FUNCTION.LAYOUTOBJECTHIERARCHY ) - 1 );
+
+    // Else
+      $$FUNCTION.LAYOUTOBJECTHIERARCHY
+    );
+    
+    _useRow = not ( _isIndent or _isOutdent );
+    
+    _resultRow = Case(
+      Length( $$FUNCTION.LAYOUTOBJECTHIERARCHY ) ≥ 1 ;
+      $$FUNCTION.LAYOUTOBJECTHIERARCHY & _prefixChar ) & _topRow;
+    
+    $$FUNCTION.LAYOUTOBJECTHIERARCHY[2] = List(
+      $$FUNCTION.LAYOUTOBJECTHIERARCHY[2];
+      Case(
+        _useRow;
+        _resultRow;
+      // Else
+        ""
+      )
+    )
+  ];
+
+  Case(
+    ( ValueCount( _remainingData ) = 1 )
+      or IsEmpty( _content );
+    // Return result and reset global variables being used
+    $$FUNCTION.LAYOUTOBJECTHIERARCHY[2] &
+      Let(
+        [
+          $$FUNCTION.LAYOUTOBJECTHIERARCHY = "";
+          $$FUNCTION.LAYOUTOBJECTHIERARCHY[2] = ""
+        ];
+        
+        ""
+      ); // final result
+      
+    // Recursion (not using this as result because of stack inversion)
+    devp.LayoutObjectHierarchy( _remainingData )
+  )
+)

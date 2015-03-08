@@ -1,0 +1,24 @@
+Case(
+  ( _repetition > _repetition_max )
+    or ( _max_values = 0 );
+  devp.Nil;
+
+  Let(
+    [
+      _value = GetRepetition( _repeating_field; _repetition );
+      _max_values = Case(
+        IsEmpty( _value );
+        _max_values;
+        _max_values - 1
+      )
+    ];
+
+    Case(
+      _repetition = 1;
+      devp.Nil;
+      ¶
+    ) &
+    _value &
+    devp.RepeatingFieldOmitTrailingNulls_( _repeating_field; _repetition_max; _repetition + 1; _max_values )
+  )
+)

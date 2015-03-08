@@ -1,0 +1,7 @@
+// It seems odd to me to have the slighly convoluted calculation used to test
+//   for a valid relationship, so I enclose it in this custom function for
+//   readability.
+//
+// Written by Charles Ross
+
+not IsEmpty( _relatedKey )

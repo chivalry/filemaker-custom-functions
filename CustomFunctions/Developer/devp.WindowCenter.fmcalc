@@ -1,0 +1,70 @@
+/**
+ * =====================================================
+ * WindowCenter ( dimension )
+ * 
+ * PARAMETERS:
+ *                @dimension (enumeration) Vertical, Horizontal
+ * RETURNS:
+ *                (int) Screen position value based on dimension
+ *                supplied
+ * DEPENDENCIES:
+ *                none
+ * NOTES:
+ *                Using a locally scoped variable within your
+ *                script will alter what this function returns
+ *                $parentWindowHeight for window height of parent
+ *                $parentWindowWidth for window width of parent
+ *                $parentWindowTop for window top of parent
+ *                $parentWindowLeft for window left of parent
+ * =====================================================
+ * 
+ */
+
+Let(
+  [
+    _vertical     = PatternCount( _dimension ; "vert" );
+    _horizontal   = PatternCount( _dimension ; "horiz" );
+    
+    _parentHeight = Case(
+      IsEmpty( $parentWindowHeight );
+      Get( WindowDesktopHeight );
+    // Else
+      $parentWindowHeight
+    );
+      
+    _parentWidth = Case(
+      IsEmpty( $parentWindowWidth );
+      Get( WindowDesktopWidth );
+    // Else
+      $parentWindowWidth
+    );
+
+    _childHeight = Case(
+      IsEmpty( $childWindowHeight );
+      Get( WindowHeight );
+    // Else
+      $childWindowHeight
+    );
+
+    _childWidth = Case(
+      IsEmpty( $childWindowWidth );
+      Get ( WindowWidth );
+    // Else
+      $childWindowWidth
+    );
+    
+    _childDimension = Case(
+      _vertical;
+      _childHeight;
+      _childWidth
+    );
+    
+    _parentDimension = Case(
+      _vertical;
+      $parentWindowTop;
+      $parentWindowLeft
+    )
+  ];
+
+  ( _parentHeight / 2 ) - ( _childDimension / 2 ) + $_parentDimension
+)

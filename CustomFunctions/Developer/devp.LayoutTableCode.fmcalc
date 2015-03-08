@@ -1,0 +1,9 @@
+Let(
+  [
+    _toName = Get( LayoutTableName )
+  ];
+
+  // Naming convention for TOs is that the root table name is first, followed by
+  //   at least one underscore.
+  Left( _toName; Position( _toName; "_"; 1; 1 ) - 1 )
+)
