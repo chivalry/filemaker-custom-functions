@@ -1,0 +1,41 @@
+// © 2006 Winfried Huslik, www.fmdiff.com
+
+Let(
+  [
+    _neg = Sign( _date2 - _date1 );
+    
+    _d1 = Case(
+      _neg < 0;
+      _date2;
+    // Else
+      _date1
+    );
+    
+    _d2 = Case(
+      _neg < 0;
+      _date1;
+    // Else
+      _date2
+    );
+
+    _d = Mod(
+      Day( _d2 ) - Day( _d1 );
+      Day( Date( Month( _d1 ) + 1; 0; Year( _d1 ) ) )
+    );
+
+    _m = Mod(
+      Month( _d2 ) - Month( _d1 ) - ( Day( _d2 ) < Day( _d1 ) );
+      12
+    );
+
+    _y = Year( _d2 ) - Year( _d1 )
+      - ( ( Month( _d2 ) - ( Day( _d2 ) < Day( _d1 ) ) ) < Month ( _d1 ) )
+  ];
+
+  List(
+    _y * _neg;
+    _m * _neg;
+    _d * _neg;
+    _y & " years, " & _m & " months, and " & _d & " days"
+  )
+)

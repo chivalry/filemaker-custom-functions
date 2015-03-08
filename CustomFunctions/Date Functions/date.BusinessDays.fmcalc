@@ -1,0 +1,90 @@
+/**
+ * =========================================================
+ * BusinessDays( startDate; endDate )
+ *
+ * RETURNS:
+ *    The number of business days (non-holiday weekdays) falling between
+ *    startDate and endDate, inclusive.
+ *
+ * PARAMETERS:
+ *    startDate: A date
+ *    endDate: A date, endDate ≥ startDate
+ *
+ * DEPENDENCIES:
+ *    date.BusinessHolidays( calendarYear )
+ *
+ * HISTORY:
+ *    MODIFIED on 2011-10-19 by Jeremy Bante to correctly handle multi-year
+ *    ranges.
+ *    CREATED on 2011-10-18 by Jeremy Bante http://scr.im/jbante.
+ * =========================================================
+ */
+
+Let (
+  [
+    // compare calendar years, in case range spans multiple years
+    _startYear = Year( _start );
+    _endYear   = Year( _end );
+    _splitDate = Date( 1; 1; _startYear + 1 ); // first 1 Jan after startDate
+    _endDate   = Case(
+      _endYear > _startYear;
+      _splitDate - 1;
+      _end
+    );
+
+    _startDay = DayOfWeek( _start );
+    _endDay   = DayOfWeek( _endDate );
+
+    _startSaturday = _start - _startDay + 7;
+    _endSaturday   = _endDate - _endDay;
+    _fullWeeks     = Div( _endSaturday - _startSaturday + 1; 7 );
+
+    _leadingWeekDays = Choose(
+      _startDay - 1;
+      5; 5; 4; 3; 2; 1; 0
+    );
+    _trailingWeekDays = Choose(
+      _endDay - 1;
+      0; 1; 2; 3; 4; 5; 5
+    );
+
+    _holidayCalcLetPrefix =
+      "Let(" & ¶ &
+      "  [" & ¶ &
+      "    _d = GetAsDate(\"";
+    _holidayCalcLetSuffix =
+      "\" );" & ¶ &
+      "    _n = DayOfWeek( _d )" & ¶ &
+      "  ];" & ¶ &
+      ¶ &
+      "  ( _d ≥ GetAsDate( startDate ) )" & ¶ &
+      "    and ( _d ≤ GetAsDate( endDate ) )" & ¶ &
+      "    and ( _n > 1 )" & ¶ &
+      "    and ( _n < 7 )" & ¶ &
+      ")";
+      
+    _holidayCalculation =
+      _holidayCalcLetPrefix
+      & Substitute( date.BusinessHolidays( _startYear ); "¶"; "|" )
+      & _holidayCalcLetSuffix;
+      
+    _holidayCalculation = // Add 1 for each weekday holiday within range
+      Substitute( _holidayCalculation;
+        [ "|";         _holidayCalcLetSuffix & "  + " & _holidayCalcLetPrefix ];
+        [ "startDate"; Quote ( _start ) ];
+        [ "endDate";   Quote ( _endDate ) ]
+      );
+      
+    _holidays = Evaluate( _holidayCalculation )
+  ];
+
+  ( 5 * _fullWeeks )
+    + _leadingWeekDays
+    + _trailingWeekDays
+    - _holidays
+    + Case(
+      _endYear > _startYear;
+      date.BusinessDays( _splitDate; _end );
+      0
+    )
+)

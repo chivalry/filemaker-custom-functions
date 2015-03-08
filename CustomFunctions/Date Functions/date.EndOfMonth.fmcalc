@@ -1,0 +1,8 @@
+Let(
+  [
+    _month = Month( _date );
+    _year = Year( _date )
+  ];
+
+  Date( _month + 1; 1; _year )
+)
