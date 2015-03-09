@@ -1,5 +1,16 @@
-// Returns the name of the developer layout given a table name.
+// devp.DevLayoutForTable ( _table_name )
 //
-// Written by Charles Ross
+// Purpose:	Returns the name of the developer layout given a table name.
+// Parameters:	_table_name: The name of the table for which we need the developer layout.
+//
+// Requirements:	The appropriate setting of the $$_STG_Dev_Layout_Prefix and
+//				$$_STG_Layout_Name_Separator global variables.
+//
+// Author:		Charles Ross
+// Version:	1.0 written 15-03-07
+//
+// Example:
+// // Assuming $$_STG_Dev_Layout_Prefix = "DEV" and $$_STG_Layout_Name_Separator = "_"...
+// devp.DevLayoutForTable ( "People" ) = "DEV_People"
 
-$$_STG_Dev_Layout_Prefix & $$_STG_Layout_Name_Separator & _tableName
+$$_STG_Dev_Layout_Prefix & $$_STG_Layout_Name_Separator & _table_name

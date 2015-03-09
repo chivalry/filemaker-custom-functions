@@ -1,10 +1,18 @@
-// If the Contents are empty, returns an empty string. Otherwise returns the
-//   original contents with a space appended.
+// devp.ContentsWithSpaceIfNotEmpty ( _contents )
 //
-// Written by Charles Ross
+// Purpose:	Returns the contents with a space appended if it's not empty. Returns an empty
+//			string otherwise.
+// Parameters:	_contents: The contents to consider.
+//
+// Requirements: devp.Nil
+//
+// Author:		Charles Ross
+// Version:	1.0 written 15-03-07
+//
+// Example:
+// devp.ContentsWithSpaceIfNotEmpty ( "something" ) = "somthing "
 
-Case(
-  _contents ≠ "";
-  _contents & " ";
-  ""
+Case (
+  _contents ≠ devp.Nil;	_contents & " ";
+  					devp.Nil
 )

@@ -1,5 +1,0 @@
-devp.RepeatingFieldAllValues_(
-  _repeating_field;
-  devp.RepeatingFieldRepetitions( _repeating_field );
- 1
-)
