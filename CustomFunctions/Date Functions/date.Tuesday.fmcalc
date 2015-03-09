@@ -1,1 +1,8 @@
-2
+// date.Tuesday
+//
+// Purpose:	Return FileMaker's representation for Tuesday when calling DayOfWeek
+//
+// Author:		Charles Ross
+// Version:	1.0 written 15-03-08
+
+3
