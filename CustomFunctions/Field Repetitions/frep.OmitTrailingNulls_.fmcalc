@@ -19,6 +19,6 @@ Case(
       ¶
     ) &
     _value &
-    devp.RepeatingFieldOmitTrailingNulls_( _repeating_field; _repetition_max; _repetition + 1; _max_values )
+    devp.OmitTrailingNulls_( _repeating_field; _repetition_max; _repetition + 1; _max_values )
   )
 )

@@ -1,1 +1,1 @@
-ValueCount( devp.RepeatingFieldNonNullValues( _repeating_field ) )
+ValueCount( devp.NonNullValues( _repeating_field ) )

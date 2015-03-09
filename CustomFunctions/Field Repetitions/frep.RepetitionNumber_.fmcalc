@@ -22,11 +22,11 @@ Let(
         _match_count = _match_max;
         devp.Nil;
 
-        ¶ & devp.RepeatingFieldRepetitionNumber_( _repeating_field; _value; _match_target; _match_max; _match_count; _repetition + 1 )
+        ¶ & devp.RepetitionNumber_( _repeating_field; _value; _match_target; _match_max; _match_count; _repetition + 1 )
       );
 
       _match_count = _match_target;
       _repetition; // We found the value we're looking for.
-      devp.RepeatingFieldRepetitionNumber_ (_repeating_field; _value; _match_target; _match_max; _match_count; _repetition + 1 )
+      devp.RepetitionNumber_ (_repeating_field; _value; _match_target; _match_max; _match_count; _repetition + 1 )
     )
 )

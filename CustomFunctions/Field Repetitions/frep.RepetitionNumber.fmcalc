@@ -2,7 +2,7 @@ Let(
   [
     _match_max = Case(
       IsEmpty( _value );
-      devp.RepeatingFieldRepetitions( _repeating_field ) - Count( _repeating_field ); // Syntax: Null values.
+      devp.Repetitions( _repeating_field ) - Count( _repeating_field ); // Syntax: Null values.
 
       _value = "*";
       Count( _repeating_field ); // Syntax: Non-null values.
@@ -26,7 +26,7 @@ Let(
 
   Case(
     _match_max and ( not IsEmpty( _match_target ) );
-    devp.RepeatingFieldRepetitionNumber_( _repeating_field; _value; _match_target; _match_max; 0; 1 );
+    devp.RepetitionNumber_( _repeating_field; _value; _match_target; _match_max; 0; 1 );
 
     "" // If the target value is not in the list, or there are too few matches, don't waste time searching the list.
   )

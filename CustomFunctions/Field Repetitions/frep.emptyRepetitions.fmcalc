@@ -1,1 +1,1 @@
-frep.RepeatingFieldRepetitions( _repeating_field ) - frep.RepeatingFieldNonNullValues( _repeating_field )
+frep.Repetitions( _repeating_field ) - frep.NonNullValues( _repeating_field )

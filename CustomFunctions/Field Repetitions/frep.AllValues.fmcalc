@@ -1,5 +1,5 @@
-frep.RepeatingFieldAllValues_(
+frep.AllValues_(
   _repeating_field;
-  frep.RepeatingFieldRepetitions( _repeating_field );
+  frep.Repetitions( _repeating_field );
  1
 )

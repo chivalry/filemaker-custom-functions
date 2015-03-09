@@ -1,1 +1,1 @@
-frep.RepeatingFieldRepetitionNumber( _repeating_field; "*"; "*" )
+frep.RepetitionNumber( _repeating_field; "*"; "*" )
