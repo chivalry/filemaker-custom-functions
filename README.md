@@ -74,7 +74,8 @@ there was a function actually called template and it actually took two parameter
 The example portion should be something that, once the custom function has been defined, would allow a developer to copy
 and paste into the data viewer, remove the commenting and have it return `True`. An example, using one of FileMaker's
 built-in functions, might be `Middle ( "abc"; 2; 1 ) = "a"`. If multiple examples are included, use a single calculation
-that uses a boolean `and` to create the truth statement.
+that uses a boolean `and` to create the truth statement. If the test is trivial because a constant is being returned,
+this can be omitted.
 
 If the function depends on any other custom functions, these dependencies should be documented in the requirements
 section.
