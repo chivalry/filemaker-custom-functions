@@ -1,7 +1,0 @@
-// Returns True if the path is any FileMaker path.
-
-( _type = path.TypeFileMakerMac )
-  or ( _type = path.TypeFileMakerMacImage )
-  or ( _type = path.TypeFileMakerWin )
-  or ( _type = path.TypeFileMakerWinImage )
-  or ( _type = path.TypeFileMakerWinNetwork )

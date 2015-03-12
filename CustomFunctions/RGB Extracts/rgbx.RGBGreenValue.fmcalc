@@ -1,5 +1,0 @@
-// Returns the green value (0-255) of a given RGB value.
-//
-// Written by Charles Ross
-
-Int( ( _rgb - ( rgbx.RGBRedValue( _rgb ) * 65536 ) ) / 256 )

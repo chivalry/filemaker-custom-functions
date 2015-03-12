@@ -1,6 +1,0 @@
-// Return the number of the frontmost tab given the provided prefix. For example, if each of the tabs
-//   is prefixed with "entity_tab_" and the current front tab is "entity_tab_03", this function returns the
-//   integer 3. Assumes no tab set will have more than 100 tabs and that indexing begins at either
-//   0 or 1. Returns devp.Null if none of the tabs are frontmost.
-
-devp.FrontTabNumber~( _tab_prefix; 0 )

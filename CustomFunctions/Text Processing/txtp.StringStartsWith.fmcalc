@@ -1,1 +1,0 @@
-Left( _text;  Length( _search_string ) ) = _search_string

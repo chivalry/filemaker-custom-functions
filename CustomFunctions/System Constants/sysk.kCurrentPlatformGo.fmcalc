@@ -1,6 +1,0 @@
-// Used as a named constant. Must have a value such that Get( SystemPlatform ) =
-//   kCurrentPlatformGo when running on FileMaker Go.
-//
-// Written by Charles Ross
-
-3

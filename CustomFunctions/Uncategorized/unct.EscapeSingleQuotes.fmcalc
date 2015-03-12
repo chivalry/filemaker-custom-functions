@@ -1,6 +1,0 @@
-//  purpose:  Wrap pText in single quotes
-//  usage:   Q ( pText ) 
-//  The purpose of the Substitute is to "escape" any internally embedded apostrophes, e.g., O'Malley becomes 'O''Malley', which SQL will convert into O'Malley
-
-
- "'" & Substitute ( _text ; "'"; "''" ) & "'"

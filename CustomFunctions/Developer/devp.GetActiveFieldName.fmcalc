@@ -1,5 +1,0 @@
-// Returns the full name of the active field, including the table occurrence.
-//
-// Written by Charles Ross
-
-Get( ActiveFieldTableName ) & "::" & Get( ActiveFieldName )

@@ -1,5 +1,0 @@
-// Returns only the rightmost word of the passed text.
-//
-// Written by Charles Ross
-
-RightWords( _word; 1 )

@@ -1,7 +1,0 @@
-// A constant for use with calls to the Pad functions. It's actual value doesn't
-//   matter, so long as it's used consistently and has a different value from
-//   that returned by kLeft.
-//
-// Written by Charles Ross
-
-"Right"

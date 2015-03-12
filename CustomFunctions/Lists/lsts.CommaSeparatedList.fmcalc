@@ -1,5 +1,0 @@
-// Converts a return separated list into a comma separated list.
-//
-// Written by Charles Ross
-
-Substitute( _list; "¶"; ", " )

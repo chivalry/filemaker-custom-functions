@@ -1,3 +1,0 @@
-// http://edoshin.typepad.com/bits_and_pieces/2006/01/rounding_to_a_g.html#more
-
-Ceiling( _number / _precision ) * _precision

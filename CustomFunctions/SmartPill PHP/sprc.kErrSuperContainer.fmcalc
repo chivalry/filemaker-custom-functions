@@ -1,8 +1,0 @@
-// A constant to store the string returned by the SuperContainer plugin when an
-//   error occurs.
-//
-// EXTERNAL REQUIREMENTS: The SuperContainer plugin.
-//
-// Written by Charles Ross
-
-"ERROR"

@@ -1,6 +1,0 @@
-( sysk.PlatformIsGo
-  and ( not PatternCount( Get( ApplicationVersion ); "iPad" ) ) )
-
-or
-
-$$PLATFORM_OVERRIDE_IPHONE

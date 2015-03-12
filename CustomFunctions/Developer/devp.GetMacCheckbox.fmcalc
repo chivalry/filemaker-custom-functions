@@ -1,5 +1,0 @@
-Case(
-  _test;
-  $$MAC_CHECKBOX_ON;
-  $$MAC_CHECKBOX_OFF
-)

@@ -1,4 +1,0 @@
-// http://www.kegebein.net/blog/2009/06/manage-parameters/
-
-scpm.kegebein_EscapeCharacters( _key ) & "==" &
-scpm.kegebein_EscapeCharacters( _value ) & ¶

@@ -1,1 +1,0 @@
-Abs( Get( SystemPlatform ) ) = sysk.kCurrentPlatformWin

@@ -1,6 +1,0 @@
-// Encapsulates the building of parameter/value pairs used by the AssignParams
-//   function.
-//
-// Written by Charles Ross.
-
-_var_name & " = " & Quote( _param_value ) & "; "

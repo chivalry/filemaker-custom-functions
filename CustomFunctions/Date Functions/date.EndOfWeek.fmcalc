@@ -1,9 +1,0 @@
-Let(
-  [
-    _month_number = Month( _date );
-    _year = Year( _date );
-    _month_start = Date( _month_number; 1; _year )
-  ];
-
-  _month_start + _end_weekday - DayOfWeek( _month_start ) + 1
-)

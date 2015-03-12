@@ -1,5 +1,0 @@
-Case(
-  IsEmpty( _text );
-  devp.Nil;
-  " (" & _text & ")"
-)

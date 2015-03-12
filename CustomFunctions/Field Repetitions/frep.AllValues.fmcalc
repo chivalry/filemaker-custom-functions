@@ -1,5 +1,0 @@
-frep.AllValues_(
-  _repeating_field;
-  frep.Repetitions( _repeating_field );
- 1
-)

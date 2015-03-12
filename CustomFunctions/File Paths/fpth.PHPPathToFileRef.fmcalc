@@ -1,5 +1,0 @@
-// Translates a PHP style path into a FileMaker file reference. On Macs this is a POSIX path, and on
-//   Windows a C:\ path.
-// /Drive/Users/username/file.ext => filemac:/Drive/Users/file.ext
-// /Drive/Volumes/DriveName/folder/file.ext => filemac:/DriveName/folder/file.ext
-

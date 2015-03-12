@@ -1,5 +1,0 @@
-Case(
-  sysk.PlatformIsGo;
-  devp.GetiPadSwitch( _test );
-  devp.GetMacCheckbox( _test )
-)

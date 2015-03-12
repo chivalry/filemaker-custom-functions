@@ -1,5 +1,0 @@
-// Returns only the leftmost word of the passed text.
-//
-// Written by Charles Ross
-
-LeftWords( _word; 1 )

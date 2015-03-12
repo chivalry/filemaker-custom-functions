@@ -1,5 +1,0 @@
-Case(
-  _test;
-  $$IPAD_ON_BUTTON;
-  $$IPAD_OFF_BUTTON
-)

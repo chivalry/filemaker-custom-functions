@@ -1,3 +1,0 @@
-( Abs( Get( SystemPlatform ) ) = sysk.kCurrentPlatformGo )
-  or $$PLATFORM_OVERRIDE_IPAD
-  or $$PLATFORM_OVERRIDE_IPHONE

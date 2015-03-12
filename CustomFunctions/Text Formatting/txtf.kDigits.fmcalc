@@ -1,6 +1,0 @@
-// Just an easy way to specify decimal digits, usually used within the Filter
-//   funciton.
-//
-// Written by Charles Ross
-
-"0123456789"

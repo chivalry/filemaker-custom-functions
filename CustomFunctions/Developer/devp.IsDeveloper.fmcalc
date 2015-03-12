@@ -1,5 +1,0 @@
-// Just an easy way to determine full access.
-//
-// Written by Charles Ross
-
-Get( CurrentPrivilegeSetName ) = "[Full Access]"

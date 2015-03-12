@@ -1,1 +1,0 @@
-GetValue( frep.NonNullValues( _repeating_field ); 1 )

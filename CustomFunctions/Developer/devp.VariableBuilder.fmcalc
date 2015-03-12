@@ -1,9 +1,0 @@
-// A feature of this system is the assigning of global variables of numerous
-//   types (graphics, tool tips, etc.) from records within fields. Each record
-//   is given a name and each table of global variables has a table code
-//   indicating which type of variable it is. Given these two pieces of
-//   information, this function builds the variable name.
-//
-// Written by Charles Ross
-
-"$$_" & _varType & "_" & Substitute( _varName; " "; "_" )

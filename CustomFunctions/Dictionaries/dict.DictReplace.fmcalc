@@ -1,6 +1,0 @@
-// Replaces the value of an existing name with a new value.
-//
-// Written by Jesse Antunes
-//   http://sixfriedrice.com/wp/filemaker-dictionary-functions/
-
-dict.DictRemove( _dict; _key ) & dict.DictEntry( _key; _value )

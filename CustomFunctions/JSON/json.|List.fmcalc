@@ -1,6 +1,0 @@
-/* expecting separated by "|-"  = calc custom function "…" will set to ^_^  and then replace with that... 
-
-so usage: |( item1 & … & item2 & … & item3 & … & item4)  */
-
-If ( not Length (_listItems) ; "<|->" ; // null list type
-"<|-" & Substitute ( _listItems ; ["|-><|-" ; "|->" & json.… & "<|-"] ; ["|"; "/|/"] ; ["^_^"; "|-"] ) & "|->" )

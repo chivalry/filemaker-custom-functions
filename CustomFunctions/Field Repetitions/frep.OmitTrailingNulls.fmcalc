@@ -1,6 +1,0 @@
-devp.OmitTrailingNulls_(
-  _repeating_field;
-  devp.Repetitions( _repeating_field );
-  1;
-  Count( _repeating_field )
-)

@@ -1,7 +1,0 @@
-// Pads the given string with the specified number of zeroes.
-//
-// EXTERNAL REQUIREMENTS: The Pad custom function.
-//
-// Written by Charles Ross
-
-Right( padd.Pad( _text; "0"; _length; padd.kLeft ); _length )
