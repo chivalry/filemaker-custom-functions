@@ -51,6 +51,7 @@ named identically to the wrapper function but with an appended underscore.
 
 Parameters are named in `snake_case`, but with a leading underscore, as in `_list` and
 `_folder_path`.  
+
 ### Preamble
 
 Each custom function starts with a preamble that looks like the following:
@@ -59,22 +60,22 @@ Each custom function starts with a preamble that looks like the following:
     //
     // Purpose:	description
     // Parameters:	  _param_1: description
-    //              	_param_2: description
+    //                _param_2: description
     //
     // Requirements: requirements
     //
     // Author:		Charles Ross
-    // Version:	  1.0 written 15-03-07
+    // Version:	    1.0 written 15-03-07
     //
     // Notes:		Notes
     //
     // Example:
     // sample = result
 
-The template is what would normall show between FileMaker's parameter list and the custom
-function code. For example, if there was a function actually called template and it
+The template is what would normally show between FileMaker's parameter list and the custom
+function code. For example, if there was a function actually called Template and it
 actually took two parameters as above, the template line would have `Template ( _param_1;
-_param_2 )`. If there's not parameters for the function, the template should not have
+_param_2 )`. If there's no parameters for the function, the template should not have
 parenthesis.
 
 The example portion should be something that, once the custom function has been defined,
@@ -86,3 +87,15 @@ trivial because a constant is being returned, this can be omitted.
 
 If the function depends on any other custom functions, these dependencies should be
 documented in the requirements section.
+
+### Script Variables
+
+If script variables are used within a custom function to track information between recursive
+calls, the script variable names should include the custom function to reduce the chance
+that custom function script variables will conflict with those found in actual executing
+scripts. For example, if a function is named `MyCustomFunction` and it references a script
+variable that under normal circumstances might be named `$_len`, with the custom funciton
+a name of `$_MyCustomFunction_len`, or perhaps `$_mcf_len`, should be used. While this can
+unfortunately result in very long script variable names within custom functions, using this
+namespacing technique is preferable to having a script reference the same variable and use
+the custom function in question, thereby overwriting the script's variable value.
