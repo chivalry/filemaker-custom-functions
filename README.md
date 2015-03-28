@@ -2,7 +2,24 @@
 
 These are the standard custom functions that I generally import into all of my FileMaker
 projects. They represent a library of custom functions, some commonly used, others more
-esoteric.
+esoteric, but each one has actually been used or seems to have a high liklihood of
+utility in some future project.
+
+While I wrote many of these myself, there are quite a few that are from other sources.
+I've tried to acknowledge the original author when I could as well as provide a URL to
+the web page where the function was originally found. If you find a function that you
+wrote without an attribution to you, please open an issue so I can fix that, or, if the
+text format is available for it, fork the repository, make your change and submit a pull
+request.
+
+## Formats
+
+All of the custom functions can be found in three places:
+
+1. Within a FileMaker 13 file, `CustomFunctions.fmp12`. This is the golden master and the only place a function is guaranteed to be.
+2. Within a FileMaker 11 file, `CustomFunctions.fp7`. Incompatible custom functions that take advantage of FileMaker 12+ features, such as `ExecuteSQL`, will not be included here.
+3. Within a text file in a parent folder named for the functions group, such as `CustomFunctions/Lists/lsts.First.fmcalc`. The `fmcalc` extension will allow the proper syntax highlighting within vim if the [filemaker.vim](https://github.com/chivalry/filemaker.vim) plugin is installed.
+
 
 ## Standards
 
@@ -39,7 +56,7 @@ Some examples follow.
 ### Wrapped Recursive Functions
 
 If a function's sole purpose is to act as a recursive tool for a wrapper function, in
-which case it is only every called by the wrapper function, then the recursive tool is
+which case it is only ever called by the wrapper function, then the recursive tool is
 named identically to the wrapper function but with an appended underscore.
 
     lsts.Concat
@@ -58,16 +75,15 @@ Each custom function starts with a preamble that looks like the following:
 
     // Temmplate
     //
-    // Purpose:	description
-    // Parameters:	  _param_1: description
-    //                _param_2: description
+    // Purpose:	     description
+    // Parameters:	 _param_1: description
     //
     // Requirements: requirements
     //
-    // Author:		Charles Ross
-    // Version:	    1.0 written 15-03-07
+    // Author:		 Charles Ross
+    // Version:	     1.0 written 15-03-07
     //
-    // Notes:		Notes
+    // Notes:		 Notes
     //
     // Example:
     // sample = result
@@ -78,12 +94,19 @@ actually took two parameters as above, the template line would have `Template ( 
 _param_2 )`. If there's no parameters for the function, the template should not have
 parenthesis.
 
-The example portion should be something that, once the custom function has been defined,
-would allow a developer to copy and paste into the data viewer, remove the commenting and
-have it return `True`. An example, using one of FileMaker's built-in functions, might be
-`Middle ( "abc"; 2; 1 ) = "a"`. If multiple examples are included, use a single
-calculation that uses a boolean `and` to create the truth statement. If the test is
-trivial because a constant is being returned, this can be omitted.
+The example portion should be a sort of unit test for the function, something that, once
+the custom function has been defined, would allow a developer to copy and paste into the
+data viewer, remove the commenting and have it return `True`. An example, using one of
+FileMaker's built-in functions, might be `Middle ( "abc"; 2; 1 ) = "a"`. If multiple
+examples are included, use a single calculation that uses a boolean `and` to create the
+truth statement. If the test is trivial because a constant is being returned, this can
+be omitted.
+
+Such unit tests aren't always possible, expecially when the funciton's primary purposes
+resides not in its return value but in its side effects. If possible, use comments in the
+example to explain what the initial conditions should be and use the example to not only
+express the return value of the function but also what side effects should also be true
+after calling it.
 
 If the function depends on any other custom functions, these dependencies should be
 documented in the requirements section.
