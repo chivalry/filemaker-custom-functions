@@ -20,6 +20,10 @@ All of the custom functions can be found in three places:
 2. Within a FileMaker 11 file, `CustomFunctions.fp7`. Incompatible custom functions that take advantage of FileMaker 12+ features, such as `ExecuteSQL`, will not be included here.
 3. Within a text file in a parent folder named for the functions group, such as `CustomFunctions/Lists/lsts.First.fmcalc`. The `fmcalc` extension will allow the proper syntax highlighting within vim if the [filemaker.vim](https://github.com/chivalry/filemaker.vim) plugin is installed.
 
+There's one more file included for historical reference only, `CustomFunctionsArchive.fmp12`,
+which contains the custom functions I had in their original format before I began editing
+them to conform to standards and eliminating them if they weren't actually used or likely
+to be used.
 
 ## Standards
 
