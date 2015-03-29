@@ -1,0 +1,42 @@
+// dict.Get ( _dict; _key )
+//
+// Purpose:		Returns the value for the named key in the passed dictionary.
+//
+// Parameters:		_dict:	The dictionary to return the value from
+//				_key:		The key to return the value for
+//
+// Requirements:	dict.Escape
+//				dict.Unescape
+//
+// Author:			Jesse Antunes
+// Version:		1.0 written 15-03-11
+//
+// Notes:			http://sixfriedrice.com/wp/filemaker-dictionary-functions/
+//
+// Example:
+// Let (
+//   [
+//     _dict = dict.Add ( devp.Nil; "key1" ; "value1" );
+//     _dict = dict.Add ( _dict; "key2"; "value2" )
+//   ];
+// 
+//   dict.Get ( _dict; "key2" )
+// ) = "value2"
+
+Let(
+  [
+    _match		= "<:" & dict.Escape( _key ) & ":=";
+    _p_start	= Position( _dict; _match; 1; 1 );
+    _start		= _p_start + Length( _match );
+    _end		= Position( _dict ; ":>"; _start; 1 );
+    _len		= Case(
+      _end = 0;	999999999;
+      			_end - _start
+    )
+  ];
+
+  Case(
+    _p_start = 0;	devp.Nil; 
+    			dict.Unescape( Middle( _dict; _start; _len ) )
+  )
+)

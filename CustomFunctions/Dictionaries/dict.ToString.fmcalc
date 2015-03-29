@@ -1,0 +1,56 @@
+// dict.ToString ( _dict; _format )
+//
+// Purpose:		Converts a dictionary into a string with the given format.
+//
+// Parameters:		_dict:	The dictionary to export
+//				_format:	The format to export to
+//
+// Requirements: 	dict.First
+//				dict.Get
+//				dict.Remove
+//
+// Author:			Jesse Antunes
+// Version:		1.0 written 15-03-11
+//
+// Notes:			Format should be a string where "%n" is replaced by the key and "%v" is replaced
+//				by the matching value.
+//
+//				http://sixfriedrice.com/wp/filemaker-dictionary-functions/
+//
+// Example:
+// Let (
+//   [
+//     _dict = dict.Add ( devp.Nil; "key1" ; "value1" );
+//     _dict = dict.Add ( _dict; "key2"; "value2" )
+//   ];
+// 
+//   dict.ToString ( _dict; "key = %n; value = %v¶" )
+// ) = "key = key1; value = value1¶key = key2; value = value2¶"
+
+Let(
+  [
+    _first_name	= dict.First ( _dict );
+    _raw_data	= dict.Get( _dict; _first_name );
+
+    _data = Case(
+      not IsEmpty( dict.First( _raw_data ) );	dict.ToString( _raw_data ; _format );
+      								_raw_data
+    );
+
+    _rest = dict.Remove( _dict; _first_name )
+  ];
+  
+  Case(
+    not IsEmpty( _first_name );
+    Substitute( 
+      _format;
+      [ "%n";		_first_name 	]; 
+      [ "%v";		_data		]
+    ) & Case (
+      not IsEmpty( _rest ); 
+      dict.ToString(_rest; _format)
+    );
+  // Else
+    _dict
+  )
+)

@@ -1,0 +1,27 @@
+// dict.Replace ( _dict; _key; _value )
+//
+// Purpose:		Replaces the value of an existing name with a new value.
+//
+// Parameters:		_dict:	The dictionary to modify
+//				_key:		The key to modify
+//				_value:	The new value for the key
+//
+// Requirements: 	dict.Remove
+//				dict.Entry
+//
+// Author:			Jesse Antunes
+// Version:		1.0 written 15-03-11
+//
+// Notes:			http://sixfriedrice.com/wp/filemaker-dictionary-functions/
+//
+// Example:
+// Let (
+//   [
+//     _dict = dict.Add ( devp.Nil; "key1" ; "value1" );
+//     _dict = dict.Add ( _dict; "key2"; "value2" )
+//   ];
+// 
+//   dict.Get ( dict.Replace ( _dict; "key1"; "newkey" ); "key1" ) = "newkey"
+// )
+
+dict.Remove( _dict; _key ) & dict.Entry( _key; _value )

@@ -1,0 +1,24 @@
+// dict.ToXML ( _dict )
+//
+// Purpose:		Outputs a dictionary in a pseudo-XML format.
+//
+// Parameters:		_dict:	The dictionary to export
+//
+// Requirements: 	dict.ToString
+//
+// Author:			Jesse Antunes
+// Version:		1.0 written 15-03-11
+//
+// Notes:			http://sixfriedrice.com/wp/filemaker-dictionary-functions/
+//
+// Example:
+// Let (
+//   [
+//     _dict = dict.Add ( devp.Nil; "key1" ; "value1" );
+//     _dict = dict.Add ( _dict; "key2"; "value2" )
+//   ];
+// 
+//   dict.ToXML ( _dict )
+// ) = "<key1>¶value1¶</key1>¶<key2>¶value2¶</key2>¶"
+
+dict.ToString( _dict; "<%n>¶%v¶</%n>¶" )

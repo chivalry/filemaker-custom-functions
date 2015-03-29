@@ -1,0 +1,18 @@
+// dict.Entry ( _key; _value )
+//
+// Purpose:		Creates a dictionary entry.
+//
+// Parameters:		_key:		The key to create an entry for
+//              		_value:	The value to set the key to
+//
+// Requirements: 	dict.Escape
+//
+// Author:			Jesse Antunes
+// Version:		1.0 written 15-03-11
+//
+// Notes:			http://sixfriedrice.com/wp/filemaker-dictionary-functions/
+//
+// Example:
+// dict.Entry ( "key"; "value" ) = "<:key:=value:>"
+
+"<:" & dict.Escape( _key ) & ":="  & dict.Escape( _value ) & ":>"
