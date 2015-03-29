@@ -1,0 +1,19 @@
+// date.EndOfMonth ( _date )
+//
+// Purpose:		Return the last day of the month containing _date
+// Parameters:		_date:	A generic date.
+//
+// Author:			Charles Ross
+// Version:		1.1 written 15-03-08
+//
+// Example:
+// date.EndOfMonth ( Date ( 2; 1; 2015 ) ) = Date ( 2; 28; 2015 )
+
+Let(
+  [
+    _month		= Month ( _date );
+    _year		= Year ( _date )
+  ];
+
+  Date ( _month + 1; 1; _year ) - 1
+)

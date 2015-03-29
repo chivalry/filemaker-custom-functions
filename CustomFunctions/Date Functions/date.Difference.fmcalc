@@ -1,0 +1,49 @@
+// date.Difference ( _date_1; _date_2 )
+//
+// Purpose:		Return the difference between two days in years, months, days and english.
+// Parameters:		_date_1:	The earlier date.
+//				_date_2:	The latter 	date
+//
+// Author:			Winfried Huslik, www.fmdiff.com
+// Version:		1.0 written 2006
+//
+// Notes:			Numbers are returned with the appropriate sign when _date_2 < _date_1
+//
+// Example:
+// date.Difference ( Date ( 1; 1; 2015 ); Date ( 6; 10; 2006 ) ) = "-8¶-6¶-21¶8 years, 6 months, and 21 days"
+
+Let(
+  [
+    _sign = Sign ( _date_2 - _date_1 );
+    
+    _d_1 = Case (
+      _sign < 0;	_date_2;
+			_date_1
+    );
+    
+    _d_2 = Case (
+      _sign < 0;	_date_1;
+			_date_2
+    );
+
+    _days = Mod (
+      Day ( _d_2 ) - Day ( _d_1 );
+      Day ( Date ( Month ( _d_1 ) + 1; 0; Year ( _d_1 ) ) )
+    );
+
+    _months = Mod (
+      Month ( _d_2 ) - Month ( _d_1 ) - ( Day ( _d_2 ) < Day ( _d_1 ) );
+      12
+    );
+
+    _years = Year ( _d_2 ) - Year ( _d_1 )
+      - ( ( Month ( _d_2 ) - ( Day ( _d_2 ) < Day ( _d_1 ) ) ) < Month ( _d_1 ) )
+  ];
+
+  List (
+    _years * _sign;
+    _months * _sign;
+    _days * _sign;
+    _years & " years, " & _months & " months, and " & _days & " days"
+  )
+)
