@@ -1,0 +1,18 @@
+// mkey.BitIsSet
+//
+// Purpose:		Returns True if the binary bit of the number is on.
+//
+// Parameters:		_number:	The number whose bit we are checking
+//				_bit:		Which bit to check
+//
+// Author:			Mikhail Edoshin
+// Version:		1.0 written 05-11-01
+//
+// Notes:			http://web.archive.org/web/20100919220414/http://edoshin.skeletonkey.com/2005/11/custom_function.html
+//
+// Example:
+// mkey.BitIsSet ( 16; 5 ) = 1 // 16 = 10000 in binary
+//   and mkey.BitIsSet ( 18; 2 ) = 1 // 18 = 10010 oin binary
+//   and mkey.BitIsSet ( 18; 3 ) = 0
+
+Mod( Div( _number; 2 ^ ( _bit - 1 ) ); 2 )

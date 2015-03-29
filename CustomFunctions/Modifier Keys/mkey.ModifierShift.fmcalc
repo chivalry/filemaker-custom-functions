@@ -1,0 +1,15 @@
+// mkey.ModifierShift
+//
+// Purpose:		Returns the constant for the bit that is set when the shift key is pressed.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Notes:			To be used with mkey.ModifierKeyIsActive
+//
+// Example:
+// // When the alt or option key is pressed...
+// mkey.ModifierShift = 1
+//  and mkey.ModifierKeyIsActive ( mkey.ModifierShift )
+
+1

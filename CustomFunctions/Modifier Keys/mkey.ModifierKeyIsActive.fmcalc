@@ -1,0 +1,19 @@
+// mkey.ModifierKeyIsActive ( _key )
+//
+// Purpose:		Returns true when passed the custom function constant for the specified key.
+//
+// Parameters:		_key:		An integer from 1 to 5, can be encapsulated with appropriate custom
+//						functions.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+//
+// Requirements:	mkey.BitIsSet
+//
+// Example:
+// // When the shift and alt (or option) key is pressed...
+// mkey.ModifierKeyIsActive ( mkey.ModifierShift )
+//   and mkey.ModifierKeyIsActive ( mkey.ModifierAlt )
+
+mkey.BitIsSet( Get( ActiveModifierKeys ); _key )

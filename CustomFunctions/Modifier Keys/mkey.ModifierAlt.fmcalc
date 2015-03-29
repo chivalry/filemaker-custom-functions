@@ -1,0 +1,15 @@
+// mkey.ModifierAlt
+//
+// Purpose:		Returns the constant for the bit that is set when the alt (option) key is pressed.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Notes:			To be used with mkey.ModifierKeyIsActive
+//
+// Example:
+// // When the alt or option key is pressed...
+// mkey.ModifierAlt = 4
+//  and mkey.ModifierKeyIsActive ( mkey.ModifierAlt )
+
+4

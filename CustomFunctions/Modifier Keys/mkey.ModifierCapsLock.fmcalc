@@ -1,0 +1,15 @@
+// mkey.ModifierCapsLock
+//
+// Purpose:		Returns the constant for the bit that is set when the caps lock key is on.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Notes:			To be used with mkey.ModifierKeyIsActive
+//
+// Example:
+// // When the alt or option key is pressed...
+// mkey.ModifierCapsLock = 2
+//  and mkey.ModifierKeyIsActive ( mkey.ModifierCapsLock )
+
+2
