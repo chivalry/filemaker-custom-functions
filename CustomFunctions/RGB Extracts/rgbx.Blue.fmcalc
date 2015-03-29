@@ -1,0 +1,11 @@
+// rgbx.Blue ( _rgb )
+//
+// Purpose:		Returns the blue value (0-255) of a given RGB value.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Example:
+// rgbx.Blue ( RGB ( 1; 2; 3 ) ) = 3
+
+Mod( _rgb; 256 )

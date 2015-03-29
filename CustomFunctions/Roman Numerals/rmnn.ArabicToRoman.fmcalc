@@ -1,0 +1,51 @@
+// rmnn.ArabicToRoman ( _arabic )
+//
+// Purpose:		Converts an arabic number between 1 and 3,999 into its Roman numeral version.
+//
+// Parameters:		_arabic: The arabic number to convert.
+//
+// Requirements: 	rmnn.Pre
+//				rmnn.Letter
+//				rmnn.Post
+//
+// Author:			Brad Lowry
+// Version:		1.0 written 15-03-11
+//
+// Notes:			http://www.briandunning.com/cf/84.
+//
+// Example:
+// rmnn.ArabicToRoman ( 123 ) = "CXXIII"
+
+Case (
+  ( _arabic ≠ Int ( _arabic ) )
+      or ( _arabic ≤ 0 )
+      or ( _arabic > 3999 );
+  "Error: rmnn.ArabicToRoman only handles integers between 0 and 3,999.";
+
+  Let (
+    [
+      _m_count = Mod ( Int ( _arabic / 1000 ); 10 );
+      _post_m = Left ( "MMM"; _m_count );
+    
+      _c_count	= Mod ( Int ( _arabic / 100 ); 10 );
+      _pre_c		= rmnn.Pre ( _c_count; "C" );
+      _m_or_d	= rmnn.Letter ( _c_count; "M"; "D" );
+      _post_c	= rmnn.Post ( _c_count; "C" );
+      
+      _x_count	= Mod ( Int ( _arabic / 10 ); 10 );
+      _pre_x	= rmnn.Pre ( _x_count; "X" );
+      _c_or_l	= rmnn.Letter ( _x_count; "C"; "L" );
+      _post_x	= rmnn.Post ( _x_count; "X" );
+      
+      _i_count	= Mod ( _arabic; 10 );
+      _pre_i		= rmnn.Pre ( _i_count; "I" );
+      _x_or_v	= rmnn.Letter ( _i_count; "X"; "V" );
+      _post_i	= rmnn.Post ( _i_count; "I" );
+
+      _result = _post_m & _pre_c & _m_or_d & _post_c & _pre_x &
+        _c_or_l & _post_x & _pre_i & _x_or_v & _post_i
+    ];
+  
+    _result
+  )
+)

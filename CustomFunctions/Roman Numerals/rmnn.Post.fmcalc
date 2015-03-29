@@ -1,0 +1,16 @@
+// rmnn.Post ( _count; _letter )
+//
+// Purpose:		A convenience function for use with rmnn.ArabicToRoman
+//
+// Parameters:		_count:	The count to test for
+//				_letter:	The letter to use if the test returns true
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Example:
+// rmnn.Post ( 2; "I" ) = "II"
+
+Case (
+  Mod ( _count; 5 ) ≤ 3;	Left ( _letter & _letter & _letter; Mod ( _count; 5 ) )
+)
