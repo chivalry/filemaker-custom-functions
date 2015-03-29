@@ -1,0 +1,16 @@
+// rept.ValueCount ( _repeating_field )
+//
+// Purpose:		Returns the count of repetitions that have non-blank values.
+//
+// Parameters:		_repeating_field:	Pass the field itself (as if passing the field value), not using
+//								GetFieldName, because the custom function engine will interpret
+//								the parameter as a reference.
+//
+// Author:			Will M. Baker
+// Version:		1.0 written 11-10-29
+//
+// Example:
+// // Assuming a repeating field with 5 repetitions with "apple", "orange", "", "pear", ""...
+// rept.ValueCount ( repeating_field ) = 3
+
+Count ( _repeating_field )

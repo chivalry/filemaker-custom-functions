@@ -1,0 +1,24 @@
+// rept.FieldReps ( _field_name )
+//
+// Purpose:		Returns the number of repetitions a field has defined regardless of the number
+//				displayed on any particular layout.
+//
+// Parameters:		_repeating_field:	Pass the field itself (as if passing the field value), not using
+//								GetFieldName, because the custom function engine will interpret
+//								the parameter as a reference.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Example:
+// // Assuming that the field "repeating" has 10 repetitions:
+// rept.FieldReps ( TO::repeating ) = 10
+
+Let(
+  [
+    _full_type = FieldType ( Get ( FileName ); GetFieldName ( _repeating_field ) );
+    _type_word = RightWords ( _full_type; 1 )
+  ];
+
+  GetAsNumber ( _type_word )
+)

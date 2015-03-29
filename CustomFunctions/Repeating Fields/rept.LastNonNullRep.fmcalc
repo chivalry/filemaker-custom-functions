@@ -1,0 +1,22 @@
+// rept.LastNonNullRep ( _repeating_field )
+//
+// Purpose:		Returns the index of the last repetition that has a value.
+//
+// Parameters:		_repeating_field:	Pass the field itself (as if passing the field value), not using
+//								GetFieldName, because the custom function engine will interpret
+//								the parameter as a reference.
+//
+// Requirements: 	rept.RepNumber
+//				rept.Wildcard
+//				devp.Nil
+//
+// Author:			Will M. Baker
+// Version:		1.0 written 11-10-20
+//
+// Notes:			http://buzz.beezwax.net/2011/10/29/working-with-repeating-fields
+//
+// Example:
+// // Assuming a repeating field with 5 repetitions with "apple", "orange", "", "pear", ""...
+// rept.LastNonNullRep ( repeating_field ) = 4
+
+rept.RepNumber ( _repeating_field; rept.Wildcard; devp.Nil )

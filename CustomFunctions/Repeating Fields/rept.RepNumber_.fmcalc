@@ -1,0 +1,68 @@
+// repf.RepetitionNumber_ ( _repeating_field; _value; _match_target; _match_max; match_count; _repetition )
+//
+// Purpose:		Return a carriage-return-delimited list of repetition numbers whose corresponding
+//				values match the input search criteria.
+//
+// Parameters:		_repeating_field:	Pass the field itself (as if passing the field value), not using
+//								GetFieldName, because the custom function engine will interpret
+//								the parameter as a reference.
+//              		_value:			The value to be matched on. If empty, search for null values. If
+//								"*" (asterisk), search for all non-null values. Otherwise search
+//								for matching values. Case insensitive.
+//				_match_taget:		Which matching repetition number(s) to return. If anything
+//								other than "*" (asterisk), return only one matching repetition
+//								number; if "*", return all matching repetition numbers. If empty,
+//								return the last matching repetition number. If a number, n, return
+//								the nth matching repetition number.
+//				_match_max:		The maximum number of matches to process. Set by parent
+//								function to either the maximum number of matches, or to the nth
+//								match as requested by initial input parameter.
+//				_match_count:		An increasing counter of matches found thus far. Increments
+//								following each match encountered.
+//				_repetition:		The number of repetitions processed thus far. Increments
+//								following each recursive call to the function. Also serves as an
+//								indication of which repetition number is being processed at the
+//								moment.
+//
+// Author:			Will M. Baker
+// Version:		1.0 written 11-10-29
+//
+// Notes:			http://buzz.beezwax.net/2011/10/29/working-with-repeating-fields
+//
+// Example:
+// // Assuming a repeating field with 5 repetitions with "apple", "orange", "", "pear", ""...
+// // Return null values (devp.Nil), all repetitions ("*")
+// rept.RepNumber_( _repeating_field; devp.Nil; rept.All; _match_max; 0; 1 ) = "3¶5"
+
+Let (
+  [
+    _repetition_value = GetRepetition ( _repeating_field; _repetition );
+
+    _match = Case (
+      IsEmpty ( _value ) and IsEmpty ( _repetition_value );
+      True;
+
+      _value = rept.Wildcard and not IsEmpty ( _repetition_value );
+      True;
+
+      False
+    );
+
+    _match_count = _match_count + _match
+  ];
+
+  Case (
+    _match and _match_target = rept.All;
+    _repetition // syntax: we found a value, but should continue to look for more.
+      & Case(
+        _match_count = _match_max;
+        devp.Nil;
+
+        ¶ & rept.RepNumber_ ( _repeating_field; _value; _match_target; _match_max; _match_count; _repetition + 1 )
+      );
+
+      _match_count = _match_target;
+      _repetition; // We found the value we're looking for.
+      rept.RepNumber_ (_repeating_field; _value; _match_target; _match_max; _match_count; _repetition + 1 )
+    )
+)

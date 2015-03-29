@@ -1,0 +1,21 @@
+// rept.NullReps ( _repeating_field )
+//
+// Purpose:		Returns the nth value, excluding blanks.
+//
+// Parameters:		_repeating_field:	Pass the field itself (as if passing the field value), not using
+//								GetFieldName, because the custom function engine will interpret
+//								the parameter as a reference.
+//				_n:				Which value to return
+//
+// Requirements: 	rept.NonNullValues
+//
+// Author:			Will M. Baker
+// Version:		1.0 written 11-10-29
+//
+// Notes:			http://buzz.beezwax.net/2011/10/29/working-with-repeating-fields
+//
+// Example:
+// // Assuming a repeating field with 5 repetitions with "apple", "orange", "", "pear", ""...
+// rept.NullReps ( repeating_field ) = "3¶5"
+
+rept.RepNumber ( _repeating_field; devp.Nil; rept.All )
