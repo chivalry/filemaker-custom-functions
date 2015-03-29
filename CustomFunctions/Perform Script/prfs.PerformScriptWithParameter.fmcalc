@@ -1,0 +1,62 @@
+// prfs.PerformScriptWithParameter ( _script; _param )
+//
+// Purpose:		Perform the named script sending the named parameter using whichever plugin is
+//				available.
+//
+// Parameters:		_scirpt:	The name of the script to execute.
+//				_param:	An optional parameter to send to the script, can be empty.
+//
+// Requirements: 	A plugin that supports executing scripts from calculations.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-26
+//
+// Notes:			Only ScriptMaster is currently supported. The Groovy code is from the ScriptMaster
+//				sample file.
+//
+//				This is the first test of a technique I'm trying, using a custom function as a wrapper for
+//				a ScriptMaster registered function, registering the function and then immediately
+//				using it within an Evaluate call. 
+//
+//				The ScriptMaster function needs to be called from within Evaluate because the first time
+//				this custom function is saved it hasn't been executed, so the ScriptMaster function
+//				hasn't been registered yet.
+//
+// Todo:			Offer support for DoScript and EventScript
+//				Test for registered function before attempting to register it again.
+//
+//				Find a way to have this without the use of plug.PluginIsReady for 11- compatibility.
+//
+// Example:
+// // Assuming that the "Test" script exists...
+// prfs.PerformScriptWithParameter ( "Test"; "param" ) = 1
+
+Case (
+  plug.PluginIsReady ( "ScriptMaster" );
+  Let (
+    [
+      _signature = "prfs_PerformScript( tableName ; scriptName ; param )";
+
+      // Register the function if it hasn't been already.
+      _ = Case (
+        not PatternCount ( SMGetRegisteredModules ; _signature );
+        Let (
+          [
+            _code =
+              "fmpro.performScript( tableName, scriptName, param );¶" &
+              "return true;"
+          ];
+
+          RegisterGroovy ( _signature; _code )
+        )
+      );
+
+      _calc = "prfs_PerformScript ( " &
+        Quote ( Get ( FileName ) ) & "; " &
+        Quote ( _script ) & "; " &
+        Quote ( _param ) & " )"
+    ];
+
+    Evaluate ( _calc )
+  )
+)

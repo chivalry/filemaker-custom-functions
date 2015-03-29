@@ -1,0 +1,17 @@
+// prfs.PerformScript ( _script )
+//
+// Purpose:		A convenience function for executing a script when no parameter is needed.
+//
+// Parameters:		_script:	The name of the script to execute.
+//
+// Requirements: 	prfs.PerformScriptWithParameter
+//				devp.Nil
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-26
+//
+// Example:
+// // Assuming the "Test" script exists...
+// prfs.PerformScript ( "Test" ) = 1
+
+prfs.PerformScriptWithParameter ( "Test"; devp.Nil )

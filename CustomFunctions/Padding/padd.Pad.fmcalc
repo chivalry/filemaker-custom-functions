@@ -1,0 +1,33 @@
+// padd.Pad ( _text; _char; _counter; _side )
+//
+// Purpose:		Pads the text string with the char string the count number of times on the indicated
+//				side.
+//
+// Requirements:	padd.Left
+//				padd.Right
+//
+// Parameters:		_text:	The text to pad with the char.
+//              		_char:	The char to repeatedly pad.
+//				_counter:	How many times to pad the char.
+//				_side:	On which side of the string to pad the char.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+//
+// Example:
+// padd.Pad ( "text"; "*"; 5; paddLeft ) = "*****text"
+
+Let (
+  [
+    _decr = _counter - 1
+  ];
+
+  Case (
+    _counter < 0;		"error";
+    _counter = 0;		_text;
+
+    _side = padd.Left;		_char & padd.Pad ( _text; _char; _decr; _side );
+					padd.Pad ( _text; _char; _decr; _side ) & _char
+  )
+)

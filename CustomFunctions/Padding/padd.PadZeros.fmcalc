@@ -1,0 +1,17 @@
+// padd.PaddZeroes ( _text; _length )
+//
+// Purpose:		Pads zeroes to the limit that the returned text is of the length specified.
+//
+// Parameters:		_text:	The text to pad
+//				_length:	How long the return string should be.
+//
+// Requirements: 	padd.Pad
+//				padd.Left
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Example:
+// padd.PadZeroes ( 13; 5 ) = "00013"
+
+Right( padd.Pad( _text; "0"; _length; padd.Left ); _length )
