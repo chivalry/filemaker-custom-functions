@@ -1,0 +1,21 @@
+// esql.ExecuteSQL ( _sql )
+//
+// Purpose:		A convenience function when the second and third parameters to ExecuteSQL are
+//				not needed.
+//
+// Parameters:		_sql:	The SQL statement to execute.
+//
+// Requirements: 	devp.Nil
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Example:
+// // Assuming that $_sql has a valid SQL request:
+// esql.ExecuteSQL ( $_sql ) = ExecuteSQL ( $_sql; ""; "" )
+
+ExecuteSQL(
+  _sql;
+  devp.Nil;
+  devp.Nil
+)

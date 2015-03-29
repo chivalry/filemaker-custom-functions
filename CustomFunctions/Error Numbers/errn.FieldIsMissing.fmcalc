@@ -1,0 +1,13 @@
+// errn.FieldIsMissing
+//
+// Purpose:		Returns the error number for the named error
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Notes:			Meant to be compared with Get ( LastError )
+//
+// Example:
+// errn.FieldIsMissing = 102
+
+102
