@@ -1,0 +1,45 @@
+// lsts.Shuffle ( _list )
+//
+// Purpose:		Return the contents of _list in random order.
+// Parameters:		_list:	The list to process
+//
+// Author:			Jeremy Bante
+// Version:		1.0 written 11-03-31
+//
+// Example:
+// lsts.ShuffleList ( List ( 1; 2; 3 ) ) = "2¶1¶3" // Not a true test because of random component.
+
+Let (
+  [
+    _value_count = ValueCount ( _list );
+
+    _selection = Case (
+      _value_count > 1;	Max ( Ceiling ( Random * _value_count ) ; 1 );
+        					1
+      );
+
+    $_ShuffleList_shuffled_list =
+      List (
+        $_ShuffleList_shuffled_list;
+        GetValue ( _list ; _selection )
+      );
+
+    _left_list	= LeftValues ( _list ; _selection - 1 );
+    _right_list	= RightValues ( _list ; _value_count - _selection )
+  ];
+
+  Case (
+    _value_count > 1;
+    lsts.Shuffle ( _left_list & _right_list );
+
+    Let (
+      [
+        _shuffled_list = $_ShuffleList_shuffled_list;
+
+        $_ShuffleList_shuffled_list = devp.Nil
+      ];
+
+      _shuffled_list
+    )
+  )
+)

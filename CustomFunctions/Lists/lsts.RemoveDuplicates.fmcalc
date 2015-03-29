@@ -1,0 +1,36 @@
+// lsts.RemoveDuplicates ( _list )
+//
+// Purpose:		Remove duplicate entries from a list and normalize the list
+//
+// Parameters:		_list:	The list to process
+//
+// Author:			Andrew Persons
+// Version:		1.0 written 15-03-11
+//
+// Notes:			This function is case sensitive, but the values do not need to be alphabetized, and the
+//				duplicates do not need to be next to each other. It will leave the list in the order it
+//				received it, minus any duplicates.
+//
+//				http://www.briandunning.com/cf/492
+//
+//				The list is normalized to remove the trailing carriage return.
+//
+// Example:
+// Let (
+//   [
+//     _list = List ( 1; 2; 1; 1; 3 )
+//   ];
+// 
+//   lsts.RemoveDuplicates ( _list )
+// ) = List ( 1; 2; 3 )
+
+Let (
+  [
+    _raw = lsts.RemoveDuplicates_ ( _list );
+
+    _len = Length ( _raw );
+    _result = Left ( _raw; _len - 1 )
+  ];
+
+  _result
+)

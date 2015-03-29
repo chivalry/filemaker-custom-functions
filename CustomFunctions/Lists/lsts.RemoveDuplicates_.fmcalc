@@ -1,0 +1,47 @@
+// lsts.RemoveDuplicates ( _list )
+//
+// Purpose:		Remove duplicate entries from a list.
+//
+// Parameters:		_list:	The list to process
+//
+// Author:			Andrew Persons
+// Version:		1.0 written 15-03-11
+//
+// Notes:			This function is case sensitive, but the values do not need to be alphabetized, and the
+//				duplicates do not need to be next to each other. It will leave the list in the order it
+//				received it, minus any duplicates.
+//
+//				http://www.briandunning.com/cf/492
+//
+// Example:
+// Let (
+//   [
+//     _list = List ( 1; 2; 1; 1; 3 )
+//   ];
+// 
+//   lsts.RemoveDuplicates_ ( _list )
+// ) = "1¶2¶3¶"
+
+Let (
+  [
+    _value	= LeftValues ( _list; 1 );
+    _count	= ValueCount ( _list );
+
+    _new_list = Replace (
+      Substitute (
+        "¶" & _list & "¶";
+        [ "¶";			"¶|"		];
+        [ "|" & _value;	devp.Nil	];
+        [ "|";			devp.Nil	]
+      );
+      1;
+      1;
+      devp.Nil
+    )
+  ];
+
+  Case (
+    _count > 0;
+    _value & lsts.RemoveDuplicates_ ( Replace ( _new_list; Length ( _new_list ); 1; devp.Nil ) )
+  )
+)

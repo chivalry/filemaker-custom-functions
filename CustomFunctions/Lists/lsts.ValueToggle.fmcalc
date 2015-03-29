@@ -1,0 +1,66 @@
+// lsts.ValueToggle ( _value; _list )
+//
+// Purpose:		Add or remove a value from a return delimited list of data
+//
+// Parameters:		_list: The list to process
+//
+// Author:			Matt Petrowsky
+// Version:		1.0 written 11-01-13
+//
+// Example:
+// Let (
+// _ = "--------------------";
+// 
+//  List (
+//   List ( "At beginning ( one )"; _; lsts.ValueToggle ( "one"; List ( "one"; "two"; "three" ) ); _ );
+//   List ( "At ending ( three )"; _; lsts.ValueToggle ( "three"; List ( "one"; "two"; "three" ) ); _ );
+//   List ( "With multiple spread out ( one )"; _; lsts.ValueToggle ( "one"; List ( "one"; "two"; "one"; "three" ) ); _ );
+//   List ( "With multiple at beginning ( one )"; _; lsts.ValueToggle ( "one"; List ( "one"; "one"; "two"; "three" ) ); _ );
+//   List ( "With multiple at ending ( three )"; _; lsts.ValueToggle ( "three"; List ( "one"; "two"; "three"; "three" ) ); _ );
+//   List ( "With multiple in middle ( two )"; _; lsts.ValueToggle ( "two"; List ( "one"; "two"; "two"; "three" ) ); _ );
+//   List ( "With even returns at start ( two )"; _; lsts.ValueToggle ( "two"; "¶¶¶¶one¶two¶three" ); _ );
+//   List ( "With odd returns at start ( two )"; _; lsts.ValueToggle ( "two"; "¶¶¶one¶two¶three" ); _ );
+//   List ( "With even returns at end ( two )"; _; lsts.ValueToggle ( "two"; "one¶two¶three¶¶¶¶" ); _ );
+//   List ( "With odd returns at end ( two )"; _; lsts.ValueToggle ( "two"; "one¶two¶three¶¶¶" ); _ );
+//   List ( "Without value ( one )"; _; lsts.ValueToggle ( "one"; List ( "two"; "three" ) ); _ );
+//   )
+// )
+
+Let (
+  [
+    _new_list	= Substitute ( If ( Left ( _list; 1 ) ≠ ¶; "^") & _list & "^"; ¶; "^^" ); // List minus all returns
+    _match		= "^" & _value & "^" // Value to match
+  ];
+
+  Case ( 
+    PatternCount ( _new_list; _match );
+    Let (
+      [
+        // Kill matching values
+        _removed		= Substitute ( _new_list; _match; "" );
+
+        // Put returns back in
+        _new_list		= Substitute ( _removed; "^^"; ¶ );
+
+        // Trim leading ^
+        _new_list		= Middle ( _new_list; 2; 100000 );
+
+        // Trim trailing ^
+        _new_list		= Left ( _new_list; Length ( _new_list ) - 1 );
+
+        // Remove returns for trimming
+        _cleaned		= Substitute ( _new_list; ¶; "" );
+
+        // Position of firt non cleaned char
+        _first_char		= Position ( _new_list; Left ( _cleaned; 1 ); 0; 1 );
+
+        // Position of last non cleaned char
+        _last_char		= Position ( _new_list; Right ( _cleaned; 1 ); Length ( _new_list ); -1 )
+      ];
+
+      Middle ( _new_list; _first_char; _last_char - _first_char + 1 )
+    );
+
+    Case ( _list ≠ ""; _list & ¶ ) & _value // default)
+  )
+)

@@ -1,0 +1,15 @@
+// lsts.ReplaceSeparator ( _list )
+//
+// Purpose:		Replaces the default list separator with the specified string. Can be used to convert a list
+//				to some other data structure, such as a comma separated string.
+//
+// Parameters:		_list:		The list to process
+//              		_string:	The string to use instead of a paragraph return
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Example:
+// lsts.ReplaceSeparator ( "1¶2¶3"; ", " ) = "1, 2, 3"
+
+Substitute( _list; "¶"; _string )
