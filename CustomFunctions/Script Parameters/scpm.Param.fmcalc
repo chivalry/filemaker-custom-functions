@@ -1,0 +1,16 @@
+// scpm.Param ( _var_name; _param_value )
+//
+// Purpose:		Formats a variable name and associated value for use by scpm.AssignParams
+//
+// Parameters:		_var_name:	The name of the variable.
+//				_param_value:	The value to assign to the variable.
+//
+// Author:			Charles Ross, inspired by Alexander Zueiv
+// Version:		1.0 written 15-03-11
+//
+// Notes:			See notes for scpm.AssignParams for full discussion.
+//
+// Example:
+// scpm.Param ( "Required"; "required value" ) = "Required = \"required value\"; "
+
+_var_name & " = " & Quote( _param_value ) & "; "

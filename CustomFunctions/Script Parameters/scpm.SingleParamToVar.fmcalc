@@ -1,0 +1,45 @@
+// scpm.SingleParamToVar ( _param_name )
+//
+// Purpose:		Uses the $_scpm_params variable and the name of the parameter name passed to assign
+//				the named variable the value found in $_scpm_params. Returns this value as a
+//				troubleshooting feature.
+//
+// Parameters:		_param_name:	The name of the parameter to set and return the value of.
+//
+// Requirements: 	$_scpm_params script variable.
+//				devp.Nil
+//
+// Author:			Charles Ross, inspired by Alexander Zueiv
+// Version:		1.0 written 15-03-11
+//
+// Notes:			See notes for scpm.AssignParams for full discussion.
+//
+//				$_scpm_params is a variable declared in the custom function SetAssignParamVars. It's
+//				value is simply Get( ScriptParameter ). The _param_name may not have been passed (it
+//				may be optional to the script), so we check for its existence before doing anything. The
+//				function doesn't actually return anything useful, but after it's run, the variable named in
+//				_param_name should have a local script variable declared with that name if the caller of
+//				the script passed such a parameter.
+//
+// Example:
+// sample = result
+
+Case (
+  // Does the parameter exist in the arguments to the script?
+  PatternCount ( $_scpm_params; _param_name );  
+  Let (
+    [
+      // Get the value of the named parameter by evaluating within a Let function the passed parameter
+      //  and returning in that statement the named parameter.
+      _value = Evaluate ( "Let ( [ " & $_scpm_params & "] ; " & _param_name & " )" );
+
+      // Construct a local script variable and assign it the value found above.
+      _ = Evaluate ( "Let( [ $" & _param_name & " = \"" & _value & "\" ]; \"\" )" )
+    ];
+
+    // Return the value of the local script variable. This is a debugging feature to make sure it works correctly.
+    Evaluate ( "$" & _param_name )
+  );
+
+  devp.Nil // Empty string returned if the parameter doesn't exist.
+)

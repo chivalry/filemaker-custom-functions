@@ -1,0 +1,15 @@
+// srtt.SortableTime ( _time )
+//
+// Purpose:		Returns a textual version of a time that will sort property as text.
+//
+// Parameters:		_time:	The time to convert.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Example:
+// srtt.SortableTime ( Time ( 3; 4; 15 ) ) = "030415"
+
+Right( "0" & Hour( _time ); 2 ) &
+  Right( "0" & Minute( _time ); 2 ) &
+  Right( "0" & Seconds( _time); 2 )

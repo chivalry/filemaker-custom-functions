@@ -1,0 +1,19 @@
+// scpm.WordsToList ( _words )
+//
+// Purpose:		Returns all the words in the passed string in list form.
+//
+// Parameters:		_words:	The string to convert to a list of words.
+//
+// Author:			Charles Ross, inspired by Alexander Zueiv
+// Version:		1.0 written 15-03-11
+//
+// Notes:			See notes for scpm.AssignParams for full discussion.
+//
+// Example:
+// scpm.WordsToList( "one two>three;four" ) = "one¶two¶three¶four¶"
+
+Case (
+  WordCount ( _words ) = 0;	devp.Nil;
+						LeftWords ( _words; 1 ) & "¶" &
+						  scpm.WordsToList ( RightWords ( _words; WordCount ( _words ) - 1 ) )
+)
