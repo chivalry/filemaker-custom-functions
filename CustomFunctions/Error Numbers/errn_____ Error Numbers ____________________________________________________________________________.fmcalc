@@ -1,0 +1,2 @@
+// Functions that assist with error handling, generally by giving names to error numbers. Not every error
+// number will be represented here, only those which have been used at least once in some solution.
