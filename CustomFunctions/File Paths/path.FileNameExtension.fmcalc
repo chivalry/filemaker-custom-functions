@@ -1,0 +1,29 @@
+// path.FileNameExtension ( _name )
+//
+// Purpose:		Given a file name, returns the extension, if any.
+//
+// Parameters:		_name:	The name of the file to get the extension from.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Notes:			For example, if FileNameExtension( "filename.txt" ) = "txt". An empty string
+//				is returned if there is no extension and the function works correctly even if
+//				there are multiple periods in the file name and regardless or the length of the
+//				extension.
+//
+// Example:
+// path.FileNameExtension ( "filename.txt" ) = "txt"
+
+Let (
+  [
+    _dot_count		= PatternCount ( _name; "." );
+    _last_dot_pos	= Position ( _name; "." ; 1; _dot_count );
+    _ext_len		= Length ( _name ) - _last_dot_pos
+  ];
+
+  Case (
+    _dot_count = 0;	devp.Nil;
+				Right ( _name; _ext_len )
+  )
+)
