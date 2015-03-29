@@ -1,0 +1,36 @@
+// nump.BaseToInteger ( _int; _base )
+//
+// Purpose:		Converts _number from the passed _base to base-10.
+//
+// Parameters:		_int:		An integer to convert.
+//				_base:	The base to convert from.
+//
+// Author:			Mikhail Edoshin
+// Version:		1.0 written 05-10-01
+//
+// Notes:			http://web.archive.org/web/20090707091229/
+//				  http://edoshin.skeletonkey.com/2005/10/number_to_decim.html
+//
+// Example:
+// nump.BaseToNumber ( "11F" ; 16 ) = 287
+
+Case (
+  IsEmpty ( _int_text )
+    or ( _base < 2 )
+    or ( _base > 36 );		devp.Nil;
+
+  Let (
+    [
+      _len = Length ( _int_text );
+
+      _chars			= "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      _pos			= Position ( _chars; Left ( _int_text; 1 ); 1; 1 );
+      _digit_value	= ( _pos - 1 ) * ( _base ^ ( _len - 1 ) );
+      _rest			= Right ( _int_text; _len - 1 );
+
+      _result = _digit_value + nump.BaseToInteger ( _rest; _base )
+    ];
+    
+    _result
+  )
+)

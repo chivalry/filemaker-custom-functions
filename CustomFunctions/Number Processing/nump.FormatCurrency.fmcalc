@@ -1,0 +1,15 @@
+// nump.FormatCurrency ( _number )
+//
+// Purpose:		Converts the number to a currency representation of dollars and cents.
+//
+// Parameters:		_number:	The amount of money to represent.
+//
+// Requirements: 	nump.FormatNumber
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Example:
+// nump.FormatCurrency ( 12345.67 ) = "$12,345.67"
+
+"$" & nump.FormatNumber( _number; 2; "," )

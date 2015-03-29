@@ -1,0 +1,35 @@
+// nump.IntegerToBase ( _int_text; _base )
+//
+// Purpose:		Converts a textual representation of an integer in a given base to a base-10 number.
+//
+// Parameters:		_int_text:	A textual representation of the integer in the tiven base
+//				_base:	The base to convert from.
+//
+// Requirements: 	devp.Nil
+//
+// Author:			Mikhail Edoshin
+// Version:		1.0 written 05-10-01
+//
+// Notes:			http://web.archive.org/web/20100117170354/
+//				  http://edoshin.skeletonkey.com/2005/10/number_to_base.html
+//
+// Example:
+// nump.IntegerToBase ( 287 ; 16 ) = "11F"
+
+Case(
+  IsEmpty ( _int )
+    or ( _base < 2 )
+    or ( _base > 36 );		devp.Nil;
+
+  Let(
+    [
+      _chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+      _current_digit = Middle ( _chars; Mod ( _int; _base ) + 1; 1 )
+    ];
+    
+    Case(
+      _int ≥ _base;	nump.IntegerToBase( Div ( _int; _base ); _base )
+    )  & _current_digit
+  )
+)

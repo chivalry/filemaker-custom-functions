@@ -1,0 +1,39 @@
+// nump.RoundTo ( _number; _precision )
+//
+// Purpose:		Rounds the number to the nearest multiple of the precision.
+//
+// Parameters:		_number:		The number to round.
+//				_precision:	The multiple to round to.
+//
+// Author:			Mikhail Edoshin
+// Version:		1.0 written 06-01-01
+//
+// Notes:			http://web.archive.org/web/20100122090742/
+//				  http://edoshin.skeletonkey.com/2006/01/rounding_to_a_g.html
+//
+//				To round time use a precision that is the number of seconds you want to round to, for
+//				example, a precision of 300 woiuld round to the nearest 15 minutes.
+//
+//				To round currency to the nearest quarter, use a precision of 0.25.
+//
+// Example:
+// ( nump.RoundTo ( 5; 3 ) = 6 )
+//  and ( nump.RoundTo ( Time ( 1; 23; 45 ); 15 * 60 ) = Time ( 1; 30; 0 ) )
+
+Round( _number / _precision; 0 ) * _precision
+
+/*Don't calculate the number of seconds: use the Time() function instead. For example, to round to an hour:
+
+Round To( Time Field, Time( 1, 0, 0 ) )
+to 15 minutes:
+
+Round To( Time Field, Time( 0, 15, 0 ) )
+You might also want to make a few constant custom functions: HOURS and MINUTES. These function must return Time( 1, 0, 0 ), Time( 0, 1, 0 ) respectively. (You could make a function for seconds, if you need them, but you'll need to select a name carefully, because Seconds is taken already.) With such functions your code will be more readable, like this:
+
+Round To( Time Field, 2 * HOURS )
+
+Round To( Time Field, 0.5 * HOURS )
+
+Round To( Time Field, 15 * MINUTES )
+
+Round To( Time Field, 1/2 * MINUTES )*/

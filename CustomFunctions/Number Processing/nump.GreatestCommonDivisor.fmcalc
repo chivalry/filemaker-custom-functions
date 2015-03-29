@@ -1,0 +1,32 @@
+// nump.GreatestCommonDivisor ( _greater_number; _smaller_number )
+//
+// Purpose:		Returns the greatest common divisor of the numbers provided.
+//
+// Parameters:		_greater_number:	The larger of the two numbers.
+//              		_smaller_number:	The smaller of the two numbers.
+//
+// Author:			Mikhail Edoshin
+// Version:		1.0 written 06-01-01
+//
+// Notes:			http://web.archive.org/web/20100223190222/
+//				  http://edoshin.skeletonkey.com/2006/01/greatest_common.html
+//
+// Example:
+// nump.GreatestCommonDivisor ( 12; 8 ) = 4
+
+Let(
+  [ 
+    _greater = GetAsNumber( _greater_number );
+    _smaller = GetAsNumber( _smaller_number )
+  ];
+
+  Case( 
+    IsEmpty( _greater ) or IsEmpty( _smaller );
+    devp.Nil;
+
+    _smaller = 0;
+    _greater;
+
+    nump.GreatestCommonDivisor( _smaller; Mod( _greater; _smaller ) )
+  )
+)

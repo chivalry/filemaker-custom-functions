@@ -1,0 +1,48 @@
+// nump.FormatNumber ( _number; _precision; _separator )
+//
+// Purpose:		Formats the number to the given precision with the given separator between thousands.
+//
+// Parameters:		_number: 		The number to format.
+//				_precision:	The precision to format the number to, with dollars and cents, would
+//							be 2, for example.
+//				_separator:	The string to place between thousands.
+//
+// Author:			Agnès Barouh
+// Version:		3.1 written 08-01-01
+//
+// Notes:			barouh.agnes@wanadoo.fr
+//
+//				The decimal separator should work for the locale it's run in.
+//
+// Example:
+// NumberFormat ( "69584" ; 2 ; " " ) = "69 584.00"
+
+Let(
+  [
+    _rounded = Abs ( Round ( _number; _precision ) );
+
+    _minus = Case (
+      _number < 0;	"-";
+				devp.Nil
+    );
+
+    _separated = Substitute (
+      NumToJText ( Int ( _rounded ); 1; 0 );
+      ",";	_separator
+    );
+
+    _decimal_separator = Filter ( 1 / 2; ".," ); // Will work based on locale.;
+
+    // Fills precision with trailing zeros if needed.
+    _frac = Middle ( _rounded - Int ( _rounded ) & Substitute ( ( 10 ^ _precision ) - 1; 9; 0 ); 2; _precision )
+  ];
+  
+  Case (
+    not IsEmpty ( _number );
+   _minus & _separated &
+    Case (
+      _precision > 0;
+      _decimal_separator & _frac
+    )
+  )
+)

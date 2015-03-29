@@ -1,0 +1,24 @@
+// nump.RoundUpTo ( _number; _precision )
+//
+// Purpose:		Rounds the number up to the nearest multiple of the precision.
+//
+// Parameters:		_number:		The number to round.
+//				_precision:	The multiple to round to.
+//
+// Author:			Mikhail Edoshin
+// Version:		1.0 written 06-01-01
+//
+// Notes:			http://web.archive.org/web/20100122090742/
+//				  http://edoshin.skeletonkey.com/2006/01/rounding_to_a_g.html
+//
+//				To round time use a precision that is the number of seconds you want to round to, for
+//				example, a precision of 300 woiuld round to the nearest 15 minutes.
+//
+//				To round currency to the nearest quarter, use a precision of 0.25.
+//
+// Example:
+// // ( nump.RoundUpTo ( 5; 2 ) = 2 )
+//  and ( nump.RoundUpTo ( Time ( 1; 23; 45 ); 15 * 60 ) = Time ( 1; 30; 0 ) )
+
+
+Ceiling( _number / _precision ) * _precision
