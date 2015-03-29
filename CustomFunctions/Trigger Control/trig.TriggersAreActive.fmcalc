@@ -1,0 +1,19 @@
+// trig.TriggersAreActive
+//
+// Purpose:		trig.TriggersAreActive checks a global variable to identify whether or not script
+//				triggers should be allowed to run. This function is best used in concert with the
+//				trig.TriggersDisable, trig.TriggersEnable, and trig.TriggersReset functions.
+//
+// Requirements: 	$$_TRIG_DISALBE_TRIGGERS
+//
+// Author:			Jeremy Bante
+// Version:		1.0 written 10-12-12
+//				1.1 modified 10-12-13
+//
+// Notes:			Supressible Triggered Scripts Best Practice:
+//				http://filemakerstandards.org/display/bp/Suppressible+Triggered+Scripts
+//
+// Example:
+// sample = result
+
+not $$_TRIG_DISALBE_TRIGGERS

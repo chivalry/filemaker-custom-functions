@@ -1,0 +1,14 @@
+// txtp.StringStartsWith ( _text; _search_string )
+//
+// Purpose:		Returns True if the text begins with the search string.
+//
+// Parameters:		_text:		The text to test.
+//				_search_string:	The search string to test the presence of at the beginning of text.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Example:
+// txtp.StartsWith ( "Four score"; "Four" ) and ( not txtp.StartsWith ( "Seven years"; "years" )
+
+Left( _text;  Length( _search_string ) ) = _search_string

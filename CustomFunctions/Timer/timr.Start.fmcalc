@@ -1,0 +1,11 @@
+// timr.Start
+//
+// Purpose:		Used by timr.Timer to indicate a start action.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Example:
+// timr.Start = "START"
+
+"START"

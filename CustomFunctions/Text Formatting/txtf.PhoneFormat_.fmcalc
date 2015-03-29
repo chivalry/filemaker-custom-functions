@@ -1,0 +1,42 @@
+// txtf.PhoneFormat_ ( _phone; _format )
+//
+// Purpose:		Formats a phone number to the given format using pound signs as digit placeholders.
+//
+// Parameters:		_phone:	The phone number to format.
+//				_format:	The format to apply.
+//
+// Author:			Jesse Swensen
+// Version:		1.0 written 15-03-11
+//
+// Notes:			https://www.briandunning.com/cf/1459
+//
+//				Will format the number according to the given format. Fills in the format from right to
+//				left and if the number is longer than the format, the extra numbers will be prepended
+//				to the front of the formatted phone number. Any non-numeric characters in the phone
+//				number are ignored.
+//
+// Example:
+// ( txtf.PhoneFormat_ ( "5551212"; "### (###) ###-####" ) = "555-1212" )
+//   and ( txtf.PhoneFormat_ ( "55b51.2-12"; "### (###) ###-####" ) = "555-1212" )
+//   and ( txtf.PhoneFormat_ ( "8005551212"; "### (###) ###-####" ) = "(800) 555-1212" )
+//   and ( txtf.PhoneFormat_ ( "18005551212"; "### (###) ###-####" ) = "1 (800) 555-1212" )
+
+// Recursively formats a phone number given the format mask provided.
+//
+// Written by Charles Ross
+
+Case (
+  not IsEmpty ( _format );
+  Let (
+    [
+      _numbers = Filter ( _phone; txtf.Digits );
+      _new_format = Left ( _format; Length ( _format ) - 1);
+      _new_number = Left ( _numbers; Length ( _numbers ) - 1)
+    ];
+
+    Case (
+      Right ( _format; 1 ) = "#";	txtf.PhoneFormat_ ( _new_number; _new_format ) & Right ( _numbers; 1 ); 
+						txtf.PhoneFormat_ ( _numbers; _new_format ) & Right ( _format; 1 ) 
+    )
+  )
+)

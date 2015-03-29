@@ -1,0 +1,11 @@
+// timr.Delete
+//
+// Purpose:		Used by timr.Timer to indicate a delete action.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Example:
+// timr.Delete = "DELETE"
+
+"DELETE"

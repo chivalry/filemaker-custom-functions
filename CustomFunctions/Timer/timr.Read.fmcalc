@@ -1,0 +1,11 @@
+// timr.Read
+//
+// Purpose:		Used by timr.Timer to indicate a read action.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Example:
+// timr.Read = "READ"
+
+"READ"

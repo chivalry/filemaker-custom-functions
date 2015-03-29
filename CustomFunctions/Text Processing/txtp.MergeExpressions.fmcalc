@@ -1,0 +1,78 @@
+// txtp.MergeExpressions ( _text )
+//
+// Purpose:		Returns the text merged with FileMaker calculation expressions, preserving formatting
+//				as much as possible.
+//
+// Parameters:		_text:	The text to merge with FileMaker expressions.
+//
+// Author:			Mikhail Edoshin
+// Version:		1.0 written 05-11-01
+//
+// Notes:			http://web.archive.org/web/20080928134952/
+//				  http://edoshin.skeletonkey.com/2005/11/merge_expressio.html
+//
+//				Replaces everything between "<<" and ">>" to the result of evaluating the contents as
+//				a FileMaker expression, such as a field name.
+//
+//				Ignores invalid or incomplete expressions.
+//
+//				Preserves the style of the placeholder (or more accurately, the style of the first "<").
+//
+//				If a referenced field has a style, the placeholder's style and the field's style are
+//				combined, with the field's style taking precedence.
+//
+// Todo:			To dos
+//
+// Example:
+// // Assuming fields first_name and last_name...
+// txtp.MergeExpressions ( "An expression with a calc: <<first_name & last_name>>." )
+//    = "An expression with a calc: Mikhail Edoshin."
+
+Case (
+  IsEmpty ( _text );
+  devp.Nil;
+
+  Let (
+    [ 
+      _s	= "<<" ;
+      _s_len	= Length ( _s );
+      _e	= ">>";
+      _e_len	= Length ( _e );
+
+      _start	= Position ( _text; _s; 1; 1 );
+      _end	= Position ( _text; _e; _start; 1 );
+
+      _text_len = Length ( _text )
+    ];
+
+    Case (
+      ( _start = 0 ) or ( _end ) = 0;	_text;
+
+      Let (
+        [
+          _contents = Middle ( _text; _start + _s_len; _end - _start - _s_len );
+          _is_valid = IsValidExpression ( _contents );
+
+          _before = Case (
+            _is_valid;	Left ( _text; _start - 1 );
+				Left ( _text; _start + _s_len - 1 )
+          );
+
+          _mid = Case (
+            _is_valid;	Replace ( Middle ( _text; _start; 1 ); 1; 1; Evaluate ( _contents ) );
+				devp.Nil
+          );
+
+          _new_text = Case (
+            _is_valid;	Right ( _text; _text_len - _end - _e_len + 1 );
+				Right ( _text; _text_len - _start - _s_len + 1 )
+          );
+
+          _after = txtp.MergeExpressions ( _new_text )
+        ];
+
+        _before & _mid & _after
+      )
+    )
+  )
+)

@@ -1,0 +1,11 @@
+// txtf.Digits
+//
+// Purpose:		A convenience function for filtering digits in strings.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Example:
+// txtf.Digits = "0123456789"
+
+"0123456789"

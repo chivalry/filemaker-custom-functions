@@ -1,0 +1,41 @@
+// txtp.Supertrim ( _text )
+//
+// Purpose:		Removes all whitespace from the beginning and end of a string.
+//
+// Parameters:		_text:	The text to trim.
+//
+// Requirements:	devp.Nil
+//
+// Author:			Debi Fuchs, debi@aptworks.com
+// Version:		1.0 written 15-03-11
+//
+// Notes:			Speedily (and with no recursion) remove leading and trailing white space, including
+//				spacing, tabs and returns, from a text string.
+//
+// Example:
+// txtp.Supertrim ( " ¶	text	" ) = "text"
+
+Let(
+  [
+    // Determine value of original string with ALL whitespace removed.  
+    _normalized = Substitute(
+      _text;
+      [ " ";		devp.Nil ];
+      [ " ";		devp.Nil ];
+      [ "	";	devp.Nil ];
+      [ "¶";		devp.Nil ]
+    );
+    
+    // Determine position of first non-ws character in original string.
+    _first_char = Position( _text; Left( _normalized; 1 ); 0; 1 );
+    
+    // Determine position of last non-ws character in original string.
+    _last_char = Position( _text; Right( _normalized; 1 ); Length( _text ); -1 )
+  ];
+  
+  // If any non-whitespace characters exist return appropriate middle portion of
+  // original Text.
+  Case(
+    _first_char;	Middle( _text; _first_char; _last_char - _first_char + 1 )
+  )
+)
