@@ -1,0 +1,30 @@
+// devp.NextVersion ( _current_version )
+//
+// Purpose:		Accepts a version number of the form X.XxX, where the Xs are integers and x is either
+//				a (for alpha version), b (for beta version) or v (for release version) and returns the next
+//				version. It does this by keeping the X.Xx portion and adding one to the last X.
+//
+// Parameters:	_current_version: The current version that needs to incremented.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Example:
+// devp.NextVersion ( "1.1a2" ) = "1.1a3"
+
+Let (
+  [
+    _letter = Case (
+      PatternCount ( _current_version; "a" );		"a";
+      PatternCount ( _current_version; "b" );		"b";
+      PatternCount ( _current_version; "v" );		"v"
+    );
+    
+    _letter_pos		= Position ( _current_version; _letter; 1; 1 );
+    _base_str		= Left ( _current_version; _letter_pos );
+    _base_num		= Right ( _current_version; Length ( _current_version ) - _letter_pos );
+    _incremented	= GetAsNumber ( _base_num ) + 1
+  ];
+
+  _base_str & _incremented
+)

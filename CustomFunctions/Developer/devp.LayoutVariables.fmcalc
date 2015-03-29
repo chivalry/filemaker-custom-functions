@@ -1,0 +1,50 @@
+// devp.LayoutVariables ( _layout )
+//
+// Purpose:		Extract all layout objects named as a $variable in order to declare those
+//				objects and their content as valid $variables.
+//
+// Parameters:		_layout:	The layout to get the variable names from
+//
+// Requirements:	lsts.ValueFilter
+//				devp.LayoutObjects
+//				lsts.CustomList
+//
+// Author:			Matt Petrowsky
+// Version:		1.0 written 11-07-08
+//
+// Todo:			This function doesn't seem to work yet, could be a bug in lsts.ValueFilter.
+//
+// Example:
+// // When a field is named $fieldname and contains the string "field content"
+// devp.LayoutVariables ( Get ( Layoutname ) ) = "$fieldname = \"field content\""
+
+Let (
+  [
+    // will find both local and global variables
+    $_lv_layout_variables = lsts.ValueFilter( "$"; devp.LayoutObjects( _layout ) );
+
+    _calc = "Let (
+      [
+        _value = GetValue ( $_lv_layout_variables ; [n] )
+      ];
+
+      Case ( Left ( _value; 1 ) = \"$\";
+        Substitute (
+          _value;
+          [ _value; _value & \" = \" & Quote( GetLayoutObjectAttribute( _value; \"content\" ) ) ]
+        )
+      )
+    )
+    ";
+
+    _result = Substitute (
+      lsts.CustomList ( 1; ValueCount ( $_lv_layout_variables ); _calc );
+      [ ¶; ";¶" ]
+    );
+
+    $_lv_layout_variables = devp.Nil
+
+  ];
+
+  _result
+)

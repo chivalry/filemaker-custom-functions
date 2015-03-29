@@ -1,0 +1,63 @@
+// devp.SystemInfo
+//
+// Purpose:		Returns a list of informative values about the current FMP
+//				environment.
+//
+// Requirements: 	devp.IsDeveloper
+//
+// Author:			Matt Petrowsky
+// Version:		1.0
+//
+// Example:
+// // Every call will be different. One test call worked as follows...
+// devp.SystemInfo = "App	Version = 13.05¶App Current Time = 3/17/2015 4:55:20 AM¶" &
+//   "Host Name = Narnia¶Host IP = " &
+//   "File Location = file:/Aslan/Users/chuck/Dropbox/Projects/chiv/chiv.custom_functions/CustomFunctions.fmp12¶"&
+//   "Account = Admin¶-----------------------------------¶Script Param = ¶Script Result = ¶" &
+//   "-----------------------------------¶Last Error = 0¶Last ODBC = ¶-----------------------------------¶" &
+//   "Layout = CustomFunctions¶Layout Table = CustomFunctions¶-----------------------------------¶" &
+//   "Open Records = 0¶Record Modified = 5¶-----------------------------------¶Active Field = ¶" &
+//   "Active Field Table = ¶Active Layout Object = ¶Active Layout Table = CustomFunctions¶" &
+//   "-----------------------------------¶Local time = 3/17/2015 4:55:20 AM¶" &
+//   "Host time = 3/17/2015 4:55:20 AM¶-----------------------------------"
+
+Case (
+  devp.IsDeveloper;
+  Let (
+    [
+      // Variables
+      $$_DEVP_SYSTEM_INFO = List(
+        "App	Version = " &			Abs ( Get ( ApplicationVersion ) );
+        "App Current Time = " &		GetAsText ( Get ( CurrentTimeStamp ) );
+        "Host Name = " &			Get ( HostName );
+        "Host IP = " &				Get ( HostIPAddress );
+        "File Location = " &			Get ( FilePath );
+        "Account = " &				Get ( AccountName );
+        "-----------------------------------";
+        "Script Param = " &			Get ( ScriptParameter );
+        "Script Result = " &			Get ( ScriptResult );
+        "-----------------------------------";
+        "Last Error = " &			Get ( LastError );
+        "Last ODBC = " &			Get ( LastODBCError );
+        "-----------------------------------";
+        "Layout = " &				Get ( LayoutName );
+        "Layout Table = " &			Get ( LayoutTableName );
+        "-----------------------------------";
+        "Open Records = " &			Get ( RecordOpenCount );
+        "Record Modified = " &		Get ( RecordModificationCount );
+        "-----------------------------------";
+        "Active Field = " &			Get ( ActiveFieldName );
+        "Active Field Table = " &		Get ( ActiveFieldTableName );
+        "Active Layout Object = " &	Get ( ActiveLayoutObjectName );
+        "Active Layout Table = " &		Get ( LayoutTableName );
+        "-----------------------------------";
+        "Local time = " &			Get ( CurrentTimeStamp );
+        "Host time = " &			Get ( CurrentHostTimeStamp );
+        "-----------------------------------";
+      )
+    ];
+
+    // Return value
+    $$_DEVP_SYSTEM_INFO
+  )
+)

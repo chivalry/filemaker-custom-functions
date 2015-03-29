@@ -1,0 +1,12 @@
+// devp.IsDeveloper
+//
+// Purpose:		Returns true if the current user is logged in with full access.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-08
+//
+// Example:
+// // When the user is logged in with a full access account…
+// devp.IsDeveloper = True
+
+Get ( CurrentPrivilegeSetName ) = "[Full Access]"

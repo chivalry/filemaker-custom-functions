@@ -1,0 +1,30 @@
+// devp.GetTableName ( _field )
+//
+// Purpose:		Returns only the table name, i.e., without the field name
+//
+// Parameters:		_field: The field to return the table name for
+//
+// Author:			Kevin Frank
+// Version:		1.0 written 11-04-18
+//
+// Notes:			GetFieldName() returns the relationship plus the field name. This function
+//				is to be used in SQL queries to protect the table occurrence references
+//				from breaking if the TO is renamed.
+//
+//				The Quote() funciton "escapes" problematic characters and SQL reserved
+//				words, if any — otherwise, no harm done.
+//
+//				http://filemakerhacks.com/2011/04/18/avoiding_brittleness/
+//
+// Example:
+// // When TableOccurrence::field_name exists
+// devp.GetTableName ( TableOccurrence::field_name ) = "TableOccurrence"
+
+Let (
+  [
+    _to_and_field	= GetFieldName ( _field );
+    _list			= Substitute ( _to_and_field; "::"; "¶" )
+  ];
+
+  Quote ( GetValue ( _list; 1 ) )
+)

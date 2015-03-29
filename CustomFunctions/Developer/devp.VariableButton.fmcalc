@@ -1,0 +1,40 @@
+// devp.VariableButton ( _part; _evaluation_test )
+//
+// Purpose:		Returns the appropriate graphic when a button should be raised or lowered.
+//
+// Parameters:		_part:			Which portion of the button to return, a number, 1, 2, or 3,
+//								indicating left, middle, or right.
+//				_evaluation_test:	If True is passed, uses the recessed version. Otherwise uses
+//								the raised version.
+//
+// Requirements: 	Global variables storing the graphic portions of the button in the form
+//				"$$_GRA_" follwed by the evelation, the word "_BUTTON_" and the color scheme,
+//				and lastly the part number, as in $$_GRA_RAISED_BUTTON_BLUE_LEFT.
+//				$$_COLOR_SCHEME
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-08
+//
+// Example:
+// // Should return a container object, and so can't be expressed within a comment, but
+// devp.VariableButton ( "LEFT"; True )		// should return the graphic contained in the
+//									// global variable $$_GRA_RECESSED_BUTTON_BLUE
+//									// if the $$_COLOR_SCHEME is "BLUE".
+
+Let(
+  [
+    _part_word = Choose(
+      _part - 1;
+      "LEFT"; "MIDDLE"; "RIGHT"
+    );
+    _evaluation = Case(
+      _evaluation_test;
+      "RECESSED"; "RAISED"
+    );
+
+    _global_var_name = "$$_GRA_" & _evaluation & "_BUTTON_" & $$_COLOR_SCHEME & "_"
+                      & _part_word
+  ];
+
+  Evaluate( _global_var_name )
+)
