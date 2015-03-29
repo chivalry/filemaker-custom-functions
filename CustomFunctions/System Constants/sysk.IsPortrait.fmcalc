@@ -1,0 +1,12 @@
+// sysk.IsPortrait
+//
+// Purpose:		Returns True if an interface is in portrait mode, meant for use on iOS.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Example:
+// // When executed on an iPad that is being held in portrait mode...
+// sysk.IsPortrait = 1
+
+Get( WindowContentWidth ) < Get( WindowContentHeight )

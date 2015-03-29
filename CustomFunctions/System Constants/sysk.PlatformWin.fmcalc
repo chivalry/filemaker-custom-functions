@@ -1,0 +1,12 @@
+// sysk.PlatformWin
+//
+// Purpose:		A constant representing what Get ( SystemPlatform ) returns to indicate Windows.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Example:
+// // When evaluated while running under Windows...
+// Get ( SystemPlatform ) = sysk.PlatformWin
+
+-2

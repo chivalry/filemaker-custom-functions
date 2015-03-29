@@ -1,0 +1,12 @@
+// sysk.ModePrinting
+//
+// Purpose:		A constant representing what Get ( WindowMode ) returns to indicate printing mode.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Example:
+// // When evaluated while the window is in printing mode...
+// Get ( WindowMode ) = sysk.ModePrinting
+
+3

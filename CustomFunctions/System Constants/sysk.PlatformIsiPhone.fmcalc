@@ -1,0 +1,16 @@
+// sysk.PlatformIsiPhone
+//
+// Purpose:		Returns true if the system is running under on an iPhone or iPod Touch.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Notes:			Makes use of global variables $$_SYSK_PLATFORM_OVERRIDE_IPHONE and to allow the
+//				developer to override the return value during development and testing.
+//
+// Example:
+// // While running the system on an iPhone or iPod Touch...
+// sysk.PlatformIsiPhone = 1
+
+( sysk.VersionName = sysk.VersioniPhone )
+  or $$_SYSK_PLATFORM_OVERRIDE_IPHONE

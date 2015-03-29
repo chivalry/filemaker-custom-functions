@@ -1,0 +1,12 @@
+// sysk.ModePreview
+//
+// Purpose:		A constant representing what Get ( WindowMode ) returns to indicate preview mode.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Example:
+// // When evaluated while the window is in preview mode...
+// Get ( WindowMode ) = sysk.ModePreview
+
+2

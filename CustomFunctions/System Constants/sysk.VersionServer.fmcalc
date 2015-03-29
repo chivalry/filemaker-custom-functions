@@ -1,0 +1,13 @@
+// sysk.VersionServer
+//
+// Purpose:		A constant representing what the first word of Get ( ApplicationVersion ) returns to
+//				indicate FileMaker Server.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Example:
+// // When evaluated while running under FileMaker Server...
+// Get ( ApplicationVersion ) = sysk.VersionServer
+
+"Server"

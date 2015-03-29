@@ -1,0 +1,12 @@
+// sysk.ModeFind
+//
+// Purpose:		A constant representing what Get ( WindowMode ) returns to indicate find mode.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Example:
+// // When evaluated while the window is in find mode...
+// Get ( WindowMode ) = sysk.ModeFind
+
+1

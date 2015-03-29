@@ -1,0 +1,16 @@
+// sysk.PlatformIsiPad
+//
+// Purpose:		Returns true if the system is running under on an iPad.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Notes:			Makes use of global variables $$_SYSK_PLATFORM_OVERRIDE_IPAD and to allow the
+//				developer to override the return value during development and testing.
+//
+// Example:
+// // While running the system on an iPad...
+// sysk.PlatformIsiPad = 1
+
+( sysk.VersionName = sysk.VersioniPad )
+  or $$_SYSK_PLATFORM_OVERRIDE_IPAD

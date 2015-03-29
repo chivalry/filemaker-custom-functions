@@ -1,0 +1,18 @@
+// sysk.PlatformIsMac
+//
+// Purpose:		Returns True if the system is running under OS X.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Notes:			Makes use of global variables $$_SYSK_PLATFORM_OVERRIDE_IPAD and
+//				$$_SYSK_PLATFORM_OVERRIDE_IPHONE to allow the developer to override the return
+//				value during development and testing.
+//
+// Example:
+// // While running the system on a Mac...
+// sysk.PlatformIsMac = 1
+
+( Get( SystemPlatform ) = sysk.PlatformMac )
+  and ( not $$_SYSK_PLATFORM_OVERRIDE_IPAD )
+  and ( not $$_SYSK_PLATFORM_OVERRIDE_IPHONE )

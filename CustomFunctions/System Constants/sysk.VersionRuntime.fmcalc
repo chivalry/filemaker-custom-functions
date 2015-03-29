@@ -1,0 +1,13 @@
+// sysk.VersionRuntime
+//
+// Purpose:		A constant representing what the first word of Get ( ApplicationVersion ) returns to
+//				indicate FileMaker Runtime.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Example:
+// // When evaluated while running under FileMaker Runtime...
+// Get ( ApplicationVersion ) = sysk.VersionRuntime
+
+"Runtime"

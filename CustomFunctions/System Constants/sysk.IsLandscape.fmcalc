@@ -1,0 +1,12 @@
+// sysk.IsLandscape
+//
+// Purpose:		Returns True if an interface is in landscape mode, meant for use on iOS.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Example:
+// // When executed on an iPad that is being held in landscape mode...
+// sysk.IsLandscape = 1
+
+Get( WindowContentWidth ) > Get( WindowContentHeight )

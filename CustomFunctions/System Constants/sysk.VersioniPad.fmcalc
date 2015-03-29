@@ -1,0 +1,13 @@
+// sysk.VersioniPad
+//
+// Purpose:		A constant representing what the first word of Get ( ApplicationVersion ) returns to
+//				indicate FileMaker Go on an iPad.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Example:
+// // When evaluated while running under FileMaker Go on an iPad...
+// Get ( ApplicationVersion ) = sysk.VersioniPad
+
+"Go_iPad"
