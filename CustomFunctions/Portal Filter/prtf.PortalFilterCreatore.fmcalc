@@ -1,0 +1,18 @@
+// prtf.PortalFilterCreator ( _list )
+//
+// Purpose:		Creates exploded text for each of the items in the list.
+//
+// Parameters:		_list: The list of items to explode.
+//
+// Requirements: 	prtf.PortalFilterCreator_
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Notes:			Just calls prtf.PortalFilterCreator_, passing the list and appending a last item so that
+//				all portal records can be displayed properly when a search field is empty.
+//
+// Example:
+// prtf.PortalFilterCreator ( List ( "ABC"; "def" ) ) = "A¶AB¶ABC¶d¶de¶def¶¶" & prtf.AllItems
+
+prtf.PortalFilterCreator_( _list ) & "¶" & prtf.AllItems

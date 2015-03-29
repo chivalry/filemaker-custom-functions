@@ -1,0 +1,14 @@
+// prtf.AllItems
+//
+// Purpose:		A constant to indicate when all items should be shown in a filtered portal.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Notes:			Calculations should use this to compare when a filter field is empty and therefore
+//				all portal items should be displayed.
+//
+// Example:
+// prtf.AllItems = "AllAllAll"
+
+"AllAllAll"
