@@ -16,14 +16,15 @@ request.
 
 All of the custom functions can be found in three places:
 
-1. Within a FileMaker 13 file, `CustomFunctions.fmp12`. This is the golden master and the only place a function is guaranteed to be.
-2. Within a FileMaker 11 file, `CustomFunctions.fp7`. Incompatible custom functions that take advantage of FileMaker 12+ features, such as `ExecuteSQL`, will not be included here.
-3. Within a text file in a parent folder named for the functions group, such as `CustomFunctions/Lists/lsts.First.fmcalc`. The `fmcalc` extension will allow the proper syntax highlighting within vim if the [filemaker.vim](https://github.com/chivalry/filemaker.vim) plugin is installed.
+1. Within a FileMaker 13 file, `Main.fmp12`. This is the golden master and the only place a standard function is guaranteed to be.
+2. Within a FileMaker 11 file, `Main.fp7`. Incompatible custom functions that take advantage of FileMaker 12+ features, such as `ExecuteSQL`, will not be included here.
+3. Within a text file in a parent folder named for the functions group, such as `Main/Lists/lsts.First.fmcalc`. The `fmcalc` extension will allow the proper syntax highlighting within vim if the [filemaker.vim](https://github.com/chivalry/filemaker.vim) plugin is installed.
 
-There's one more file included for historical reference only, `CustomFunctionsArchive.fmp12`,
+There's one more file included for historical reference only, `Archive.fmp12`,
 which contains the custom functions I had in their original format before I began editing
 them to conform to standards and eliminating them if they weren't actually used or likely
-to be used.
+to be used. If a function is collected but not used in main because it's not yet a
+standard function, it may be stored here.
 
 ## Standards
 
@@ -80,7 +81,8 @@ Each custom function starts with a preamble that looks like the following:
     // Temmplate
     //
     // Purpose:	     description
-    // Parameters:	 _param_1: description
+    //
+    // Parameters:	 _param: description
     //
     // Requirements: requirements
     //
@@ -94,9 +96,8 @@ Each custom function starts with a preamble that looks like the following:
 
 The template is what would normally show between FileMaker's parameter list and the custom
 function code. For example, if there was a function actually called Template and it
-actually took two parameters as above, the template line would have `Template ( _param_1;
-_param_2 )`. If there's no parameters for the function, the template should not have
-parenthesis.
+actually took two parameters as above, the template line would have `Template ( _param_1 )`.
+If there's no parameters for the function, the template should not have parenthesis.
 
 The example portion should be a sort of unit test for the function, something that, once
 the custom function has been defined, would allow a developer to copy and paste into the
