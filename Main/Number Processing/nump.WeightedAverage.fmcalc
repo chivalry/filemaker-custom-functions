@@ -1,0 +1,41 @@
+// nump.WeightedAverage ( _weights; _values )
+//
+// Purpose:		Given a list of weights and matching values, return the weighted average.
+//
+// Parameters:		_weights:	The weights that each member of the values list should have
+//				_values:	The values to provide a weighted average of.
+//
+// Requirements: 	lsts.Map2
+//				lsts.Sum
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-06
+//
+// Notes:			List sizes should match, but if they don't the longer one has zero values for excess
+//				members.
+//
+//				Underlying math (LaTeX):
+//				\bar{x} = \frac{ \sum_{i=1}^n w_i x_i}{\sum_{i=1}^n w_i}
+//
+// Example:
+// nump.WeightedAverage ( "10¶5¶"; "10¶40¶" ) = 20
+
+Let (
+  [
+    // Create a list that multiplies each weight by its matching value.
+    _products = lsts.Map2 (
+      _weights;
+      _values;
+      "%1 * %2";
+      List( devp.DataTypeNumber; devp.DataTypeNumber );
+      devp.DataTypeNumber
+    );
+
+    _product_sum	= lsts.Sum( _products );
+    _weight_sum		= lsts.Sum( _weights );
+
+    _result = _product_sum / _weight_sum
+  ];
+
+  _result
+)
