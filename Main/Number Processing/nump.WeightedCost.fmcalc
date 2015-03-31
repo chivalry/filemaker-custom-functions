@@ -1,0 +1,66 @@
+// nump.WeightedCost ( _qty_list; _cost_list; _last_cost; _qty_needed )
+//
+// Purpose:		Given a list of available quantities, a matching list of costs, a last cost and a needed
+//				quantity with the assumption that the lists are provided are sorted by date in
+//				descending order, compute the average cost based on how many items were taken
+//				from each bucket, using the last cost as the cost for any quantities in excess of
+//				availability.
+//
+// Parameters:		_qty_list: 		The quantities that exist for each cost
+//              		_cost_list:		The costs that we can draw from
+//				_last_cost:		The last cost to use if we run out of quantity
+//				_qty_needed:	The quantity needed to fulfill
+//
+// Requirements: 	nump.WeightedCost_
+//				nump.WeightedAverage
+//				$_wc_qty_used_list local variable
+//				$_wc_cost_used_list local variable
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-06
+//
+// Notes:			Assuming that we have a function for the weighted average, we can solve this by
+//				figuring out what quantities we have to take from the available quantities to reach
+//				the needed quantity.
+//
+//				If the needed is less than or equal to the first item, we take what we need and we're
+//				done and append the quantity taken and cost to a running list of each.
+//
+//				If the needed quanity is greater than the first member's available quantity, we take
+//				everything in the first member, and append what we've taken and the cost to our
+//				running list, reduce the quantity needed by what was taken, and repeat the process.
+//
+//				Makes use of the temporary "script" variables $_qty_used_list and $_cost_used_list to
+//				avoid having to work around the inability to pass multiple return values from a function.
+//				These are cleared out after use to avoid cluttering up the data viewer.
+//
+// Todo:			To dos
+//
+// Example:
+// Let (
+//   [
+//     _qtys	= List ( 91; 158; 14; 1 );
+//     _costs	= List ( 1.71; 1.69; 1.61; 1.67 );
+//     _last		= 1.71;
+// 
+//     _test =		nump.WeightedCost ( _qtys; _costs; _last; 90 ) = 1.71
+//     		and	nump.WeightedCost ( _qtys; _costs; _last; 100 ) = 1.7082
+// 			and	nump.WeightedCost ( _qtys; _costs; _last; 200 ) = 1.6991
+// 			and	nump.WeightedCost ( _qtys; _costs; _last; 300 ) = 1.6947; // 1.9646666...
+//   ];
+//
+//   _test
+// )
+
+Let (
+  [
+    _ = nump.WeightedCost_ ( _qty_list; _cost_list; _last_cost; _qty_needed );
+
+    _weighted_average = nump.WeightedAverage ( $_wc_qty_used_list; $_wc_cost_used_list );
+
+    $_wc_qty_used_list	= devp.Nil;
+    $_wc_cost_used_list	= devp.Nil
+  ];
+
+  Round ( _weighted_average; 4 )
+)
