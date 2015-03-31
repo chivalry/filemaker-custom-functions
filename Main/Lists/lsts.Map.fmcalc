@@ -1,0 +1,52 @@
+// lsts.Map ( _list; _calculation; _input_type; _output_type )
+//
+// Purpose:		Maps one list to another by running each item in the list through the specified
+//				calculation. The calculation should be a valid FileMaker calculation if %L is
+//				replaced by an item in the list.
+//
+// Parameters:		_list:			The list to map using the calculation.
+//				_calculation:	The calculation to apply to each value in the list.
+//				_input_type:	The data type of the input values.
+//				_output_type:	The data type of the output values.
+//
+// Requirements: 	devp.DataType* (not required, but meant for use with this and other map functions)
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-06
+//
+// Notes:			Notes
+//
+// Todo:			Find a way to generalize mapping functions.
+//
+//				Find a way to work this without having to specify data types.
+//
+// Example:
+// lsts.Map( "1¶2¶3"; "%L * 2"; "number"; "number" ) == "2¶4¶6"
+
+Case (
+  // Recursive exit condition
+  ValueCount ( _list ) = 0;	devp.Nil;
+
+  Let(
+    [
+      _first = lsts.First ( _list );
+      _rest = lsts.Rest ( _list );
+
+      _value = devp.GetAsType ( _first; _input_type );
+
+      // Coerce to number for the calculation evaluation unless the type is text.
+      _value = Case(
+        _input_type = devp.DataTypeText;	_value;
+								GetAsNumber ( _value )
+      );
+
+      _calc			= Substitute ( _calculation; "%L"; _value );
+      _calc_result		= Evaluate ( _calc );
+      _calc_value		= devp.GetAsType ( _calc_result; _output_type );
+
+      _result = _calc_value & ¶ & lsts.Map ( _rest; _calculation; _input_type; _output_type )
+    ];
+
+    _result
+  )
+)
