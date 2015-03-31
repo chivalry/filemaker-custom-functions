@@ -1,0 +1,18 @@
+// lsts.Append ( _list; _value )
+//
+// Purpose:		If the list is empty, just return the value. Otherwise return the list with the value
+//				appended to the end.
+//
+// Parameters:		_list:		The list to append the value to.
+//				_value:	The value to append to the list.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-06
+//
+// Example:
+// lsts.Append ( lsts.Append ( devp.Nil; "one" ); "two" ) = "one¶"two"
+
+Case (
+  ValueCount ( _list ) = 0;	devp.Nil;
+					_list & "¶"
+) & _value
