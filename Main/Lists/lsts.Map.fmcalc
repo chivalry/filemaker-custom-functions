@@ -10,18 +10,22 @@
 //				_output_type:	The data type of the output values.
 //
 // Requirements: 	devp.DataType* (not required, but meant for use with this and other map functions)
+//				devp.GetAsType
+//				lsts.First
+//				lsts.Rest
 //
 // Author:			Charles Ross
 // Version:		1.0 written 15-03-06
 //
-// Notes:			Notes
+// Notes:			The calculation should have the string "%L" to indicate where each list item should be
+//				inserted into the calculation.
 //
 // Todo:			Find a way to generalize mapping functions, perhaps by using lsts.CustomList.
 //
 //				Find a way to work this without having to specify data types.
 //
 // Example:
-// lsts.Map( "1¶2¶3"; "%L * 2"; "number"; "number" ) == "2¶4¶6"
+// lsts.Map( "1¶2¶3"; "%L * 2"; devp.DataTypeNumber; devp.DataTypeNumber ) == "2¶4¶6"
 
 Case (
   // Recursive exit condition
