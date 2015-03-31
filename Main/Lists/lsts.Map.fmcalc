@@ -16,7 +16,7 @@
 //
 // Notes:			Notes
 //
-// Todo:			Find a way to generalize mapping functions.
+// Todo:			Find a way to generalize mapping functions, perhaps by using lsts.CustomList.
 //
 //				Find a way to work this without having to specify data types.
 //
