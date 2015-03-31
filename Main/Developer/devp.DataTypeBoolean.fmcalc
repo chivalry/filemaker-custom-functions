@@ -1,0 +1,13 @@
+// devp.DataTypeBoolean
+//
+// Purpose:		A string constant indicating a boolean data type.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-06
+//
+// Notes:			Intended for use with the devp.GetAsType function.
+//
+// Example:
+// devp.DataTypeBoolean = "boolean"
+
+"boolean"

@@ -1,0 +1,13 @@
+// devp.DataTypeTimestamp
+//
+// Purpose:		A string constant indicating a timestamp data type.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-06
+//
+// Notes:			Intended for use with the devp.GetAsType function.
+//
+// Example:
+// devp.DataTypeTimestamp = "timestamp"
+
+"timestamp"
