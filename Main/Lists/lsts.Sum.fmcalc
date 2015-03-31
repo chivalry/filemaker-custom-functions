@@ -1,0 +1,33 @@
+// lsts.Sum ( _list )
+//
+// Purpose:		Returns the sum of a list of numbers.
+//
+// Parameters:		_list:	The list to produce the sum of.
+//
+// Requirements: 	lsts.First
+//				lsts.Rest
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-06
+//
+// Notes:			Might it be better to write this as non-recursive, using Substitute to change the list to
+//				something that could be passed to Evaluate?
+//
+// Example:
+// lsts.Sum ( "1¶2¶3" ) = 6
+
+Case (
+  // Recursive exit condition.
+  ValueCount ( _list ) = 0;	devp.Nil;
+
+  Let (
+    [
+      _first = lsts.First ( _list );
+      _rest = lsts.Rest ( _list );
+
+      _result = GetAsNumber ( _first ) + lsts.Sum( _rest )
+    ];
+
+    _result
+  )
+)
