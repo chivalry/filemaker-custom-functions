@@ -1,4 +1,4 @@
-// date.Range ( _date_1; _date_2 )
+// rang.Dates ( _date_1; _date_2 )
 //
 // Purpose:		Return a list of dates between the first and last date, inclusive.
 //
@@ -8,8 +8,10 @@
 // Author:			Charles Ross
 // Version:		1.0 written 15-03-06
 //
+// Notes:			Check into generalizing this so that the data type isn't needed to be known.
+//
 // Example:
-// date.Range ( Date ( 3; 31; 2015 ); Date ( 4; 2; 2015 ) ) = "3/31/2015¶4/1/2015¶4/2/2015"
+// rang.Dates ( Date ( 3; 31; 2015 ); Date ( 4; 2; 2015 ) ) = "3/31/2015¶4/1/2015¶4/2/2015"
 
 Let (
   [
@@ -23,6 +25,6 @@ Let (
   GetAsText ( _earlier ) &
   Case (
     _earlier = _later;	devp.Nil;
-				"¶" & date.Range ( _earlier + 1; _later )
+				"¶" & rang.Dates ( _earlier + 1; _later )
   )
 )
