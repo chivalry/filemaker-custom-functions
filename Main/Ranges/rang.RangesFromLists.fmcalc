@@ -1,0 +1,16 @@
+// rang.RangesFromList ( _start_list; _end_list )
+//
+// Purpose:		Creates a list of ranges using corresponding values from two lists.
+//
+// Parameters:		_start_list:	The list of range starting values.
+//				_end_list:	The list of range ending values.
+//
+// Requirements: 	lsts.Concatenate
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-08
+//
+// Example:
+// sample = result
+
+lsts.Concatenate ( _start_list; _end_list; rang.Separator )
