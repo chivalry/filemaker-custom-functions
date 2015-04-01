@@ -50,8 +50,6 @@
 //				by scpm.Param would be useful in other situations, such as script return values.
 //				Abstract this out.
 //
-//				The variable names are too simple and should be namespaced with a prefix.
-//
 //				Provide better examples throughout the sub functions.
 //
 // Example:
