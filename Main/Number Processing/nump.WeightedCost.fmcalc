@@ -34,8 +34,6 @@
 //				avoid having to work around the inability to pass multiple return values from a function.
 //				These are cleared out after use to avoid cluttering up the data viewer.
 //
-// Todo:			To dos
-//
 // Example:
 // Let (
 //   [
