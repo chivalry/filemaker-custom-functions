@@ -23,8 +23,10 @@ All of the custom functions can be found in three places:
 There's one more file included for historical reference only, `Archive.fmp12`,
 which contains the custom functions I had in their original format before I began editing
 them to conform to standards and eliminating them if they weren't actually used or likely
-to be used. If a function is collected but not used in main because it's not yet a
-standard function, it may be stored here.
+to be used. It also contains functions that were created for specific applications,
+unlikely to be generally useful as they are, but worthy of retention for some other reason,
+perhaps as a reference to the algorithm used. If a function is collected but not used in
+main because it's not yet a standard function, it may be stored here.
 
 ## Standards
 
