@@ -21,8 +21,6 @@
 //				If a referenced field has a style, the placeholder's style and the field's style are
 //				combined, with the field's style taking precedence.
 //
-// Todo:			To dos
-//
 // Example:
 // // Assuming fields first_name and last_name...
 // txtp.MergeExpressions ( "An expression with a calc: <<first_name & last_name>>." )
