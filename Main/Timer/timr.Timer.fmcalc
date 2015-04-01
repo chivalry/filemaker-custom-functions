@@ -21,8 +21,6 @@
 //
 //				http://www.kegebein.net/blog/2010/06/unlimited-timer/
 //
-// Todo:			To dos
-//
 // Example:
 // // With the side effect that the timer is stored for future use.
 // timr.Timer ( "timer"; timr.Start ) & timr.Timer ( "timer"; timr.Stop ) = "0:00:00"
