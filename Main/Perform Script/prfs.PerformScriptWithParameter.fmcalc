@@ -23,8 +23,7 @@
 //				hasn't been registered yet.
 //
 // Todo:			Offer support for DoScript and EventScript
-//				Test for registered function before attempting to register it again.
-//
+//				
 //				Find a way to have this without the use of plug.PluginIsReady for 11- compatibility.
 //
 // Example:
