@@ -11,7 +11,7 @@
 //				updated 11-11-01 by Agnès Barouh to work with FM SErver
 //				4.8 updated 12-11-01 by Agnès Barouh to work with IWP
 //
-// Notes:			Please, do not used "CLNum" in your calculation with Let()
+// Notes:			Please, do not used "_custom_list_num" in your calculation with Let()
 //
 //				Build any list based on all Native or Custom Functions involving a 'Number' value
 //				as a parameter, such as : Left(), Middle(), GetValue(), GetRepetitionNumber (),
@@ -50,10 +50,10 @@
 //
 //				CustomList ( 1; 4; "GetNthRecord ( Field ; [n])")
 //				therefore becomes
-//				"Let ( [ CLNum = 1 ] ; GetNthRecord ( Field ; CLNum ) ) & ¶ &
-//				Let ( [ CLNum = 2 ] ; GetNthRecord ( Field ; CLNum ) ) & ¶ &
-//				Let ( [ CLNum = 3 ] ; GetNthRecord ( Field ; CLNum ) ) & ¶ &
-//				Let ( [ CLNum = 4 ] ; GetNthRecord ( Field ; CLNum ) )"
+//				"Let ( [ _custom_list_num = 1 ] ; GetNthRecord ( Field ; _custom_list_num ) ) & ¶ &
+//				Let ( [ _custom_list_num = 2 ] ; GetNthRecord ( Field ; _custom_list_num ) ) & ¶ &
+//				Let ( [ _custom_list_num = 3 ] ; GetNthRecord ( Field ; _custom_list_num ) ) & ¶ &
+//				Let ( [ _custom_list_num = 4 ] ; GetNthRecord ( Field ; _custom_list_num ) )"
 //
 //				2: Evaluates this chain.
 //
