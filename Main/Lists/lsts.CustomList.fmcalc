@@ -1,11 +1,18 @@
 // lsts.CustomList ( _start; _end; _funciton )
 //
 // Purpose:		Return a list that applies the start and end values to the function's "[n]" token
+//
 // Parameters:		_start:	description
 //              		_end:	description
 //				_function:	description
 //
-// Author:			Agnès Barouh (filemaker@tictac.fr), Ugo Di Luca, Grazie Mille
+// Requirements:	devp.Nil
+//				sysk.PlatformIsGo
+//				sysk.PlatformIsServer
+//				sysk.PlatformIsWeb
+//				txtp.StartsWith
+//
+// Author:			Agnès Barouh (filemaker@tictac.fr), Ugo Di Luca, Grazie Mille, cleanup by Charles Ross
 // Version:		updated 08-07-01 by Agnès Barouh
 //				updated 10-08-01 by Agnès Barouh to work with FM Go
 //				updated 11-11-01 by Agnès Barouh to work with FM SErver
@@ -86,13 +93,13 @@ Case (
       _diff	= _end - _start + 1;
 
       _version =  Case (
-        Left ( Get ( ApplicationVersion ) ; 2 ) = "Go" ;	1 ;
-	Left ( Get ( ApplicationVersion ) ; 2 ) = "Se" ;	2 ;
-	Left ( Get ( ApplicationVersion ) ; 2 ) = "We" ;	3 ;
-										0
+        sysk.PlatformIsGo;		1;
+        sysk.PlatformIsServer;	2;
+        sysk.PlatformIsWeb;		3;
+						0
       ) ;
 
-      _limit = Choose (
+      _stack_size = Choose (
         _version ;
         1700  ;	400 ;		300 ;		900
       ) ;
@@ -127,17 +134,17 @@ Case (
       $_custom_list_n[ _index ]  = _start - 1;
 
       _calc = Case (
-        _diff ≥ ( _limit - 10 ) ;	( _limit / 10 )  ;
-						Floor ( _diff / 10 ) + 1
+        _diff ≥ ( _stack_size - 10 ) ;	( _stack_size / 10 )  ;
+							Floor ( _diff / 10 ) + 1
       );
 
       // Here starts the "magic" of the Substitutions and the whole mechanism.
       // CustomList() is set to evaluate stacks of 1,700 values at a time ( 400 for
       // FileMakerGo), which is the current limit of FileMaker internal Evaluate function
 
-      _first				= Substitute ( ( 10 ^ _calc ) - 1; 9; "__________" ) ;  
-      _x				= Floor ( _diff / _limit );
-      $_custom_list_remainer[ _index ]	= _diff - ( _x * _limit );
+      _first							= Substitute ( ( 10 ^ _calc ) - 1; 9; "__________" ) ;  
+      _x							= Floor ( _diff / _stack_size );
+      $_custom_list_remainer[ _index ]	= _diff - ( _x * _stack_size );
 
       // When the "Function" argument is left empty, CustomList() will return a numeric
       // list based on the range defined
@@ -150,30 +157,30 @@ Case (
       // Each repeating variable content is parsed in order to get our String ready for the
       // last evaluation - Special care is made for French users here, please substitute
       // the "definir" below with your local translation of the "Let" function if you're not
-      // using an english version. The use of "Let ([" is recommanded anyway */
+      // using an english version. The use of "Let ([" is recommanded anyway
 
-      $_custom_list_execute[ _index ] = Case (
-        Left (
-          Substitute (
-            Lower ( _function );
-            ["definir";	"Let"	];
-            [" ";		""	];
-            ["¶";		""	]
-          );
-          5
-        ) = "Let([";
-        Substitute (
-          _first ;
-          [ "_";  "Let([$_custom_list_n[" & _index & "]=$_custom_list_n[" & _index & "]+1;_custom_list_num=$_custom_list_n[" & _index & "];" &
-            Replace ( _function_r; 1; Position ( _function_r; "["; 1; 1 ); "" ) & "&\¶&¶"]
-        );
-
-        Substitute (
-          _first ;
-          [ "_";  "Let([$_custom_list_n[" & _index & "]=$_custom_list_n[" & _index & "]+1;_custom_list_num=$_custom_list_n[" & _index & "]];" &
-            _function_r & ")&\¶&¶"]
-        )
+      // Removed localized "Let" translation.
+      _normalized_fn = Substitute (
+        Lower ( _function );
+        [ " ";		devp.Nil ];
+        [ "¶";		devp.Nil ]
       );
+      _starts_with_let = txtp.StartsWith ( _normalized_fn ; "Let([" );
+
+      _base_fn = "Let([$_custom_list_n[" & _index & "]=$_custom_list_n[" & _index & "]+1;" &
+        "_custom_list_num=$_custom_list_n[" & _index & "]";
+
+      _base_fn = _base_fn & Case (
+        _starts_with_let;	";";
+					"];"
+      );
+
+      _fn_append = Case (
+        _starts_with_let;	Replace ( _function_r; 1; Position ( _function_r; "["; 1; 1 ); "" ) & "&\¶&¶";
+					_function_r & ")&\¶&¶"
+      );
+
+      $_custom_list_execute[ _index ] = Substitute ( _first ; "_";  _base_fn & _fn_append );
 
       // Final compilation starts here. The reminder part above each 1,700 values is
       // treated now.
