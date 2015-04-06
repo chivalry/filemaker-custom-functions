@@ -70,15 +70,17 @@
 //   "3/18/2015¶3/19/2015¶3/20/2015¶3/21/2015¶3/22/2015"
 
 Case (
-  /*This function will not evaluate if Invalid parameters were passed for Start and End.*/
+  // This function will not evaluate if Invalid parameters were passed for Start and End.
   IsEmpty ( _start )
     or IsEmpty ( _end )
     or ( _end < 1 )
     or ( _start < 1 );
-  "";
-          
+  devp.Nil;
+
   Let (
     [
+      _function = Substitute ( _function; "%n"; "[n]" );
+
       _start	= GetAsNumber ( _start );
       _end	= GetAsNumber ( _end );
       _diff	= _end - _start + 1;
@@ -141,8 +143,8 @@ Case (
       // list based on the range defined
 
       _function_r = Case (
-        IsEmpty ( _function );	"CLNum";
-						Substitute ( _function; ["[n]"; "CLNum"] ; [¶ ; ""] )
+        IsEmpty ( _function );	"_custom_list_num";
+						Substitute ( _function; ["[n]"; "_custom_list_num"] ; [¶ ; ""] )
       );
 
       // Each repeating variable content is parsed in order to get our String ready for the
@@ -162,13 +164,13 @@ Case (
         ) = "Let([";
         Substitute (
           _first ;
-          [ "_";  "Let([$_custom_list_n[" & _index & "]=$_custom_list_n[" & _index & "]+1;CLNum=$_custom_list_n[" & _index & "];" &
+          [ "_";  "Let([$_custom_list_n[" & _index & "]=$_custom_list_n[" & _index & "]+1;_custom_list_num=$_custom_list_n[" & _index & "];" &
             Replace ( _function_r; 1; Position ( _function_r; "["; 1; 1 ); "" ) & "&\¶&¶"]
         );
 
         Substitute (
           _first ;
-          [ "_";  "Let([$_custom_list_n[" & _index & "]=$_custom_list_n[" & _index & "]+1;CLNum=$_custom_list_n[" & _index & "]];" &
+          [ "_";  "Let([$_custom_list_n[" & _index & "]=$_custom_list_n[" & _index & "]+1;_custom_list_num=$_custom_list_n[" & _index & "]];" &
             _function_r & ")&\¶&¶"]
         )
       );
