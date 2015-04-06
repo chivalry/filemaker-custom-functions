@@ -6,14 +6,29 @@
 //
 // Author:			Charles Ross, inspired by Alexander Zueiv
 // Version:		1.0 written 15-03-11
+//				1.1 edited 15-04-06; remove underscore as word break character
 //
 // Notes:			See notes for scpm.AssignParams for full discussion.
 //
+//				Underscores, by default, divide words. This function overrides that to allow
+//				underscores within a word without dividing it.
+//
 // Example:
-// scpm.WordsToList( "one two>three;four" ) = "one¶two¶three¶four¶"
+// scpm.WordsToList( "one_two>three;four" ) = "one_two¶three¶four¶"
 
-Case (
-  WordCount ( _words ) = 0;	devp.Nil;
-						LeftWords ( _words; 1 ) & "¶" &
-						  scpm.WordsToList ( RightWords ( _words; WordCount ( _words ) - 1 ) )
+Let (
+  [
+    _sub = "zzzzzWordsToListzzzz"
+  ];
+
+  Case (
+    WordCount ( _words ) = 0;		devp.Nil;
+
+    PatternCount ( _words ; "_" );		Substitute (
+							  scpm.WordsToList ( Substitute ( _words ; "_"; _sub ) ); _sub; "_"
+							);
+
+							LeftWords ( _words; 1 ) & "¶" &
+							  scpm.WordsToList ( RightWords ( _words; WordCount ( _words ) - 1 ) )
+  )
 )
