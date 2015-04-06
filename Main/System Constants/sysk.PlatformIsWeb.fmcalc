@@ -1,0 +1,12 @@
+// sysk.PlatformIsWeb
+//
+// Purpose:		Returns true if the system is running under on CWP or WebDirect.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-04-06
+//
+// Example:
+// // While running the system on CWP or Webdirect...
+// sysk.PlatformIsWeb = 1
+
+sysk.VersionName = sysk.VersionWeb
