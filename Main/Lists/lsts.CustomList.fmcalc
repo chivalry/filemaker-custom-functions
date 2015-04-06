@@ -108,7 +108,7 @@ Case (
         _end
       );
 
-      $null = "\"\"";
+      $_custom_list_nil = Quote ( devp.Nil );
 
       // CustomList has its own recursion model. As CustomList may be involved into the
       // "function" argument, each CustomList expression used is passed to a repeating
@@ -116,13 +116,13 @@ Case (
 
       _index = Let (
         [
-          $CLExeCount = $CLExeCount + 1
+          $_custum_list_execute_count = $_custum_list_execute_count + 1
         ];
 
-        $CLExeCount & PatternCount ( _function ; "CustomList" ) + 1
+        $_custum_list_execute_count & PatternCount ( _function ; "CustomList" ) + 1
       ) ;
 
-      $CLn[ _index ]  = _start - 1;
+      $_custom_list_n[ _index ]  = _start - 1;
 
       _calc = Case (
         _diff ≥ ( _limit - 10 ) ;	( _limit / 10 )  ;
@@ -135,7 +135,7 @@ Case (
 
       _first				= Substitute ( ( 10 ^ _calc ) - 1; 9; "__________" ) ;  
       _x				= Floor ( _diff / _limit );
-      $CLRemainder[ _index ]	= _diff - ( _x * _limit );
+      $_custom_list_remainer[ _index ]	= _diff - ( _x * _limit );
 
       // When the "Function" argument is left empty, CustomList() will return a numeric
       // list based on the range defined
@@ -150,7 +150,7 @@ Case (
       // the "definir" below with your local translation of the "Let" function if you're not
       // using an english version. The use of "Let ([" is recommanded anyway */
 
-      $CLExecute[ _index ] = Case (
+      $_custom_list_execute[ _index ] = Case (
         Left (
           Substitute (
             Lower ( _function );
@@ -162,13 +162,13 @@ Case (
         ) = "Let([";
         Substitute (
           _first ;
-          [ "_";  "Let([$CLn[" & _index & "]=$CLn[" & _index & "]+1;CLNum=$CLn[" & _index & "];" &
+          [ "_";  "Let([$_custom_list_n[" & _index & "]=$_custom_list_n[" & _index & "]+1;CLNum=$_custom_list_n[" & _index & "];" &
             Replace ( _function_r; 1; Position ( _function_r; "["; 1; 1 ); "" ) & "&\¶&¶"]
         );
 
         Substitute (
           _first ;
-          [ "_";  "Let([$CLn[" & _index & "]=$CLn[" & _index & "]+1;CLNum=$CLn[" & _index & "]];" &
+          [ "_";  "Let([$_custom_list_n[" & _index & "]=$_custom_list_n[" & _index & "]+1;CLNum=$_custom_list_n[" & _index & "]];" &
             _function_r & ")&\¶&¶"]
         )
       );
@@ -178,9 +178,9 @@ Case (
   
       _final = Case (
         _x > 0;
-        Substitute ( ( 10 ^ _x ) - 1; 9; "Evaluate ( $CLExecute[" & _index & "] & $null ) & " )
+        Substitute ( ( 10 ^ _x ) - 1; 9; "Evaluate ( $_custom_list_execute[" & _index & "] & $_custom_list_nil ) & " )
       ) &
-      "Evaluate( LeftValues ( $CLExecute[" & _index & "] ; $CLRemainder[" & _index & "]  ) & $null ) & " & $null;
+      "Evaluate( LeftValues ( $_custom_list_execute[" & _index & "] ; $_custom_list_remainer[" & _index & "]  ) & $_custom_list_nil ) & " & $_custom_list_nil;
 
       // The Final variable can now be evaluated to get our List
 
@@ -197,7 +197,7 @@ Case (
         )
       ) ;
 
-      $CLExecute[ _index ]  = "" 
+      $_custom_list_execute[ _index ]  = "" 
 
       // ----------- FUNCTION RESULT BELOW -----------
     ];
