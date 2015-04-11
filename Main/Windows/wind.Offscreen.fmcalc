@@ -1,0 +1,18 @@
+// wind.Offscreen
+//
+// Purpose:		Returns a large negative number for hiding offscreen utility windows, overriding this for
+//				developers.
+//
+// Requirements:	devp.IsDeveloper
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-04-09
+//
+// Example:
+// // Assuming the current user is not a developer...
+// wind.Offscreen = -9000
+
+Case (
+  devp.IsDeveloper;	0;
+				-9000
+)

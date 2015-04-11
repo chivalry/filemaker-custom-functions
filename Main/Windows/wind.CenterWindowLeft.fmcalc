@@ -1,0 +1,17 @@
+// wind.CenterWindowLeft ( _parent_left; _parent_width )
+//
+// Purpose:		Returns the left coordinate that the current window should have to center within a
+//				parent window of the given dimentions.
+//
+// Parameters:		_parent_left:	The left coordinate of the parent window.
+//				_parent_width:	The width of the parent window.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-04-09
+//
+// Todo:			Provide examples.
+//
+// Example:
+// 
+
+Max( ( ( _parent_width - Get( WindowHeight ) ) / 2 ) + _parent_left; 0 )

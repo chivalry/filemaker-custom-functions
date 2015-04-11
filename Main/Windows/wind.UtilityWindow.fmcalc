@@ -1,0 +1,18 @@
+// wind.UtilityWindow ( _id )
+//
+// Purpose:		Returns a window name that can be referred to later, often with a Close Window step.
+//
+// Parameters:		_id:	The identifier to refer to the window with when a script works with multiple utility
+//					windows.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-04-09
+//
+// Example:
+// wind.UtilityWindow ( "entity" ) = "utility_window_entity"
+
+"utility_window" &
+Case(
+  IsEmpty( _id );		devp.Nil;
+  "_" & _id
+)
