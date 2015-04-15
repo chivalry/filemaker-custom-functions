@@ -1,0 +1,18 @@
+// date.FirstDayThisWeek ( _begin_date; _first_day )
+//
+// Purpose:		Return the first day of the week given the given date and a week starting on the
+//				specified first day.
+//
+// Parameters:		_begin_date:	The date for which to find the beginning of the week.
+//				_first_day:		The weekday to use as the first day of the week.
+//
+// Author:			Matt Wills, Virtual Vermont
+// Version:		1.0 written 15-04-14
+//
+// Notes:			Can use the date.Sundday through date.Saturday functions as constantes for the
+//				_first_day parameter.
+//
+// Example:
+// date.FirstDayThisWeek ( Date ( 3; 16; 2015 ) ; date.Monday ) = Date ( 3; 13; 2015 )
+
+_begin_date - ( DayOfWeek ( _begin_date ) - ( _first_day + 1 ) )

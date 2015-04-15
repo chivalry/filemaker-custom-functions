@@ -1,0 +1,2 @@
+"An error occurred.¶Code: " & _error_number & "; Description: " & errn.ErrorString ( "fmp"; _error_number ) &
+"¶¶Please report to the developer the above description and as much detail about the actions you were performing immediately prior to this error appearing."
