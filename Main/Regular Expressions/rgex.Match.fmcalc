@@ -1,4 +1,4 @@
-// rgex.RegexMatch ( _string; _pattern )
+// rgex.Match ( _string; _pattern )
 //
 // Purpose:		Returns true if the pattern is contained in the string.
 //
@@ -15,15 +15,15 @@
 // Todo:			
 //
 // Example:
-// ( rgex.PatternFound ( "foo"; "foo" ) = 1 )
+// ( rgex.Match ( "foo"; "foo" ) = 1 )
 //  and
-// ( rgex.PatternFound ( "bar"; "foo" ) = 0 )
+// ( rgex.Match ( "bar"; "foo" ) = 0 )
 
 Case (
   plug.PluginIsReady ( "ScriptMaster" );
   Let (
     [
-      _signature = "rgex_RegexMatch( string ; pattern )";
+      _signature = "rgex_Match( string ; pattern )";
 
       // Register the function if it hasn't been already.
       _ = Case (
@@ -46,7 +46,7 @@ Case (
         )
       );
 
-      _calc = "rgex_RegexMatch ( " &
+      _calc = "rgex_Match ( " &
         Quote ( _string ) & "; " &
         Quote ( _pattern ) & " )"
     ];
