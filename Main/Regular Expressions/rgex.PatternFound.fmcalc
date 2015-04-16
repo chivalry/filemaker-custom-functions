@@ -1,0 +1,56 @@
+// rgex.RegexMatch ( _string; _pattern )
+//
+// Purpose:		Returns true if the pattern is contained in the string.
+//
+// Parameters:		_string:	The string to search for the pattern in.
+//				_pattern:	The pattern to search for.
+//
+// Requirements: 	The ScriptMaster plugin, written with version 4.32.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-04-16
+//
+// Notes:			
+//
+// Todo:			
+//
+// Example:
+// ( rgex.PatternFound ( "foo"; "foo" ) = 1 )
+//  and
+// ( rgex.PatternFound ( "bar"; "foo" ) = 0 )
+
+Case (
+  plug.PluginIsReady ( "ScriptMaster" );
+  Let (
+    [
+      _signature = "rgex_RegexMatch( string ; pattern )";
+
+      // Register the function if it hasn't been already.
+      _ = Case (
+        not PatternCount ( SMGetRegisteredModules ; _signature );
+        Let (
+          [
+            _code =
+              "import java.util.regex.*;¶" &
+              "¶" &
+              "Pattern pat = Pattern.compile( pattern,¶" &
+              "  Pattern.CASE_INSENSITIVE¶" &
+              "    | Pattern.MULTILINE¶" &
+              "    | Pattern.DOTALL );¶" &
+              "Matcher matcher = pat.matcher( string );¶" &
+              "¶" &
+              "return matcher.find();"
+          ];
+
+          RegisterGroovy ( _signature; _code )
+        )
+      );
+
+      _calc = "rgex_RegexMatch ( " &
+        Quote ( _string ) & "; " &
+        Quote ( _pattern ) & " )"
+    ];
+
+    Evaluate ( _calc )
+  )
+)
