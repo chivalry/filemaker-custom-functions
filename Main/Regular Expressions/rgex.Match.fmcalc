@@ -33,13 +33,7 @@ Case (
             _code =
               "import java.util.regex.*;¶" &
               "¶" &
-              "Pattern pat = Pattern.compile( pattern,¶" &
-              "  Pattern.CASE_INSENSITIVE¶" &
-              "    | Pattern.MULTILINE¶" &
-              "    | Pattern.DOTALL );¶" &
-              "Matcher matcher = pat.matcher( string );¶" &
-              "¶" &
-              "return matcher.find();"
+              "return Pattern.matches( pattern, string );"
           ];
 
           RegisterGroovy ( _signature; _code )
