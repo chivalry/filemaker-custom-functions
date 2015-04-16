@@ -3,15 +3,14 @@
 // Purpose:	Returns True if the named plugin is installed and enabled.
 // Parameters:	_plugin_name:	The name of the plugin to check for
 //
-// Requirements: requirements
-//
 // Author:		Charles Ross
 // Version:	1.0 written 15-03-08
 //
 // Todo:		See if there's a way to make this function compatible with 11-.
 //
 // Example:
-// sample = result
+// // Assuming ScriptMaster is installed and enabled...
+// plug.PluginIsReady ( "360Works ScriptMaster" ) = 1
 
 Let(
   [
