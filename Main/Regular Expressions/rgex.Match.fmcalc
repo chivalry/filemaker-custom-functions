@@ -15,25 +15,33 @@
 // Todo:			
 //
 // Example:
-// ( rgex.Match ( "foo"; "foo" ) = 1 )
-//  and
-// ( rgex.Match ( "bar"; "foo" ) = 0 )
+// 		rgex.Match ( "foo";	"foo" )
+// and not	rgex.Match ( "bar";	"foo" )
+// and 		rgex.Match ( "My email address is chivalry@mac.com.";
+//			  "(?i)\b[\w._%+-]+@[a-z\d.-]+\.[a-z]{2,4}\b" )
 
 Case (
   plug.PluginIsReady ( "ScriptMaster" );
   Let (
     [
-      _signature = "rgex_Match( string ; pattern )";
+      _debug = False; // Re-register each time when debugging.
+
+      _signature = "rgex_Match( source ; regex )";
 
       // Register the function if it hasn't been already.
       _ = Case (
-        not PatternCount ( SMGetRegisteredModules ; _signature );
+        not PatternCount ( SMGetRegisteredModules ; _signature ) or _debug;
         Let (
           [
-            _code =
-              "import java.util.regex.*;¶" &
-              "¶" &
-              "return Pattern.matches( pattern, string );"
+            _code = "
+/*lang=groovy*/¶
+import java.util.regex.*¶
+¶
+Pattern pattern = Pattern.compile( regex );¶
+Matcher matcher = pattern.matcher( source );¶
+¶
+return matcher.find();
+"
           ];
 
           RegisterGroovy ( _signature; _code )
@@ -41,8 +49,8 @@ Case (
       );
 
       _calc = "rgex_Match ( " &
-        Quote ( _string ) & "; " &
-        Quote ( _pattern ) & " )"
+        Quote ( _source ) & "; " &
+        Quote ( _regex ) & " )"
     ];
 
     Evaluate ( _calc )
