@@ -5,8 +5,6 @@
 //
 // Parameters:		_list:	The list of dates to convert.
 //
-// Requirements: 	requirements
-//
 // Author:			Charles Ross
 // Version:		1.0 written 15-03-08
 //
@@ -16,31 +14,16 @@
 //				If the current item is one more than the last item, make the current item the last item
 //					and move forward by one item in the list.
 //				If the current item is more than one more than the last item, close the range with the
-//					last item create the start of a new range
-//
-// Todo:			See if this can be simplified using the example that's commented out.
+//					last item create the start of a new range.
 //
 // Example:
-// sample = result
+// See rang.ListToRanges.
 
 Let (
   [
     _last_item = GetAsDate ( GetValue ( _list; _i ) );
     _curr_item = GetAsDate ( GetValue ( _list; _i + 1 ) );
     _diff = _curr_item - _last_item;
-
-/* I think this simplified version here is the same as the case statement that is enabled, but it isn't returning
-    the same result. Need to investigate.
-    $_list_to_ranges_result = $_list_to_ranges_result & Case(
-      ValueCount ( _list ) = _i;
-      _last_item & "¶";
-
-      _diff = 1;
-      lsts.ListToRanges_ ( _list; _i + 1 );
-
-      _last_item & "¶" & _curr_item & lsts.RangeSeparator & lsts.ListToRanges_ ( _list; _i + 1 )
-    )
-*/
 
     _ = Case (
       ValueCount ( _list ) = _i;
@@ -57,10 +40,10 @@ Let (
           )
         ];
 
-        ""
+        devp.Nil
       )
     )
   ];
 
-  ""
+  devp.Nil
 )
