@@ -1,0 +1,81 @@
+// devp.DataType ( _value )
+//
+// Purpose:		Returns the data type for the passed value with the assumption that if a value is
+//				converted to a datatype and then to text and remains the same as the original,
+//				that is the data type for the value.
+//
+// Parameters:		_value:	The value to check the data type for.
+//
+// Requirements: 	requirements
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-04-19
+//
+// Notes:			Checks for data types in the following order: boolean, number, timestamp, date, time,
+//				and text. The default is text.
+//
+//				Some wrangling of dates and times is necessary. A timestamp that is converted to text
+//				seems to use the format "m/d/yyyy h:m:s p", but seconds is hidden if it's zero. So for
+//				dates, times and timestamps, we have to convert the test text into this format before
+//				testing it.
+//
+// Todo:			To dos
+//
+// Example:
+// devp.DataType ( "text" ) = devp.DataTypeText
+//   and devp.DataType ( "123" ) = devp.DataTypeNumber
+//   and devp.DataType ( "1/1/15" ) = devp.DataTypeDate
+//   and devp.DataType ( "1/1/15 1:01:01" ) = devp.DataTypeTimestamp
+//   and devp.DataType ( "1:01:01" ) = devp.DataTypeTime
+//   and devp.DataType ( True ) = devp.DataTypeBoolean
+
+Let (
+  [
+    // Get possible individual timestamp fields.
+    _timestamp	= GetAsTimestamp ( _value );
+    _month		= Month ( _timestamp );
+    _day		= Day ( _timestamp );
+    _year		= Year ( _timestamp );
+    _hour		= Hour ( _timestamp );
+    _minute	= Minute ( _timestamp );
+    _second	= Seconds ( _timestamp );
+
+    _standard_date = _month & "/" & _day & "/" & _year;
+
+    _minute_field	= padd.PadZeros ( _minute; 2 );
+    _seconds_field	= Case (
+      _second = 0;	devp.Nil;
+				":" & padd.PadZeros ( _second; 2 )
+    );
+    _meridian = Case (
+      _hour ≤ 12;		"AM";
+				"PM"
+    );
+
+    _hour = Mod ( _hour; 12 );
+
+    _standard_time = _hour & ":" & _minute_field & _seconds_field;
+    _standard_timestamp = _standard_date & " " & _standard_time & " " & _meridian;
+
+    _result = Case (
+      GetAsText ( GetAsBoolean ( _value ) ) = _value;
+      devp.DataTypeBoolean;
+
+      GetAsText ( GetAsNumber ( _value ) ) = _value;
+      devp.DataTypeNumber;
+
+      GetAsText ( _timestamp ) = _standard_timestamp;
+      devp.DataTypeTimestamp;
+
+      GetAsText ( GetAsDate ( _value ) ) = _standard_date;
+      devp.DataTypeDate;
+
+      GetAsText ( GetAsTime ( _value ) ) = _standard_time;
+      devp.DataTypeTime;
+
+      devp.DataTypeText
+    )
+  ];
+
+  _result
+)
