@@ -1,0 +1,33 @@
+// plug.IsReady ( _name )
+//
+// Purpose:		Returns True if the named plugin is installed and enabled.
+//
+// Parameters:		_plugin_name:	The name of the plugin to check for
+//
+// Requirements:	plug.Attribute
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-08
+//				1.1 edited 15-04-19 abstracted out plug.Attribute.
+//
+// Todo:			See if there's a way to make this function compatible with 11-.
+//
+// Example:
+// // Assuming ScriptMaster is installed and enabled...
+// plug.IsReady ( "360Works ScriptMaster" ) = 1
+
+Let(
+  [
+    _plugins = Get ( InstalledFMPlugins );
+
+    _installed = PatternCount (
+      _plugins;
+      _name
+    );
+
+    // No need to continue if the plugin is not installed.
+    _result = _installed and ( plug.Attribute ( _name; 3 ) = "Enabled" )
+  ];
+
+  _result
+)
