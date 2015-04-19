@@ -5,10 +5,12 @@
 // Parameters:		_string:	The string to search for the pattern in.
 //				_pattern:	The pattern to search for.
 //
-// Requirements: 	The ScriptMaster plugin, written with version 4.32.
+// Requirements: 	plug.RegisterScriptMasterFunction
+//				The ScriptMaster plugin, written with version 4.32.
 //
 // Author:			Charles Ross
 // Version:		1.0 written 15-04-16
+//				1.1 edited to use plug.RegisterScriptMasterFunction.
 //
 // Notes:			
 //
@@ -20,20 +22,10 @@
 // and 		rgex.Match ( "My email address is chivalry@mac.com.";
 //			  "(?i)\b[\w._%+-]+@[a-z\d.-]+\.[a-z]{2,4}\b" )
 
-Case (
-  plug.PluginIsReady ( "ScriptMaster" );
-  Let (
-    [
-      _debug = False; // Re-register each time when debugging.
-
-      _signature = "rgex_Match( source ; regex )";
-
-      // Register the function if it hasn't been already.
-      _ = Case (
-        not PatternCount ( SMGetRegisteredModules ; _signature ) or _debug;
-        Let (
-          [
-            _code = "
+Let (
+  [
+    _signature = "rgex_Match( source ; regex )";
+    _code = "
 /*lang=groovy*/¶
 import java.util.regex.*¶
 ¶
@@ -41,18 +33,16 @@ Pattern pattern = Pattern.compile( regex );¶
 Matcher matcher = pattern.matcher( source );¶
 ¶
 return matcher.find();
-"
-          ];
+";
+    _eval = Substitute (
+      _signature;
+      [ "source";	Quote ( _source )	];
+      [ "regex";	Quote ( _regex )	]
+    )
+  ];
 
-          RegisterGroovy ( _signature; _code )
-        )
-      );
-
-      _calc = "rgex_Match ( " &
-        Quote ( _source ) & "; " &
-        Quote ( _regex ) & " )"
-    ];
-
-    Evaluate ( _calc )
+  Case (
+    plug.RegisterScriptMasterFunction ( _signature; _code; False );
+    Evaluate ( _eval )
   )
 )

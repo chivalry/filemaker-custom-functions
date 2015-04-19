@@ -10,13 +10,10 @@
 //
 // Author:			Charles Ross
 // Version:		1.0 written 15-03-26
+//				1.1 edited 15-04-19 to work with plug.RegisterScriptMasterFunction.
 //
 // Notes:			Only ScriptMaster is currently supported. The Groovy code is from the ScriptMaster
 //				sample file.
-//
-//				This is the first test of a technique I'm trying, using a custom function as a wrapper for
-//				a ScriptMaster registered function, registering the function and then immediately
-//				using it within an Evaluate call. 
 //
 //				The ScriptMaster function needs to be called from within Evaluate because the first time
 //				this custom function is saved it hasn't been executed, so the ScriptMaster function
@@ -30,32 +27,22 @@
 // // Assuming that the "Test" script exists...
 // prfs.PerformScriptWithParameter ( "Test"; "param" ) = 1
 
-Case (
-  plug.PluginIsReady ( "ScriptMaster" );
-  Let (
-    [
-      _signature = "prfs_PerformScript( tableName ; scriptName ; param )";
-
-      // Register the function if it hasn't been already.
-      _ = Case (
-        not PatternCount ( SMGetRegisteredModules ; _signature );
-        Let (
-          [
-            _code =
-              "fmpro.performScript( tableName, scriptName, param );¶" &
-              "return true;"
-          ];
-
-          RegisterGroovy ( _signature; _code )
-        )
-      );
-
-      _calc = "prfs_PerformScript ( " &
+Let (
+  [
+    _signature = "prfs_PerformScript( tableName ; scriptName ; param )";
+    _code = "
+/*lang=groovy*/¶
+fmpro.performScript( tableName, scriptName, param );¶
+return true;
+";
+    _eval = "prfs_PerformScript ( " &
         Quote ( Get ( FileName ) ) & "; " &
         Quote ( _script ) & "; " &
         Quote ( _param ) & " )"
-    ];
+  ];
 
-    Evaluate ( _calc )
+  Case (
+    plug.RegisterScriptMasterFunction ( _signature; _code; False );
+    Evaluate ( _eval )
   )
 )
