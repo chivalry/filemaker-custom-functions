@@ -167,9 +167,13 @@ Case (
       );
       _starts_with_let = txtp.StartsWith ( _normalized_fn ; "Let([" );
 
-      _base_fn = "Let([$_custom_list_n[" & _index & "]=$_custom_list_n[" & _index & "]+1;" &
-        "_custom_list_num=$_custom_list_n[" & _index & "]";
+      _base_fn = "
+        Let (
+          [
+            $_custom_list_n[<<index>>] = $_custom_list_n[<<index>>] + 1;" & "
+            _custom_list_num = $_custom_list_n[<<index>>]";
 
+      _base_fn = Substitute ( _base_fn; "<<index>>"; _index );
       _base_fn = _base_fn & Case (
         _starts_with_let;	";";
 					"];"
@@ -185,11 +189,21 @@ Case (
       // Final compilation starts here. The reminder part above each 1,700 values is
       // treated now.
   
+      _eval_1 = "
+        Evaluate ( $_custom_list_execute[<<index>>] & $_custom_list_nil ) & ";
+      _eval_1 = Substitute ( _eval_1; "<<index>>"; _index );
+
+      _eval_2 = "
+        Evaluate(
+          LeftValues ( $_custom_list_execute[<<index>>] ; $_custom_list_remainer[<<index>>]  ) &
+            $_custom_list_nil
+        ) & " & $_custom_list_nil;
+        _eval_2 = Substitute ( _eval_2; "<<index>>"; _index );
+
       _final = Case (
         _x > 0;
-        Substitute ( ( 10 ^ _x ) - 1; 9; "Evaluate ( $_custom_list_execute[" & _index & "] & $_custom_list_nil ) & " )
-      ) &
-      "Evaluate( LeftValues ( $_custom_list_execute[" & _index & "] ; $_custom_list_remainer[" & _index & "]  ) & $_custom_list_nil ) & " & $_custom_list_nil;
+        Substitute ( ( 10 ^ _x ) - 1; 9; _eval_1 )
+      ) & _eval_2;
 
       // The Final variable can now be evaluated to get our List
 
