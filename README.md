@@ -101,7 +101,7 @@ Each custom function starts with a preamble that looks like the following:
 The template is what would normally show between FileMaker's parameter list and the custom
 function code. For example, if there was a function actually called Template and it
 actually took two parameters as above, the template line would have `Template ( _param_1 )`.
-If there's no parameters for the function, the template should not have parenthesis.
+If there're no parameters for the function, the template should not have parenthesis.
 
 The example portion should be a sort of unit test for the function, something that, once
 the custom function has been defined, would allow a developer to copy and paste into the
