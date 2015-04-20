@@ -1,4 +1,4 @@
-// padd.Pad ( _text; _char; _counter; _side )
+// padd.Spaces ( _text; _space_count )
 //
 // Purpose:		Pads the given string with the specified number of spaces.
 //

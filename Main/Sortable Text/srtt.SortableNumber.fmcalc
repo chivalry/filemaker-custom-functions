@@ -1,15 +1,15 @@
 // srtt.SortableNumber ( _number )
 //
-// Purpose:		Returns a textual version of a number that will sort property as text.
+// Purpose:   Returns a textual version of a number that will sort property as text.
 //
-// Parameters:		_number:	The number to convert.
+// Parameters:    _number:  The number to convert.
 //
-// Requirements:	padd.PadZeros
+// Requirements:  padd.Zeros
 //
-// Author:			Charles Ross
-// Version:		1.0 written 15-03-11
+// Author:      Charles Ross
+// Version:   1.0 written 15-03-11
 //
 // Example:
 // srtt.SortableNumber ( 123.456 ) = "00000001234560000000"
 
-Right( padd.PadZeros( _number * ( 10 ^ 10 ); 20 ); 20 )
+Right( padd.Zeros( _number * ( 10 ^ 10 ); 20 ); 20 )

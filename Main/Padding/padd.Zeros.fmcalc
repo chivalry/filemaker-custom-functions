@@ -1,4 +1,4 @@
-// padd.PaddZeroes ( _text; _length )
+// padd.Zeroes ( _text; _length )
 //
 // Purpose:		Pads zeroes to the limit that the returned text is of the length specified.
 //
