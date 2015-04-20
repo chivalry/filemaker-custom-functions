@@ -5,7 +5,7 @@
 // Parameters:		_weights:	The weights that each member of the values list should have
 //				_values:	The values to provide a weighted average of.
 //
-// Requirements: 	lsts.Map2
+// Requirements: 	lsts.CustomList
 //				lsts.Sum
 //
 // Author:			Charles Ross
@@ -22,17 +22,20 @@
 
 Let (
   [
+    _highest_count = Max ( ValueCount ( _weights ); ValueCount ( _values ) );
+
     // Create a list that multiplies each weight by its matching value.
-    _products = lsts.Map2 (
-      _weights;
-      _values;
-      "%1 * %2";
-      List( devp.DataTypeNumber; devp.DataTypeNumber );
-      devp.DataTypeNumber
-    );
+    $_weighted_average_weights	= _weights;
+    $_weighted_average_values		= _values;
+
+    _code = "GetValue ( $_weighted_average_weights; %n ) * GetValue ( $_weighted_average_values; %n )";
+    _products = lsts.CustomList ( 1; _highest_count; _code );
 
     _product_sum	= lsts.Sum( _products );
     _weight_sum		= lsts.Sum( _weights );
+
+    $_weighted_average_weights	= devp.Nil;
+    $_weighted_average_values		= devp.Nil;
 
     _result = _product_sum / _weight_sum
   ];
