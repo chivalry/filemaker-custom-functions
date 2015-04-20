@@ -23,7 +23,7 @@ community (in no particular order):
 
 - [Matt Petrowski](http://www.filemakermagazine.com)
 - [Jeremy Bante](https://twitter.com/jbante)
-- (Winfried Huslik)[https://twitter.com/whuslik]
+- [Winfried Huslik](https://twitter.com/whuslik)
 - Matt Wills
 - [Kevin Frank](http://www.kevinfrank.com/index.html)
 - [Tom Robinson](http://www.tomrobinson.co.nz)
