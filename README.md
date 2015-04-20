@@ -12,6 +12,36 @@ wrote without an attribution to you, please open an issue so I can fix that, or,
 text format is available for it, fork the repository, make your change and submit a pull
 request.
 
+## Acknowledgements
+
+Many of these functions are from sources other than myself. I've tried to include attributions when I knew who originally wrote them, but this information is sometimes missing. If you know who wrote a particular function for which an attribution is missing (see the issues for some authors that I'm looking for), please let me know. Among the FileMaker developers that I can definitively thank for their contributions to the FileMaker community (in no particular order):
+
+- Matt Petrowski
+- Jeremy Bante
+- Winfried Huslik
+- Matt Wills
+- Kevin Frank
+- Tom Robinson
+- Jesse Antunes
+- Agnès Barouh
+- Arnold Kegebein
+- Geoff Coffey
+- Andrew Persons
+- Theo Gantos
+- Mikhail Edoshin
+- The Shadow
+- Vaughan Bromfield
+- Bob Weaver
+- LaRetta
+- Fabrice Nordman
+- Joe Scarpetta
+- James Scarpetta
+- Will M. Baker
+- Brad Lowry
+- Alexander Zueiv
+- Jesse Swensen
+- Debi Fuchs
+
 ## Formats
 
 All of the custom functions can be found in three places:
