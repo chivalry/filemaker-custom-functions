@@ -14,33 +14,40 @@ request.
 
 ## Acknowledgements
 
-Many of these functions are from sources other than myself. I've tried to include attributions when I knew who originally wrote them, but this information is sometimes missing. If you know who wrote a particular function for which an attribution is missing (see the issues for some authors that I'm looking for), please let me know. Among the FileMaker developers that I can definitively thank for their contributions to the FileMaker community (in no particular order):
+Many of these functions are from sources other than myself. I've tried to include
+attributions when I knew who originally wrote them, but this information is sometimes
+missing. If you know who wrote a particular function for which an attribution is missing
+(see the issues for some authors that I'm looking for), please let me know. Among the
+FileMaker developers that I can definitively thank for their contributions to the FileMaker
+community (in no particular order):
 
-- Matt Petrowski
-- Jeremy Bante
-- Winfried Huslik
+- [Matt Petrowski](http://www.filemakermagazine.com)
+- [Jeremy Bante](https://twitter.com/jbante)
+- (Winfried Huslik)[https://twitter.com/whuslik]
 - Matt Wills
-- Kevin Frank
-- Tom Robinson
-- Jesse Antunes
-- Agnès Barouh
-- Arnold Kegebein
-- Geoff Coffey
-- Andrew Persons
-- Theo Gantos
-- Mikhail Edoshin
-- The Shadow
+- [Kevin Frank](http://www.kevinfrank.com/index.html)
+- [Tom Robinson](http://www.tomrobinson.co.nz)
+- [Jesse Antunes](http://sixfriedrice.com/wp/about-sfr/)
+- [Agnès Barouh](mailto:barouh.agnes@wanadoo.fr)
+- [Arnold Kegebein](http://www.kegebein.net/blog/about/)
+- [Geoff Coffey](http://sixfriedrice.com/wp/about-sfr/)
+- [Andrew Persons](http://www.excelisys.com/our-team-custom-database-consultants.php)
+- [Theo Gantos](https://twitter.com/tgantos)
+- [Mikhail Edoshin](http://mikhailedoshin.com)
+- [The Shadow](http://www.fmfunctions.com/members_display_record.php?memberId=34)
 - Vaughan Bromfield
-- Bob Weaver
-- LaRetta
-- Fabrice Nordman
-- Joe Scarpetta
-- James Scarpetta
-- Will M. Baker
+- [Bob Weaver](http://fmforums.com/profile/53726-bobweaver/)
+- [LaRetta](http://fmforums.com/profile/59345-laretta/)
+- [Fabrice Nordman](https://twitter.com/FabriceN)
+- [Joe Scarpetta](http://scarpettagroup.com/filemaker-development-about/)
+- [James Scarpetta](http://scarpettagroup.com/filemaker-development-about/)
+- [Will M. Baker](https://www.beezwax.net/beez/100)
 - Brad Lowry
 - Alexander Zueiv
 - Jesse Swensen
-- Debi Fuchs
+- [Debi Fuchs](http://www.aptworks.com/welcome.html)
+
+For those of you above which I haven't yet linked to, or if there's a different URL you'd like a link to, send me a URL that you would like attached to your name.
 
 ## Formats
 
