@@ -54,8 +54,8 @@ Let (
 
     _hour = Mod ( _hour; 12 );
 
-    _standard_time = _hour & ":" & _minute_field & _seconds_field;
-    _standard_timestamp = _standard_date & " " & _standard_time & " " & _meridian;
+    _standard_time = _hour & ":" & _minute_field & _seconds_field & " " & _meridian;
+    _standard_timestamp = _standard_date & " " & _standard_time;
 
     _result = Case (
       GetAsText ( GetAsBoolean ( _value ) ) = _value;

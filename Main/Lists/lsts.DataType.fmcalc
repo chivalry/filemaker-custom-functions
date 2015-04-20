@@ -1,0 +1,74 @@
+// lsts.DataTypes ( _list )
+//
+// Purpose:		Return what seems to be the data type of all of the members of the list.
+//
+// Parameters:		_list:	The list to check the data types for.
+//
+// Requirements: 	requirements
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-04-19
+//
+// Notes:			Possible data types, in the order checked, include, in the order checked, boolean,
+//				number, timestamp, date, time, and text. All list members must be the same type for
+//				this to work, and if that's not the case, a data type of text is returned.
+//
+// Todo:			To dos
+//
+// Example:
+// Let (
+//   [
+//     _time	= Get ( CurrentTime );
+//     _date	= Get ( CurrentDate );
+//     _ts	= Get ( CurrentTimeStamp );
+// 
+//     _mixed_list	= List ( 5; "text"; True; Get ( CurrentDate ) );
+//     _text_list	= List ( "one"; "two"; "three" );
+//     _bool_list	= List ( True; False; 0; 1 );
+//     _num_list	= List ( Pi; 1; 3 );
+//     _time_list	= List ( _time; _time - Seconds ( _time ); _time + 3600 );
+//     _date_list	= List ( _date; _date + 1; _date -10 );
+//     _ts_list		= List ( _ts; _ts - Seconds ( _ts ); _ts + 3600 );
+// 
+//     _result =   lsts.DataType ( _mixed_list ) = devp.DataTypeText
+//       and lsts.DataType ( _text_list ) = devp.DataTypeText
+//       and lsts.DataType ( _bool_list ) = devp.DataTypeBoolean
+//       and lsts.DataType ( _num_list ) = devp.DataTypeNumber
+//       and lsts.DataType ( _time_list ) = devp.DataTypeTime
+//       and lsts.DataType ( _date_list ) = devp.DataTypeDate
+//       and lsts.DataType ( _ts_list ) = devp.DataTypeTimestamp
+//   ];
+// 
+//   _result
+// )
+
+Case (
+  ValueCount ( _list ) = 0;
+  devp.Nil;
+
+  Let (
+    [
+      $_data_type_cf_list = _list;
+      _code = "devp.DataType ( GetValue ( $_data_type_cf_list; %n ) )";
+
+      _type_list = lsts.CustomList ( 1; ValueCount ( $_data_type_cf_list ); _code );
+      _type_list = lsts.RemoveDuplicates ( _type_list );
+
+      _result = Case (
+        ValueCount ( _type_list ) = 1;
+        GetValue ( _type_list; 1 );
+
+        ( ValueCount ( _type_list ) = 2 )
+          and lsts.IsMember ( devp.DataTypeNumber; _type_list )
+          and lsts.IsMember ( devp.DataTypeBoolean; _type_list );
+        devp.DataTypeNumber;
+
+        devp.DataTypeText
+      );
+
+      $_data_type_cf_list = devp.Nil
+    ];
+
+    _result
+  )
+)
