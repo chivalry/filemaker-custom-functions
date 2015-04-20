@@ -49,6 +49,8 @@ function headers named like the following:
     devp_____ Developer _______________________________________________
     lsts_____ Lists ___________________________________________________
 
+Divider functions also contain comments on the purpose of the group.
+
 ### Normal Functions
 
 Normal custom functions start with the four-letter prefix, followed by a dot, and then a
