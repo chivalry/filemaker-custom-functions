@@ -18,7 +18,7 @@ All of the custom functions can be found in three places:
 
 1. Within a FileMaker 13 file, `Main.fmp12`. This is the golden master and the only place a standard function is guaranteed to be.
 2. Within a FileMaker 11 file, `Main.fp7`. Incompatible custom functions that take advantage of FileMaker 12+ features, such as `ExecuteSQL`, will not be included here. Functions here may not yet have been updated to the latest version, but exist to ease importing into FileMaker systems based on versions 11-. Eventually it may cease to receive any updates.
-3. Within a text file in a parent folder named for the functions group, such as `Main/Lists/lsts.First.fmcalc`. The `fmcalc` extension will allow the proper syntax highlighting within vim if the [filemaker.vim](https://github.com/chivalry/filemaker.vim) plugin is installed.
+3. Within a text file in a parent folder named for the functions group, such as `Main/Lists/lsts.First.fmcalc`. The `fmcalc` extension will allow the proper syntax highlighting within vim if the [filemaker.vim](https://github.com/chivalry/filemaker.vim) plugin is installed. These files are included for two reasons: to show line by line differences as functions are updated and provide the ability to retrieve the code for a single function. Note that if you copy and paste the code from a text file, you'll want to make sure you also manualy create any custom functions it depends upon.
 
 There's one more file included for historical reference only, `Archive.fmp12`,
 which contains the custom functions I had in their original format before I began editing
