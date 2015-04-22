@@ -1,0 +1,22 @@
+// psos.TurnOverrideOff
+//
+// Purpose:		Turns overridding of performing scripts on server off.
+//
+// Requirements: 	Makes use of $$_OVERRIDE_PSOS global variable
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-04-10
+//
+// Notes:			The developer may override performing scripts on the server in order to step through a
+//				script using the debugger. In production this should never return true.
+//
+// Example:
+// psos.TurnOverrideOff and ( not psos.IsOverridden )
+
+Let (
+  [
+    $$_OVERRIDE_PSOS = devp.Nil
+  ];
+
+  devp.Nil
+)

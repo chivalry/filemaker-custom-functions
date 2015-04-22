@@ -1,0 +1,28 @@
+// psos.ShouldPerformOnServer
+//
+// Purpose:		Returns true if a script intended to run on the server can do so. Allows a script to
+//				execute locally if needed or desired.
+//
+// Parameters:		_param:	description
+//
+// Requirements: 	sysk.PlatformIsServer
+//				psos.IsOverridden
+//				sysk.MultiUserStateClient
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-04-22
+//
+// Notes:			Three things must be true for this function to return true overall:
+//				- The script this is called from is not currently running on the server
+//				- The developer hasn't overridden performing scripts on the server
+//				- The system is running as a client of a server
+//
+// Example:
+// // When all three conditions are true...
+// psos.ShouldPerformOnServer = 1
+
+( not sysk.PlatformIsServer )
+  and
+( not psos.IsOverridden )
+  and
+( Get ( MultiUserState ) = sysk.MultiUserStateClient )

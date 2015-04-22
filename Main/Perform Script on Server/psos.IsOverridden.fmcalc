@@ -1,0 +1,18 @@
+// psos.IsOverridden
+//
+// Purpose:		Provides a syntax checkable way to see if performing scripts on the server should be
+//				overridden.
+//
+// Requirements: 	Makes use of $$_OVERRIDE_PSOS global variable
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-04-10
+//
+// Notes:			The developer may override performing scripts on the server in order to step through a
+//				script using the debugger. In production this should never return true.
+//
+// Example:
+// // If the developer has overridden performing scripts on the server...
+// psos.IsOverridden = 1
+
+GetAsBoolean ( $$_OVERRIDE_PSOS )
