@@ -1,0 +1,25 @@
+// psos.ConditionalOverride
+//
+// Purpose:		Allows the developer to turn off performing scripts on the server by holding down the
+//				shift key.
+//
+// Requirements: 	devp.IsDeveloper
+//				mkey.ModifierKeyIsActive
+//				mkey.ModifierShift
+//				psos.TurnOverrideOn
+//				psos.TurnOverrideOff
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-04-22
+//
+// Example:
+// // Assuming a developer is logged in and holds down the shift key...
+// psos.ConditionalOverride and psos.IsOverridden
+
+Case (
+  devp.IsDeveloper
+    and mkey.ModifierKeyIsActive ( mkey.ModifierShift );
+  psos.TurnOverrideOn;
+
+  psos.TurnOverrideOff
+)
