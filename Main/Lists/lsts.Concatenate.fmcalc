@@ -22,7 +22,7 @@
 Case (
   // Recursive exit condition
   ( ValueCount ( _list_1 ) = 0 )
-    and ( ValueCount ( _list_2 ) = 0 );		devp.Null;
+    and ( ValueCount ( _list_2 ) = 0 );		devp.Nil;
 
   Let(
     [
