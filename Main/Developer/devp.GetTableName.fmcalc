@@ -7,12 +7,7 @@
 // Author:			Kevin Frank
 // Version:		1.0 written 11-04-18
 //
-// Notes:			GetFieldName() returns the relationship plus the field name. This function
-//				is to be used in SQL queries to protect the table occurrence references
-//				from breaking if the TO is renamed.
-//
-//				The Quote() funciton "escapes" problematic characters and SQL reserved
-//				words, if any — otherwise, no harm done.
+// Notes:			GetFieldName() returns the relationship plus the field name.
 //
 //				http://filemakerhacks.com/2011/04/18/avoiding_brittleness/
 //
@@ -26,5 +21,5 @@ Let (
     _list			= Substitute ( _to_and_field; "::"; "¶" )
   ];
 
-  Quote ( GetValue ( _list; 1 ) )
+  GetValue ( _list; 1 )
 )
