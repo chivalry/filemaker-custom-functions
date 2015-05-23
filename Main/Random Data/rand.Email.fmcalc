@@ -12,26 +12,54 @@
 // Author:			Mislav Kos <mkos@soliantconsulting.com>
 // Version:		1.0 written 14-10-15
 //				1.1 edited 15-05-22 by Charles Ross for readability and use of sub functions
+//				1.2 edited 15-05-23 by Charles Ross for more variation in user name and domains
 //
 // Notes:			The fake email ALWAYS includes the word "test" right before the @ sign
 //
 // Example:
+// // A possible example…
+// rand.Email ( "Charles"; "Ross" ) = "crosstest@molestieclass.org"
 
 Let (
   [
-    _first = Left ( _first; 1 );
-    _last = Case (
-      IsEmpty ( _first ) and IsEmpty ( _last );		rand.Words ( 1; 1 );
-									_last
+    _first = Case (
+      IsEmpty ( _first );		rand.Words ( 1; 1 );
+					_first
     );
 
-    _name	= _first & _last;
-    _prefix	= Filter ( Lower ( _name ) ; data.Alphabet );
+    _first = Choose (
+      rand.Integer ( 0; 1 );	Left ( _first; 1 );
+					_first
+    );
+
+    _last = Case (
+      IsEmpty ( _last );		rand.Words ( 1; 1 );
+					_last
+    );
+
+    _sep = Choose (
+      rand.Integer ( 0; 2 );
+     ".";	"_";	devp.Nil
+    );
+
+    _name	= _first & _sep & _last;
+    _prefix	= Filter ( Lower ( _name ) ; data.Alphabet & "._" );
     _at	= "test@";
 
-    _provider = rand.ListItem ( data.EmailProvidersList );
+    _tlds = List ( ".com"; ".net"; ".org"; ".info"; ".biz"; ".edu" );
+    _company_domain = Substitute (
+      Lower ( rand.CompanyName );
+      [	" ";	devp.Nil ];
+      [ ".";	devp.Nil ]
+    );
 
-    _result = _prefix & _at & _provider
+    _domain = Choose (
+      rand.Integer ( 0; 1 );
+      rand.ListItem ( data.EmailProvidersList );
+      _company_domain & rand.ListItem ( _tlds )
+    );
+
+    _result = _prefix & _sep & _at & _domain
   ];
 
   _result
