@@ -9,6 +9,7 @@
 //				dict.First
 //				dict.Get
 //				dict.Remove
+//				devp.Nil
 //
 // Author:			Charles Ross
 // Version:		1.0 written 15-05-23
@@ -22,9 +23,9 @@ Case (
 
   Let (
     [
-      _key = dict.First ( _dict );
-      _value = dict.Get ( _dict; _key );
-      _rest = dict.Remove ( _dict; _key );
+      _key		= dict.First ( _dict );
+      _value		= dict.Get ( _dict; _key );
+      _rest		= dict.Remove ( _dict; _key );
 
       _result = List ( _value; dict.Values ( _rest ) )
     ];
