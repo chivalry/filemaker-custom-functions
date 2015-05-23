@@ -3,35 +3,43 @@
 // Purpose:		Returns a random date between the passed parameters or between the beginning of a
 //				low year and the end of a high year.
 //
-// Parameters:		_low:		the low end of the date range; you can specify just the year instead of a full
+// Parameters:		_min:	the low end of the date range; you can specify just the year instead of a full
 //						date
-//				_high:	the high end of the date range; you can specify just the year instead of a full
+//				_max:	the high end of the date range; you can specify just the year instead of a full
 //						date
 //
-// Requirements:	nump.RandomInteger
+// Requirements:	rand.Integer
 //
 // Author:			Mislav Kos <mkos@soliantconsulting.com>
 // Version:		1.0 written 14-10-15
 //				1.1 edited 15-05-22 by Charles Ross for readability and use of sub functions
 //
 // Example:
+// Let (
+//   [
+//     _date = rand.Date ( 2014; 2015 )
+//   ];
+// 
+//   ( _date ≥ GetAsDate ( "1/1/14" ) )
+//     and ( _date ≤ GetAsDate ( "12/31/15" ) )
+// )
 
 Let (
   [
-    _valid_date = IsValid ( GetAsDate ( GetAsText ( _low ) ) ) ; 
-    _valid_year = _low > 0 and _low ≤ 4000 ; 
+    _valid_date = IsValid ( GetAsDate ( GetAsText ( _min ) ) ) ; 
+    _valid_year = _min > 0 and _min ≤ 4000 ; 
 
     _start = Case (
-      _valid_date ;	GetAsDate ( _low ) ;
-	_valid_year ;	Date ( 1 ; 1 ; _low ) // _start will be empty if low is invalid
+      _valid_date ;	GetAsDate ( _min ) ;
+	_valid_year ;	Date ( 1 ; 1 ; _min ) // _start will be empty if low is invalid
     );
 	
-    _valid_date = IsValid ( GetAsDate ( GetAsText ( _high ) ) ) ; 
-    _valid_year = _high > 0 and _high ≤ 4000 ; 
+    _valid_date = IsValid ( GetAsDate ( GetAsText ( _max ) ) ) ; 
+    _valid_year = _max > 0 and _max ≤ 4000 ; 
 
     _end = Case (
-      _valid_date ;	GetAsDate ( _high ) ;
-      _valid_year ;	Date ( 12 ; 31 ; _high ) // _end will be empty if high is invalid
+      _valid_date ;	GetAsDate ( _max ) ;
+      _valid_year ;	Date ( 12 ; 31 ; _max ) // _end will be empty if high is invalid
     );
 	
     _days = _end - _start + 1 ; 
