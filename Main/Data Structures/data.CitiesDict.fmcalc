@@ -1,0 +1,216 @@
+// data.CitiesDict
+//
+// Purpose:		Return a dictionary of states name keys and cities list values.
+//
+// Requirements: 	devp.Nil
+//				dict.Add
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-05-22
+//
+// Notes:			The data includes the 294 cities in the United States with a population of at least
+//				100,000 on July 1, 2013 plus a few cities with smaller populations from Delaware,
+//				Maine, Vermont, West Virginia and Wyoming, since those states don't have any
+//				100,000+ cities. The data was taken on 10/15/14
+//				from http://en.wikipedia.org/wiki/List_of_United_States_cities_by_population.
+//
+//				Based on data collected by Mislav Kos.
+//
+// Example:
+// GetValue ( dict.Get ( data.CitiesDict; "California ); 1 ) = "Los Angeles"
+
+Let (
+  [
+    _dict = devp.Nil;
+
+    _dict = dict.Add ( _dict; "Alabama";
+      List (	"Birmingham";	"Montgomery";	"Mobile";	"Huntsville" ) );
+
+    _dict = dict.Add ( _dict; "Alaska"; "Anchorage" );
+
+    _dict = dict.Add ( _dict; "Arizona";
+      List (	"Phoenix";		"Tucson";		"Mesa";		"Chandler";		"Glendale";	"Gilbert";		"Scottsdale";	"Tempe";		"Peoria";		"Surprise" ) );
+
+    _dict = dict.Add ( _dict; "Arkansas"; "Little Rock" );
+
+    _dict = dict.Add ( _dict; "California";
+      List (	"Los Angeles";	"San Diego";	"San Jose";		"San Francisco";"Fresno";		"Sacramento";	"Long Beach";	"Oakland";		"Bakersfield";
+		"Anaheim";	"Santa Ana";	"Riverside";	"Stockton";
+		"Chula Vista";	"Irvine";		"Fremont";	"San Bernardino";
+		"Modesto";	"Oxnard";		"Fontana";		"Moreno Valley";
+		"Huntington Beach";			"Glendale";	"Santa Clarita";
+		"Garden Grove";			"Oceanside";	"Santa Rosa";
+		"Rancho Cucamonga";		"Ontario";		"Elk Grove";
+		"Lancaster";	"Corona";		"Palmdale";	"Salinas";
+		"Hayward";	"Pomona";		"Escondido";	"Sunnyvale";
+		"Torrance";	"Orange";		"Pasadena";	"Fullerton";
+		"Thousand Oaks";			"Visalia";		"Roseville";
+		"Simi Valley";	"Concord";	"Victorville";	"Santa Clara";
+		"Vallejo";		"Berkeley";	"El Monte";	"Downey";
+		"Costa Mesa";	"Inglewood";	"Carlsbad";	"Fairfield";
+		"Ventura";		"West Covina";	"Richmond";	"Murrieta";
+		"Antioch";		"Temecula";	"Norwalk";		"Daly City";
+		"Burbank";		"Santa Maria";	"El Cajon";		"Rialto";
+		"San Mateo" ) );
+
+    _dict = dict.Add ( _dict; "Colorado";
+      List (	"Denver";		"Colorado Springs";			"Aurora";
+		"Fort Collins";	"Lakewood";	"Thornton";	"Arvada";
+		"Westminster";	"Pueblo";		"Centennial";	"Boulder" ) );
+
+    _dict = dict.Add ( _dict; "Connecticut";
+      List (	"Bridgeport";	"New Haven";	"Stamford";	"Hartford";
+		"Waterbury" ) );
+
+    _dict	= dict.Add ( _dict; "Deleware";
+      List (	"Wilmington";	"Dover" ) );
+
+    _dict	= dict.Add ( _dict; "Disctrict of Columbia"; "Washington" );
+
+    _dict = dict.Add ( _dict; "Florida";
+      List (	"Jacksonville";	"Miami";		"Tampa";		"Orlando";		"St. Petersburg";			"Hialeah";		"Tallahassee";
+		"Fort Lauderdale";			"Port St. Lucie";	"Cape Coral";
+		"Pembroke Pines";			"Hollywood";	"Miramar";
+		"Gainesville";	"Coral Springs";	"Miami Gardens";
+		"Clearwater";	"Palm Bay";	"Pompano Beach";
+		"West Palm Beach";			"Lakeland" ) );
+
+    _dict = dict.Add ( _dict; "Georgia";
+      List (	"Atlanta";		"Columbus";	"Augusta";		"Savannah";
+		"Athens" ) );
+
+    _dict	= dict.Add ( _dict; "Hawaii"; "Honolulu" );
+
+    _dict	= dict.Add ( _dict; "Idaho"; "Boise" );
+
+    _dict = dict.Add ( _dict; "Illinois";
+      List (	"Chicago";		"Aurora";		"Rockford";	"Joliet";
+		"Naperville";	"Springfield";	"Peoria";		"Elgin" ) );
+
+    _dict = dict.Add ( _dict; "Indiana";
+      List (	"Indianapolis";	"Fort Wayne";	"Evansville";	"South Bend" ) );
+
+    _dict = dict.Add ( _dict; "Iowa";
+      List ( "Des Moines";	"Cedar Rapids";	"Davenport" ) );
+
+    _dict = dict.Add ( _dict; "Kansas";
+      List (	"Wichita";		"Overland Park";			"Kansas City";
+		"Olathe";		"Topeka" ) );
+
+    _dict 	= dict.Add ( _dict; "Kentucky";
+      List (	"Louisville";	"Lexington" ) );
+
+    _dict	= dict.Add ( _dict; "Louisiana";
+      List (	"New Orleans";	"Baton Rouge";	"Shreveport";	"Lafayette" ) );
+
+    _dict 	= dict.Add ( _dict; "Maine";
+      List (	"Augusta";		"Portland" ) );
+
+    _dict 	= dict.Add ( _dict; "Maryland"; "Baltimore" );
+
+    _dict 	= dict.Add ( _dict; "Massachusetts";
+      List (	"Boston";		"Worcester";	"Springfield";	"Lowell";
+		"Cambridge" ) );
+
+    _dict 	= dict.Add ( _dict; "Michigan";
+      List (	"Detroit";		"Grand Rapids";	"Warren";		"Sterling Heights";
+		"Ann Arbor";	"Lansing" ) );
+
+    _dict 	= dict.Add ( _dict; "Minnesota";
+      List (	"Minneapolis";	"Saint Paul";	"Rochester" ) );
+
+    _dict 	= dict.Add ( _dict; "Mississippi"; "Jackson" );
+
+    _dict 	= dict.Add ( _dict; "Missouri";
+      List (	"Kansas City";	"St. Louis";	"Springfield";	"Independence";
+		"Columbia" ) );
+
+    _dict 	= dict.Add ( _dict; "Montana"; "Billings" );
+
+    _dict 	= dict.Add ( _dict; "Nebraska";
+      List (	"Omaha";		"Lincoln" ) );
+
+    _dict 	= dict.Add ( _dict; "Nevada";
+      List (	"Las Vegas";	"Henderson";	"Reno";		"North Las Vegas" ) );
+
+    _dict 	= dict.Add ( _dict; "New Hampshire"; "Manchester" );
+
+    _dict 	= dict.Add ( _dict; "New Jersey";
+      List (	"Newark";		"Jersey City";	"Paterson";	"Elizabeth";
+		"Edison" ) );
+
+    _dict 	= dict.Add ( _dict; "New Mexico";
+      List (	"Albuquerque";	"Las Cruces" ) );
+
+    _dict 	= dict.Add ( _dict; "New York";
+      List (	"New York";	"Buffalo";		"Rochester";	"Yonkers";
+		"Syracuse" ) );
+
+    _dict 	= dict.Add ( _dict; "North Carolina";
+      List (	"Charlotte";	"Raleigh";		"Greensboro";	"Durham";
+		"Winston–Salem";			"Fayetteville";	"Cary";
+		"Wilmington";	"High Point" ) );
+
+    _dict 	= dict.Add ( _dict; "New Dakota"; "Fargo" );
+
+    _dict 	= dict.Add ( _dict; "Ohio";
+      List (	"Columbus";	"Cleveland";	"Cincinnati";	"Toledo";
+		"Akron";		"Dayton" ) );
+
+    _dict 	= dict.Add ( _dict; "Oklahoma";
+      List (	"Oklahoma City";			"Tulsa";		"Norman";
+		"Broken Arrow" ) );
+
+    _dict 	= dict.Add ( _dict; "Oregon";
+      List (	"Portland";	"Salem";		"Eugene";		"Gresham" ) );
+
+    _dict 	= dict.Add ( _dict; "Pennsylvania";
+      List (	"Philadelphia";	"Pittsburgh";	"Allentown";	"Erie" ) );
+
+    _dict 	= dict.Add ( _dict; "Rhode Island"; "Providence" );
+
+    _dict 	= dict.Add ( _dict; "South Carolina";
+      List (	"Columbia";	"Charleston";	"North Charleston" ) );
+
+    _dict 	= dict.Add ( _dict; "South Dakota"; "Sioux Falls" );
+
+    _dict 	= dict.Add ( _dict; "Tennessee";
+      List (	"Memphis";	"Nashville";	"Knoxville";	"Chattanooga";
+		"Clarksville";	"Murfreesboro" ) );
+
+    _dict 	= dict.Add ( _dict; "Texas";
+      List (	"Houston";	"San Antonio";	"Dallas";		"Austin";
+		"Fort Worth";	"El Paso";		"Arlington";	"Corpus Christi";
+		"Plano";		"Laredo";		"Lubbock";	"Garland";
+		"Irving";		"Amarillo";	"Grand Prairie";	"Brownsville";
+		"Pasadena";	"McKinney";	"Mesquite";	"Killeen";
+		"Frisco";		"McAllen";		"Waco";		"Carrollton";
+		"Midland";		"Denton";		"Abilene";		"Beaumont";
+		"Odessa";		"Round Rock";	"Wichita Falls";	"Richardson";
+		"Lewisville";	"Tyler";		"Pearland";	"College Station" ) );
+
+    _dict 	= dict.Add ( _dict; "Utah";
+      List (	"Salt Lake City";	"West Valley City";			"Provo";		"West Jordan" ) );
+
+    _dict 	= dict.Add ( _dict; "Vermont";
+      List (	"Montpelier";	"Burlington" ) );
+
+    _dict 	= dict.Add ( _dict; "Virginia";
+      List (	"Virginia Beach";			"Norfolk";		"Chesapeake";
+		"Richmond";	"Newport News";			"Alexandria";
+		"Hampton" ) );
+
+    _dict 	= dict.Add ( _dict; "Washington";
+      List (	"Seattle";		"Spokane";	"Tacoma";		"Vancouver";
+		"Bellevue";		"Kent";	"Everett" ) );
+
+    _dict 	= dict.Add ( _dict; "West Virginia"; "Charleston" );
+
+    _dict 	= dict.Add ( _dict; "Wisconsin";
+      List (	"Milwaukee";	"Madison";	"Green Bay" ) );
+
+    _dict 	= dict.Add ( _dict; "Wyoming"; "Cheyenne" )
+  ];
+
+  _dict
+)

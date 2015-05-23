@@ -1,0 +1,23 @@
+// data.EmailProviders
+//
+// Purpose:		Returns a list of email service provider domains.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-05-22
+//
+// Notes:			Inspired by Mislav Kos
+//
+// Example:
+
+List (
+  "lavabit.com";
+  "protonmail.ch";
+  "gmail.com";
+  "yahoo.com";
+  "hotmail.com";
+  "fastmail.com";
+  "aol.com";
+  "fastmail.com";
+  "hushmail.com";
+  "mail.com"
+)

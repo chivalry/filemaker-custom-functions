@@ -1,0 +1,8 @@
+// data.Alphabet
+//
+// Purpose:		Returns the alphabet in lower case.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-05-22
+
+"abcdefghijklmnopqrstuvwxyz"
