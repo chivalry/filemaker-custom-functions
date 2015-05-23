@@ -2,6 +2,8 @@
 //
 // Purpose:		Returns a random gender as indicated by "M" or "F".
 //
+// Requirements:	rand.Integer
+//
 // Author:			Mislav Kos <mkos@soliantconsulting.com>
 // Version:		1.0 written 14-10-15
 //				1.1 edited 15-05-22 by Charles Ross for use of sub functions
