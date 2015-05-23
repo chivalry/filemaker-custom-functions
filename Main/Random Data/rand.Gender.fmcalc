@@ -9,4 +9,7 @@
 // Example:
 // lsts.IsMember ( rand.Gender; List ( "Female"; "Male ) )
 
-rand.ListItem ( List ( "Female"; "Male" ) )
+Choose (
+  rand.Integer ( 0; 1 );
+  "Female";	"Male"
+)
