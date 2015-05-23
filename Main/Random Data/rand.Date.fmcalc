@@ -1,4 +1,4 @@
-// rand.Date
+// rand.Date ( _min; _max )
 //
 // Purpose:		Returns a random date between the passed parameters or between the beginning of a
 //				low year and the end of a high year.

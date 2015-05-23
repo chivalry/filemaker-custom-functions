@@ -1,4 +1,4 @@
-// rand.Number ( _low; _high; _precision )
+// rand.Number ( _min; _max; _precision )
 //
 // Purpose:		Returns a random number between low and high to the set precision.
 //
@@ -13,15 +13,15 @@
 //				1.1 edited 15-05-22 by Charles Ross for readability and use of sub functions
 //
 // Example:
-// sample = result
+// rand.Number ( 5; 10; 2 ) ≥ 5
 
 Let (
   [ 
     // _low will be empty if low is not a valid number
-    _low = GetAsNumber ( Filter ( _low ; data.Digits & "-." ) ) ;
+    _min = GetAsNumber ( Filter ( _min ; data.Digits & "-." ) ) ;
 
     // _high will be empty if low is not a valid number
-    _high = GetAsNumber ( Filter ( _high ; data.Digits & "-." ) ) ;  
+    _max = GetAsNumber ( Filter ( _max ; data.Digits & "-." ) ) ;  
 
     // default to 0 if precision is not a valid number
     _precision = GetAsNumber ( Filter ( _precision ; data.Digits & "-." ) ) ; 
@@ -30,10 +30,10 @@ Let (
 						0
     ) ; 
 	
-    _number = Round ( Random * ( _high - _low ) + _low ; _precision );
+    _number = Round ( Random * ( _max - _min ) + _min ; _precision );
 
     _result = Case (
-      not IsEmpty ( _low ) and not IsEmpty ( _high ) and _high ≥ _low ;
+      not IsEmpty ( _min ) and not IsEmpty ( _max ) and _max ≥ _min ;
       _number
     )
   ] ; 
