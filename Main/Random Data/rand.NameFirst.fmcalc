@@ -5,14 +5,22 @@
 // Parameters:		_gender:	"M" or "F" (or the full words), if blank choose a random gender
 //
 // Requirements: 	rand.NameFirstMale
-//				rand.NameFirstFemale
+//				rand.NameFirstFemale;
+//				rand.Gender
 //
 // Author:			Mislav Kos <mkos@soliantconsulting.com>
 // Version:		1.0 written 14-10-15
 //				1.1 edited 15-05-22 by Charles Ross for readability
 //
 // Example:
-// sample = result
+// Let (
+//   [
+//     _name = rand.NameFirst ( devp.Nil )
+//   ];
+// 
+//   lsts.IsMember ( _name; data.FemaleNamesList )
+//     or lsts.IsMember ( _name; data.MaleNamesList )
+// )
 
 Let ( 
   [
