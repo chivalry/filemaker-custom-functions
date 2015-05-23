@@ -11,5 +11,15 @@
 // Version:		1.0 written 14-10-15
 //
 // Example:
+// Let (
+//   [
+//     _name = rand.Name ( devp.Nil );
+//     _first = LeftWords ( _name; 1 );
+//     _last = RightWords ( _name; 1 )
+//   ];
+// 
+//   lsts.IsMember ( _first; List ( data.FemaleNamesList; data.MaleNamesList ) )
+//     and lsts.IsMember ( _last; data.LastNamesList )
+// )
 
 rand.NameFirst ( _gender ) & " " & rand.NameLast
