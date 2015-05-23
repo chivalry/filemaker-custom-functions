@@ -16,8 +16,8 @@
 Let (
   [
     _suffixes = List (
-      "Inc.";		"LLC";
-      "Solutions";	"Consulting"; " "
+      "Inc.";		"LLC";		"Corp.";
+      "Solutions";	"Consulting";	" "
     );
 
     _name	= rand.Words ( 1; 2 );
