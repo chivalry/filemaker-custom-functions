@@ -8,6 +8,11 @@
 //						blank
 //
 // Requirements:	rand.Words
+//				rand.Integer
+//				data.Alphabet
+//				rand.CompanyName
+//				devp.Nil
+//				rand.ListItem
 //
 // Author:			Mislav Kos <mkos@soliantconsulting.com>
 // Version:		1.0 written 14-10-15
