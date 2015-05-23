@@ -1,0 +1,34 @@
+// dict.Values ( _dict )
+//
+// Purpose:		Returns a list of all the values in the passed dictionary. Generally useful when the
+//				dictionary stores an array of key/value pairs.
+//
+// Parameters:		_dict:	The dictionary to return the values of
+//
+// Requirements: 	dict.Keys
+//				dict.First
+//				dict.Get
+//				dict.Remove
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-05-23
+//
+// Example:
+// sample = result
+
+Case (
+  ValueCount ( dict.Keys ( _dict ) ) = 0;
+  devp.Nil;
+
+  Let (
+    [
+      _key = dict.First ( _dict );
+      _value = dict.Get ( _dict; _key );
+      _rest = dict.Remove ( _dict; _key );
+
+      _result = List ( _value; dict.Values ( _rest ) )
+    ];
+
+    _result
+  )
+)
