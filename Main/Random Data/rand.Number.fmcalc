@@ -1,0 +1,42 @@
+// rand.Number ( _low; _high; _precision )
+//
+// Purpose:		Returns a random number between low and high to the set precision.
+//
+// Parameters:		low:		the low end of the number range
+//				high:		the high end of the number range
+//				precision:	similar to precision in Round ( number ; precision )
+//
+// Requirements:	data.Digits
+//
+// Author:			Mislav Kos <mkos@soliantconsulting.com>
+// Version:		1.0 written 14-10-15
+//				1.1 edited 15-05-22 by Charles Ross for readability and use of sub functions
+//
+// Example:
+// sample = result
+
+Let (
+  [ 
+    // _low will be empty if low is not a valid number
+    _low = GetAsNumber ( Filter ( _low ; data.Digits & "-." ) ) ;
+
+    // _high will be empty if low is not a valid number
+    _high = GetAsNumber ( Filter ( _high ; data.Digits & "-." ) ) ;  
+
+    // default to 0 if precision is not a valid number
+    _precision = GetAsNumber ( Filter ( _precision ; data.Digits & "-." ) ) ; 
+    _precision = Case (
+      not IsEmpty ( _precision ) ;	_precision ;
+						0
+    ) ; 
+	
+    _number = Round ( Random * ( _high - _low ) + _low ; _precision );
+
+    _result = Case (
+      not IsEmpty ( _low ) and not IsEmpty ( _high ) and _high ≥ _low ;
+      _number
+    )
+  ] ; 
+
+  _result
+)

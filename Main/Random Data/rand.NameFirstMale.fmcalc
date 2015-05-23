@@ -1,0 +1,15 @@
+// rand.NameFirstMale
+//
+// Purpose:		Returns a random male first name
+//
+// Author:			Mislav Kos <mkos@soliantconsulting.com>
+// Version:		1.0 written 14-10-15
+//				1.1 edited 15-05-22 by Charles Ross for readability and use of sub functions
+//
+// Notes:			The data includes the top 500 most popular male baby names from 2013 taken from
+//				http://www.ssa.gov/oact/babynames/limits.html
+//
+// Example:
+// sample = result
+
+rand.ListItem ( data.MaleNamesList )

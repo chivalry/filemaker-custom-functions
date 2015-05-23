@@ -1,0 +1,22 @@
+// rand.SSN
+//
+// Purpose:		Returns a random fake social security number
+//
+// Author:			Mislav Kos <mkos@soliantconsulting.com>
+// Version:		1.0 written 14-10-15
+//				1.1 edited 15-05-22 by Charles Ross for readability and use of sub functions
+//
+// Example:
+// sample = result
+
+Let (
+  [
+    _set_1 = rand.Integer ( 100; 999 );
+    _set_2 = padd.Zeros ( rand.Integer ( 0; 99 ); 2 );
+    _set_3 = padd.Zeros ( rand.Integer ( 0; 9999 ); 4 );
+
+    _result = _set_1 & "-" & _set_2 & "-" & _set_3
+  ];
+
+  _result
+)

@@ -1,0 +1,43 @@
+// rand.City ( _state )
+//
+// Purpose:		Returns the name of a city from the state specified by the parameter.
+//
+// Parameters:		_state:	either a state abbreviation or a state name
+//
+// Requirements: 	rand.State
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-05-22
+//
+// Notes:			The data includes the 294 cities in the United States with a population of at least
+//				100,000 on July 1, 2013 plus a few cities with smaller populations from Delaware,
+//				Maine, Vermont, West Virginia and Wyoming, since those states don't have any
+//				100,000+ cities. The data was taken on 10/15/14
+//				from http://en.wikipedia.org/wiki/List_of_United_States_cities_by_population.
+//
+//				If an invalid state name or state code (abbreviation) was specified, the result will be
+//				blank
+//
+//				Inspired by Mislav Kos
+//
+// Todo:			Each state has an equal chance of having a city selected regardless of how many cities
+//				that state has. Either change that to make every city equally likely by extracting the
+//				values of the data.CitiesDict function and choosing one of those or make such a
+//				selection an option.
+//
+// Example:
+// // If run enough times, the random result could be…
+// RandomCity ( "IL" ) = "Chicago"
+
+Let (
+  [
+    _state	= Case (
+      not IsEmpty ( _state ) ;		_state ;
+						rand.State
+    ) ;
+    _cities	= dict.Get ( data.CitiesDict; _state );
+    _city	= rand.ListItem ( _cities )
+  ] ; 	
+
+  _city
+)

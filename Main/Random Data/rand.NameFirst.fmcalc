@@ -1,0 +1,33 @@
+// rand.NameFirst ( _gender )
+//
+// Purpose:		Returns a random first name based on the gender provided or a random gender.
+//
+// Parameters:		_gender:	"M" or "F" (or the full words), if blank choose a random gender
+//
+// Requirements: 	rand.NameFirstMale
+//				rand.NameFirstFemale
+//
+// Author:			Mislav Kos <mkos@soliantconsulting.com>
+// Version:		1.0 written 14-10-15
+//				1.1 edited 15-05-22 by Charles Ross for readability
+//
+// Example:
+// sample = result
+
+Let ( 
+  [
+    _gender = Case (
+      IsEmpty ( _gender );	rand.Gender;
+					_gender
+    );
+
+    _gender = Left ( _gender; 1 );
+
+    _result = Case (
+      _gender = "M";	rand.NameFirstMale;
+      _gender = "F";	rand.NameFirstFemale
+    )
+  ];
+
+  _result
+)

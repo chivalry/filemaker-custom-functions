@@ -1,0 +1,15 @@
+// rand.Name ( _gender )
+//
+// Purpose:		Returns a random full name (first and last)
+//
+// Parameters:		_gender:	"M" or "F" (or the full words), if blank choose a random gender
+//
+// Requirements: 	rand.NameFirst
+//				rand.NameLast
+//
+// Author:			Mislav Kos <mkos@soliantconsulting.com>
+// Version:		1.0 written 14-10-15
+//
+// Example:
+
+rand.NameFirst ( _gender ) & " " & rand.NameLast

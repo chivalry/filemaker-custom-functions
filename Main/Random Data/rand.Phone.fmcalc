@@ -1,0 +1,22 @@
+// rand.Phone
+//
+// Purpose:		Returns a random fake phone number
+//
+// Author:			Mislav Kos <mkos@soliantconsulting.com>
+// Version:		1.0 written 14-10-15
+//				1.1 edited 15-05-22 by Charles Ross for readability and use of sub functions
+//
+// Example:
+// sample = result
+
+Let (
+  [
+    _area_code	= rand.Integer ( 100; 999 );
+    _prefix		= rand.Integer ( 100; 999 );
+    _last_digits	= padd.Zeros ( rand.Integer ( 0; 9999 ); 4 );
+
+    _result = _area_code & "-" & _prefix & "-" & _last_digits
+  ];
+
+  _result
+)

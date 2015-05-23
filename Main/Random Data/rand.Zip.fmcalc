@@ -1,0 +1,11 @@
+// rand.Zip
+//
+// Purpose:		Returns a random 5-digit zip code
+//
+// Author:			Mislav Kos <mkos@soliantconsulting.com>
+// Version:		1.0 written 14-10-15
+//
+// Example:
+// sample = result
+
+padd.Zeros ( rand.Integer ( 0; 99999 ); 5 )

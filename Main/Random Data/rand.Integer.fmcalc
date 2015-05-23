@@ -1,4 +1,4 @@
-// nump.RandomInteger ( _min; _max )
+// rand.Integer ( _min; _max )
 //
 // Purpose:		Returns a random integer guaranteed to be between min and max inclusive.
 //
@@ -15,7 +15,7 @@
 //				function to be used with FileMaker 7+.
 //
 // Example:
-// nump.RandomInteger ( 2; 6 ) ≤ 6
+// rand.Integer ( 2; 6 ) ≤ 6
 
 Let (
   [
@@ -24,5 +24,5 @@ Let (
 
   Case(
     ( _num ≤ _max ) and ( _num ≥ _min ) ;		_num ;
-									nump.RandomInteger( _min; _max ) )
+									rand.Integer ( _min; _max ) )
 )

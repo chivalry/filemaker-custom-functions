@@ -1,0 +1,17 @@
+// rand.Country
+//
+// Purpose:		Returns the name of a random country.
+//
+// Requirements:	rand.ListItem
+//				data.CountriesList
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-05-22
+//				1.1 edited 15-05-22 by Charles Ross for readability and use of sub functions
+//
+// Notes:			Inspired by Mislav Kos
+//
+// Example:
+// lsts.IsMember ( rand.Country; data.CountriesList )
+
+rand.ListItem ( data.CountriesList )

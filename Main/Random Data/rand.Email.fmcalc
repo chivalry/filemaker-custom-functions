@@ -1,0 +1,38 @@
+// rand.Email ( _first; _last )
+//
+// Purpose:		Returns a fake email address.
+//
+// Parameters:		_first:	first name of the persom for whom the email address will be generated, can
+//						blank
+//				_last:		last name of the persom for whom the email address will be generated, can
+//						blank
+//
+// Requirements:	rand.Words
+//
+// Author:			Mislav Kos <mkos@soliantconsulting.com>
+// Version:		1.0 written 14-10-15
+//				1.1 edited 15-05-22 by Charles Ross for readability and use of sub functions
+//
+// Notes:			The fake email ALWAYS includes the word "test" right before the @ sign
+//
+// Example:
+
+Let (
+  [
+    _first = Left ( _first; 1 );
+    _last = Case (
+      IsEmpty ( _first ) and IsEmpty ( _last );		rand.Words ( 1; 1 );
+									_last
+    );
+
+    _name	= _first & _last;
+    _prefix	= Filter ( Lower ( _name ) ; data.Alphabet );
+    _at	= "test@";
+
+    _provider = rand.ListItem ( data.EmailProvidersList );
+
+    _result = _prefix & _at & _provider
+  ];
+
+  _result
+)

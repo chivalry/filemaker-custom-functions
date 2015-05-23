@@ -1,0 +1,30 @@
+// rand.CompanyName
+//
+// Purpose:		Returns a fake company name
+//
+// Requirements: 	rand.Words
+//				rand.ListItem
+//
+// Author:			Mislav Kos <mkos@soliantconsulting.com>
+// Version:		1.0 written 14-10-15
+//				1.1 edited 15-05-22 by Charles Ross, increase readability, use rand.ListItem
+//
+// Example:
+// // One possible return value…
+// rand.CompanyName = "Nisi Ultrices Consulting"
+
+Let (
+  [
+    _suffixes = List (
+      "Inc.";		"LLC";
+      "Solutions";	"Consulting"; " "
+    );
+
+    _name	= rand.Words ( 1; 2 );
+    _suffix	= rand.ListItem ( _suffixes );
+
+    _result = Trim ( _name & " " & _suffix )
+  ];
+
+  _result
+)

@@ -1,0 +1,26 @@
+// rand.ListItem ( _list )
+//
+// Purpose:		Returns a random item from the provided list.
+//
+// Parameters:		_list:	The list to get a random item from.
+//
+// Requirements: 	requirements
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-05-21
+//
+// Example:
+
+Case (
+  ValueCount ( _list ) = 0;
+  devp.Nil;
+
+  Let (
+    [
+      _index = rand.Integer ( 1; ValueCount ( _list ) );
+      _result = GetValue ( _list; _index )
+    ];
+
+    _result
+  )
+)
