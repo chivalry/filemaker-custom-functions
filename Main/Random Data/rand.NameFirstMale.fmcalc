@@ -10,6 +10,6 @@
 //				http://www.ssa.gov/oact/babynames/limits.html
 //
 // Example:
-// sample = result
+// lsts.IsMember ( rand.NameFirstMale; data.MaleNamesList )
 
 rand.ListItem ( data.MaleNamesList )
