@@ -4,5 +4,8 @@
 //
 // Author:			Charles Ross
 // Version:		1.0 written 15-05-22
+//
+// Example:
+// data.Alphabet = "abcdefghijklmnopqrstuvwxyz"
 
 "abcdefghijklmnopqrstuvwxyz"

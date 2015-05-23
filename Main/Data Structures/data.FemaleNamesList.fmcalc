@@ -11,7 +11,7 @@
 // 				Based on data collected by Mislav Kos.
 //
 // Example:
-// sample = result
+// lsts.IsMember ( "Sophia"; data.FemaleNamesList )
 
 List (
   "Sophia";		"Emma";		"Olivia";		"Isabella";		"Ava";

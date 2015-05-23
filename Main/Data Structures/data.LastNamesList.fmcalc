@@ -8,7 +8,7 @@
 // Notes:			Based on data collected by Mislav Kos.
 //
 // Example:
-// sample = result
+// lsts.IsMember ( "Johnson"; data.LastNamesList )
 
 List (
   "Johnson";	"Williams";		"Brown";		"Jones";		"Miller";

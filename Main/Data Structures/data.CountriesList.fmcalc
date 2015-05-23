@@ -8,6 +8,7 @@
 // Notes:			Based on data collected by Mislav Kos.
 //
 // Example:
+// lsts.IsMember ( "United States"; data.CountriesList )
 
 List (
   "Afghanistan";	"Albania";		"Algeria";		"American Samoa";

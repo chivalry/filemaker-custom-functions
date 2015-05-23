@@ -8,6 +8,7 @@
 // Notes:			Inspired by Mislav Kos
 //
 // Example:
+// lsts.IsMember ( "mac.com"; data.EmailProvidersList )
 
 List (
   "lavabit.com";
@@ -19,5 +20,7 @@ List (
   "aol.com";
   "fastmail.com";
   "hushmail.com";
-  "mail.com"
+  "mail.com";
+  "mac.com";
+  "icloud.com"
 )
