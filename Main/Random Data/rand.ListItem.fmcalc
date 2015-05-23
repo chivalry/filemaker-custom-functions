@@ -4,7 +4,8 @@
 //
 // Parameters:		_list:	The list to get a random item from.
 //
-// Requirements: 	requirements
+// Requirements: 	devp.Nil
+//				rand.Integer
 //
 // Author:			Charles Ross
 // Version:		1.0 written 15-05-21
