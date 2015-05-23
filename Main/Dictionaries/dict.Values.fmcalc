@@ -15,7 +15,14 @@
 // Version:		1.0 written 15-05-23
 //
 // Example:
-// sample = result
+// Let (
+//   [
+//     _dict = dict.Add ( dict.Add ( dict.Add ( ""; "one"; 1 ); "two"; 2 ); "three"; 3 );
+//     _values = dict.Values ( _dict )
+//   ];
+// 
+//   _values = List ( 1; 2; 3 )
+// )
 
 Case (
   ValueCount ( dict.Keys ( _dict ) ) = 0;
