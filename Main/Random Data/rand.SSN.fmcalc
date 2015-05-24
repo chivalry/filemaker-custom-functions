@@ -10,7 +10,8 @@
 //				1.1 edited 15-05-22 by Charles Ross for readability and use of sub functions
 //
 // Example:
-// sample = result
+// // A possible result…
+// rand.SSN = "174-85-8301"
 
 Let (
   [
