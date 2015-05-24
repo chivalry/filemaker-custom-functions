@@ -16,7 +16,8 @@
 // Todo:			To dos
 //
 // Example:
-// sample = result
+// // Assuming "ValueList" is a valid value list…
+// lsts.IsMember ( rand.ValueFromValueList; ValueListItems ( Get ( FileName ); "ValueList" ) )
 
 Let (
   [ 
