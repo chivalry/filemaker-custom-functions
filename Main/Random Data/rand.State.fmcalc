@@ -2,6 +2,10 @@
 //
 // Purpose:		Returns a random American state
 //
+// Requirements:	rand.ListItem
+//				dict.Keys
+//				data.StatesDict
+//
 // Author:			Charles Ross
 // Version:		1.0 written 15-05-22
 //				1.1 edited 15-05-22 by Charles Ross for use of sub functions
