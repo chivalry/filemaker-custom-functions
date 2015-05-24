@@ -11,6 +11,6 @@
 //				http://en.wikipedia.org/wiki/List_of_most_common_surnames_in_North_America
 //
 // Example:
-// sample = result
+// lsts.IsMember ( rand.NameLast; data.LastNamesList )
 
 rand.ListItem ( data.LastNamesList )
