@@ -4,6 +4,9 @@
 //
 // Parameters:		_value_list:	The name of the value list
 //
+// Requirements:	rand.ListItem
+//				devp.Nil
+//
 // Author:			Mislav Kos <mkos@soliantconsulting.com>
 // Version:		1.0 written 14-10-15
 //				1.1 edited 15-05-22 by Charles Ross for readability and use of sub functions
