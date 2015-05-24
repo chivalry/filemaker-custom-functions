@@ -6,6 +6,8 @@
 // Parameters:		_low:		The minimum number of words to return
 //				_high:	The maximum number of words to return
 //
+// Requirements:	rand.Integer
+//
 // Author:			Mislav Kos <mkos@soliantconsulting.com>
 // Version:		1.0 written 14-10-15
 //				1.1 edited 15-05-22 by Charles Ross for readability and use of sub functions
@@ -14,15 +16,16 @@
 //				https://en.wikipedia.org/wiki/Lorem_ipsum.
 //
 // Example:
-// sample = result
+// // One possible return value…
+// rand.Words ( 3; 6 ) = "Rhoncus Habitant Facilisi Vitae"
 
 Let (
   [ 
-    _low = Max ( Int ( _low ) ; 1 ) ;   // make sure low is an integer and that it's at least 1
-    _high = Max ( Int ( _high ) ; _low ) ;   // make sure high is an integer and that it's ≥ low
+    _min = Max ( Int ( _min ) ; 1 ) ;   // make sure low is an integer and that it's at least 1
+    _max = Max ( Int ( _max ) ; _min ) ;   // make sure high is an integer and that it's ≥ low
 		
     // determine how many words we'll do
-    _count = Floor ( Random * ( _high - _low + 1 ) ) + _low ;
+    _count = Floor ( Random * ( _max - _min + 1 ) ) + _min ;
 		
     _words = "Amet Ante Arcu Cras Diam Duis Eget Elit Enim Erat Eros Nibh Nisi Nunc Odio Orci Quam Quis " 
       & "Urna Augue Class Curae Dolor Donec Etiam Fames Felis Fusce Ipsum Justo Lacus Lorem Magna " 
