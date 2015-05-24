@@ -1,9 +1,12 @@
-// rand.Time ( _low; _high )
+// rand.Time ( _min; _max )
 //
 // Purpose:		Returns a randome time between the low and high parameters.
 //
-// Parameters:		_low:		The low end of the time range, if blank, uses 0:00:00
-//				_high:	The high end of the time range, if blank, uses 23:59:59
+// Parameters:		_min:	The low end of the time range, if blank, uses 0:00:00
+//				_max:	The high end of the time range, if blank, uses 23:59:59
+//
+// Requirements:	rand.Integer
+//				devp.Nil
 //
 // Author:			Mislav Kos <mkos@soliantconsulting.com>
 // Version:		1.0 written 14-10-15
@@ -12,28 +15,26 @@
 // Notes:			If invalid value are specified for the low and/or high parameters, or if the 'high' value is
 //				lower (earlier) than the 'low' value, then the result will be blank
 //
-//				It's possible that for example RandomTime ( "10:00 AM" ; "10:10 AM" ) returns 10:15
-//				AM, since the result gets rounded to the nearest 15 minute mark
-//
 // Example:
-// sample = result
+// // One possible return value…
+// rand.Time ( GetAsTime ( "1:23" ); GetAsTime ( "6:43" ) ) = "6:26:56"
 
 Let (
   [
-    _low = Case (
-      GetAsTime ( _low ) = "?" or IsEmpty ( _low );	0;
-										_low
+    _min = Case (
+      GetAsTime ( _min ) = "?" or IsEmpty ( _min );	0;
+										_min
     );
 
-    _high = Case (
-      GetAsTime ( _high ) = "?" or IsEmpty ( _high );	( 60 * 60 * 24 ) - 1;
-										_high
+    _max = Case (
+      GetAsTime ( _max ) = "?" or IsEmpty ( _max );	( 60 * 60 * 24 ) - 1;
+										_max
     );
 
-    _time = GetAsTime ( rand.Integer ( _low; _high ) );
+    _time = GetAsTime ( rand.Integer ( _min; _max ) );
 
     _result = Case (
-      _high ≥ _low ;	_time;
+      _max ≥ _min ;	_time;
 				devp.Nil
     )
   ] ; 
