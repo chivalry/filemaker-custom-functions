@@ -1,0 +1,11 @@
+// devp.FieldTypeDate
+//
+// Purpose:		A constant representing the return value of devpFieldTypeDate when the field is a date.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-06-12
+//
+// Example:
+// devp.FieldTypeDate = "Date"
+
+"Date"

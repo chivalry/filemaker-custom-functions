@@ -1,0 +1,22 @@
+// devp.FieldType ( _field_name )
+//
+// Purpose:		Returns the type of data stored in the field.
+//
+// Parameters:		_field_name:	The name of the field to return the data type of.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-06-12
+//
+// Example:
+// // When table::field is a date field…
+// devp.FieldType ( GetFieldName ( table::field ) ) = "Date"
+
+Let (
+  [
+    _field_info	= FieldType ( Get ( FileName ) ; _field_name );
+    _list		= Substitute ( _field_info ; " " ; ¶ );
+    _type		= GetValue ( _list ; 2 )
+  ];
+
+  _type
+)

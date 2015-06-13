@@ -1,0 +1,15 @@
+// devp.PanelIsFront ( _panel_name )
+//
+// Purpose:		Returns True if the named tab or slide panel is frontmost
+//
+// Parameters:		_panel_name: The name of the tab panel to check for
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-08
+//
+// Example:
+// // Assuming that a single panel with two tabs, "tab_1" and "panel_1" is on the current layout and the
+// // first one is active...
+// devp.PanelIsFront ( "tab_1" ) and ( not devp.PanelIsFront ( "panel_1" ) )
+
+GetLayoutObjectAttribute ( _panel_name; "isFrontTabPanel" )

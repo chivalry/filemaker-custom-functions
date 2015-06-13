@@ -9,4 +9,4 @@
 // // When the user is logged in with a full access account…
 // devp.IsDeveloper = True
 
-Get ( CurrentPrivilegeSetName ) = "[Full Access]"
+Get ( AccountPrivilegeSetName ) = "[Full Access]"

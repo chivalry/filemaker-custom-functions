@@ -1,0 +1,16 @@
+// devp.NamedLayoutObjects
+//
+// Purpose:		Returns a list of named layout objects without the indicators of object hierarchy.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-06-01
+//
+// Example:
+// // When "object_name" is one of the named objects on the current layout.
+// lsts.IsMember ( "object_name" ; devp.NamedLayoutObjects )
+
+Substitute (
+  LayoutObjectNames ( Get ( FileName ); Get ( LayoutName ) );
+  [ "<¶" ; devp.Nil ];
+  [ "¶>" ; devp.Nil ]
+)

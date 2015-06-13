@@ -1,0 +1,24 @@
+// devp.FieldName ( _field )
+//
+// Purpose:		Returns only the field name, i.e., without the table occurrence name
+//
+// Parameters:		_field: The field to return the name of.
+//
+// Author:			Kevin Frank
+// Version:		1.0 written 11-04-18
+//
+// Notes:			GetFieldName() returns the relationship plus the field name.
+//
+//				http://filemakerhacks.com/2011/04/18/avoiding_brittleness/
+//
+// Example:
+// // When TableOccurrence::field_name exists
+// devp.FieldName ( TableOccurrence::field_name ) = "field_name"
+
+Let (
+  [
+    _list			= Substitute ( _qualified_field; "::"; "¶" )
+  ];
+
+  GetValue ( _list; 2 )
+)
