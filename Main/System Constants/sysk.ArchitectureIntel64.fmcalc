@@ -1,0 +1,12 @@
+// sysk.ArchitectureIntel32
+//
+// Purpose:		A constant of what is returned by Get ( ApplicationARchitecture ) when running on
+//				Intel 64-bit.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-06-12
+//
+// Example:
+// sysk.ArchitectureIntel64 = "x86_64"
+
+"x86_64"

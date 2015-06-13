@@ -1,0 +1,14 @@
+// sysk.ArchitectureIs32
+//
+// Purpose:		Returns true when executed on a 32-bit intel-based system.
+//
+// Requirements: 	sysk.ARchitectureIntel32
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-06-12
+//
+// Example:
+// When running on a Mac Core Duo…
+// sysk.ArchitectureIs32 = True
+
+Get ( ApplicationArchitecture ) = sysk.ArchitectureIntel32
