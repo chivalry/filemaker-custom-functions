@@ -1,0 +1,18 @@
+// path.ProtocolPlatform
+//
+// Purpose:		Returns the constant string that represents the path protocol for the current platform.
+//
+// Requirements:	sysk.PlatformIsMac
+//				sysk.PlatformIsWin
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-06-12
+//
+// Example:
+// // When running under OS X…
+// path.ProtocolPlatform = "filemac:"
+
+Case (
+  sysk.PlatformIsMac ; path.ProtocolMac ;
+  sysk.PlatformIsWin ; path.ProtocolWin
+)

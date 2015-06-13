@@ -1,0 +1,11 @@
+// path.ProtocolMac
+//
+// Purpose:		Returns the constant string that represents the protocol for Mac file paths.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-06-12
+//
+// Example:
+// path.ProtocolMac = "filemac:"
+
+"filemac:"

@@ -1,0 +1,11 @@
+// path.ProtocolWin
+//
+// Purpose:		Returns the constant string that represents the protocol for Windows file paths.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-06-12
+//
+// Example:
+// path.ProtocolWin = "filewin:"
+
+"filewin:"

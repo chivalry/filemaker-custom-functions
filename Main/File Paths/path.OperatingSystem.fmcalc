@@ -1,0 +1,64 @@
+// path.OSPath ( _fm_path )
+//
+// Purpose:		Converts a FileMaker style path into one native to the current OS.
+//
+// Parameters:		_fm_path:	The native FileMaker path to convert.
+//
+// Requirements: 	The BaseElements plugin
+//				txtp.TrimStart
+//				txtp.StartsWith
+//				path.ProtocolFile
+//				path.ProtocolPlatform
+//				sysk.PlatformIsMac
+//				sysk.PlatformIsWin
+//
+// Author:			Nicholas Orr
+// Version:		1.0 written 11-06-03
+//
+// Notes:			http://www.goya.com.au/blog/guide-filemaker-import-paths
+//
+// Example:
+// sample = result
+
+Let (
+  [ 
+    _desktop			= txtp.TrimStart ( Get ( DesktopPath ) ; 1 ) ; 
+    _users				= "/Users" ; 
+    _username			= Left ( _desktop ; Position ( _desktop ; "/" ; 1 ; 1 ) - 1 ) ; 
+    _system_drive		= Get ( SystemDrive ) ; 
+    _system_drive_len		= Length ( _system_drive ) ; 
+    _volumes			= "/Volumes" ; 
+
+    _path = Case ( 
+      txtp.StartsWith ( _fm_path ; path.ProtocolFile ) ;
+      txtp.TrimStart ( _fm_path ; Length ( path.ProtocolFile ) ) ; 
+
+      txtp.StartsWith ( _fm_path ; path.ProtocolPlatform ) ;
+      txtp.TrimStart ( _fm_path ; Length ( path.ProtocolPlatform ) ) ; 
+
+      _fm_path
+    ) ; 
+
+    _is_system	= txtp.StartsWith ( _path ; _system_drive ) ; 
+    _is_filevault	= txtp.StartsWith ( _path ; "/" & _username )
+      and BE_FileExists ( _users & "/." & _username ) ; 
+
+    _system_path	= txtp.TrimStart ( _path ; _system_drive_len - 1 ) ; 
+    _filevault_path	= _users & _path ; 
+
+    _mac_path = Case (
+      _is_filevault ;	_filevault_path ;
+      _is_system ;	_system_path ;
+				_volumes & _path
+    ) ; 
+
+    _win_path = txtp.TrimStart ( _path ; 1 );
+
+    _result = Case (
+      sysk.PlatformIsMac ;	_mac_path ;
+      sysk.PlatformIsWin ;	_win_path
+    )
+  ] ; 
+
+  _result
+)
