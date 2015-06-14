@@ -1,4 +1,4 @@
-// sysk.VersionAdvanced
+// plat.VersionAdvanced
 //
 // Purpose:		A constant representing what the first word of Get ( ApplicationVersion ) returns to
 //				indicate FileMaker Pro Advanced.
@@ -8,6 +8,6 @@
 //
 // Example:
 // // When evaluated while running under FileMaker Pro Advanced...
-// Get ( ApplicationVersion ) = sysk.VersionAdvanced
+// Get ( ApplicationVersion ) = plat.VersionAdvanced
 
 "ProAdvanced"

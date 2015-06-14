@@ -1,4 +1,4 @@
-// sysk.PlatformIsWeb
+// plat.IsWeb
 //
 // Purpose:		Returns true if the system is running under on CWP or WebDirect.
 //
@@ -7,6 +7,6 @@
 //
 // Example:
 // // While running the system on CWP or Webdirect...
-// sysk.PlatformIsWeb = 1
+// plat.IsWeb = 1
 
-sysk.VersionName = sysk.VersionWeb
+plat.VersionName = plat.VersionWeb

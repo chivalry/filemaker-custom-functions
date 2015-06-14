@@ -1,4 +1,4 @@
-// sysk.PlatformGo
+// plat.Go
 //
 // Purpose:		A constant representing what Get ( SystemPlatform ) returns to indicate iOS.
 //
@@ -7,6 +7,6 @@
 //
 // Example:
 // // When evaluated while running under FileMaker Go...
-// Get ( SystemPlatform ) = sysk.PlatformGo
+// Get ( SystemPlatform ) = plat.Go
 
 3

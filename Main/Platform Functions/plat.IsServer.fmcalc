@@ -1,4 +1,4 @@
-// sysk.PlatformIsServer
+// plat.IsServer
 //
 // Purpose:		Returns true if the system is running under on FileMaker Server.
 //
@@ -7,6 +7,6 @@
 //
 // Example:
 // // While running the system on FileMaker Server...
-// sysk.PlatformIsServer = 1
+// plat.IsServer = 1
 
-sysk.VersionName = sysk.VersionServer
+plat.VersionName = plat.VersionServer

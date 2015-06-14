@@ -1,4 +1,4 @@
-// sysk.PlatformWin
+// plat.VersionName
 //
 // Purpose:		A constant representing what Get ( SystemPlatform ) returns to indicate Windows.
 //
@@ -6,7 +6,7 @@
 // Version:		1.0 written 15-03-11
 //
 // Example:
-// // When evaluated while running under Windows...
-// Get ( SystemPlatform ) = sysk.PlatformWin
+// // When evaluated while running on the server…
+// plat.VersionName = plat.VersionServer
 
--2
+LeftWords ( Get ( ApplicationVersion ); 1 )

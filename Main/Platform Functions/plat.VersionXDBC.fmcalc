@@ -1,13 +1,13 @@
-// sysk.VersionServer
+// plat.VersionXDBC
 //
 // Purpose:		A constant representing what the first word of Get ( ApplicationVersion ) returns to
-//				indicate FileMaker Server.
+//				indicate an xODBC client.
 //
 // Author:			Charles Ross
 // Version:		1.0 written 15-03-11
 //
 // Example:
-// // When evaluated while running under FileMaker Server...
-// Get ( ApplicationVersion ) = sysk.VersionServer
+// // When evaluated while running under an xODBC client...
+// Get ( ApplicationVersion ) = plat.VersionXDBC
 
-"Server"
+"xDBC"

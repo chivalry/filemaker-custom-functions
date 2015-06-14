@@ -1,12 +1,12 @@
-// sysk.ArchitectureIntel32
+// plat.Intel64
 //
 // Purpose:		A constant of what is returned by Get ( ApplicationARchitecture ) when running on
-//				Intel 32-bit.
+//				Intel 64-bit.
 //
 // Author:			Charles Ross
 // Version:		1.0 written 15-06-12
 //
 // Example:
-// sysk.ArchitectureIntel32 = "i386"
+// plat.Intel64 = "x86_64"
 
-"i386"
+"x86_64"

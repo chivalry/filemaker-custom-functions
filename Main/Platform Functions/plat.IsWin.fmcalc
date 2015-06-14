@@ -1,0 +1,12 @@
+// plat.Mac
+//
+// Purpose:		A constant representing what Get ( SystemPlatform ) returns to indicate OS X.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-03-11
+//
+// Example:
+// // When evaluated while running under OS X...
+// Get ( SystemPlatform ) = plat.Mac
+
+1

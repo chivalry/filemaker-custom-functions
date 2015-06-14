@@ -1,4 +1,4 @@
-// sysk.VersioniPhone
+// plat.VersioniPhone
 //
 // Purpose:		A constant representing what the first word of Get ( ApplicationVersion ) returns to
 //				indicate FileMaker Go on an iPhone or iPod Touch.
@@ -8,6 +8,6 @@
 //
 // Example:
 // // When evaluated while running under FileMaker Go on an iPhone or iPod Touch
-// Get ( ApplicationVersion ) = sysk.VersioniPhone
+// Get ( ApplicationVersion ) = plat.VersioniPhone
 
 "Go"

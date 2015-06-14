@@ -1,4 +1,4 @@
-// sysk.VersionRuntime
+// plat.VersionRuntime
 //
 // Purpose:		A constant representing what the first word of Get ( ApplicationVersion ) returns to
 //				indicate FileMaker Runtime.
@@ -8,6 +8,6 @@
 //
 // Example:
 // // When evaluated while running under FileMaker Runtime...
-// Get ( ApplicationVersion ) = sysk.VersionRuntime
+// Get ( ApplicationVersion ) = plat.VersionRuntime
 
 "Runtime"

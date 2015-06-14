@@ -1,4 +1,4 @@
-// sysk.PlatformIsDesktop
+// plat.IsDesktop
 //
 // Purpose:		Returns true if the system is running on a traditional computer.
 //
@@ -10,6 +10,6 @@
 //
 // Example:
 // // When the system is running on OS X or Windows...
-// sysk.PlatformIsDesktop = 1
+// plat.IsDesktop = 1
 
-sysk.PlatformIsMac or sysk.PlatformIsWin
+plat.IsMac or plat.IsWin

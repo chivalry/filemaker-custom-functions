@@ -1,4 +1,4 @@
-// sysk.PlatformWin
+// plat.Win
 //
 // Purpose:		A constant representing what Get ( SystemPlatform ) returns to indicate Windows.
 //
@@ -7,6 +7,6 @@
 //
 // Example:
 // // When evaluated while running under Windows...
-// Get ( SystemPlatform ) = sysk.PlatformWin
+// Get ( SystemPlatform ) = plat.Win
 
-LeftWords ( Get ( ApplicationVersion ); 1 )
+-2
