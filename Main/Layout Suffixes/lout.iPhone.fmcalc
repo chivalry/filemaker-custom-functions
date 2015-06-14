@@ -1,0 +1,11 @@
+// lout.iPhone
+//
+// Purpose:		Returns a constant that represents iPhone specific layouts.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-06-14
+//
+// Example:
+// lout.iPhone = "_iPhone"
+
+"_iPhone"

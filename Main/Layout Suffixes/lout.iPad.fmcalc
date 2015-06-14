@@ -1,0 +1,11 @@
+// lout.iPad
+//
+// Purpose:		Returns a constant that represents iPad specific layouts.
+//
+// Author:			Charles Ross
+// Version:		1.0 written 15-06-14
+//
+// Example:
+// lout.iPad = "_iPad"
+
+"_iPad"
