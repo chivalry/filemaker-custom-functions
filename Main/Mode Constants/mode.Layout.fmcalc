@@ -1,4 +1,4 @@
-// sysk.ModeLayout
+// mode.Layout
 //
 // Purpose:		A constant representing what Get ( WindowMode ) returns to indicate layout mode.
 //
@@ -7,6 +7,6 @@
 //
 // Example:
 // // When evaluated while the window is in layout mode...
-// Get ( WindowMode ) = sysk.ModeLayout
+// Get ( WindowMode ) = mode.Layout
 
 4

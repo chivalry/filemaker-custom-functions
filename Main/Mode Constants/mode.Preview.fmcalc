@@ -1,4 +1,4 @@
-// sysk.ModePreview
+// mode.Preview
 //
 // Purpose:		A constant representing what Get ( WindowMode ) returns to indicate preview mode.
 //
@@ -7,6 +7,6 @@
 //
 // Example:
 // // When evaluated while the window is in preview mode...
-// Get ( WindowMode ) = sysk.ModePreview
+// Get ( WindowMode ) = mode.Preview
 
 2
