@@ -47,6 +47,7 @@ community (in no particular order):
 - Jesse Swensen
 - [Debi Fuchs](http://www.aptworks.com/welcome.html)
 - [Mislav Kos](http://www.soliantconsulting.com/users/mkos)
+- [Nicholas Orr](http://www.goya.com.au/about/staff)
 
 For those of you above which I haven't yet linked to, or if there's a different URL you'd like a link to, send me a URL that you would like attached to your name.
 
