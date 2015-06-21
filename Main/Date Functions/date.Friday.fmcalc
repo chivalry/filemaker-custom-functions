@@ -1,8 +1,0 @@
-// date.Friday
-//
-// Purpose:		Return FileMaker's representation for Friday when calling DayOfWeek
-//
-// Author:			Charles Ross
-// Version:		1.0 written 15-03-08
-
-5

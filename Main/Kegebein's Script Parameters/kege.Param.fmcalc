@@ -1,4 +1,0 @@
-// http://www.kegebein.net/blog/2009/06/manage-parameters/
-
-kege.EscapeCharacters( _key ) & "==" &
-kege.EscapeCharacters( _value ) & ¶
