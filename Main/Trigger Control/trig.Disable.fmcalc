@@ -19,27 +19,28 @@
 // // When called within a script…
 // trig.Disable = True
 
-Let ( [
-	_script_name			= Get ( ScriptName ) ;
-	_script_is_running	= not IsEmpty ( Get ( ScriptName ) ) ;
-	_disable_is_running	= not IsEmpty ( $_triggers_disabled_key ) ;
-	$_triggers_disabled_key =
-		Case (
-			_disable_is_running	; $_triggers_disabled_key ;
-			_script_is_running	; Get ( UUID )
-		) ;
-	$$_TRIGGERS_DISABLED_SCRIPTS =
-		If ( _script_is_running and not _disable_is_running ;
-			_script_name
-			& Char ( 9 )	// tab
-			& $_triggers_disabled_key
-			& ¶
-			& $$_TRIGGERS_DISABLED_SCRIPTS ;
-		/* Else */
-			$$_TRIGGERS_DISABLED_SCRIPTS
-		) ;
-	$$_TRIGGERS_DISABLED =
-		If ( _script_is_running ; True ; /* Else */ $$_TRIGGERS_DISABLED ) 
-] ;
-	_script_is_running
+Let (
+  [
+    _script_name		= Get ( ScriptName ) ;
+    _script_is_running		= not IsEmpty ( _script_name ) ;
+
+    // Has this script already disabled triggers?
+    _disable_is_running	= not IsEmpty ( $_triggers_disabled_key ) ;
+
+    // If this script already disabled triggers, use the existing key, otherwise generate a new one.
+    $_triggers_disabled_key = Case (
+      _disable_is_running	; $_triggers_disabled_key ;
+      _script_is_running	; Get ( UUID )
+    ) ;
+
+    // If this is the first time this script is disabling triggers, add it to the list.
+    $$_TRIGGERS_DISABLED_SCRIPTS = Case (
+      _script_is_running and not _disable_is_running ;		_script_name & trig.ScriptKey ;
+      											devp.Nil
+    ) & $$_TRIGGERS_DISABLED_SCRIPTS;
+
+    $$_TRIGGERS_DISABLED = _script_is_running or $$_TRIGGERS_DISABLED
+  ] ;
+
+  _script_is_running
 )

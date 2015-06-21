@@ -21,10 +21,12 @@
 // // Complete halts the suppression of triggers…
 // trig.Reset
 
-Let ( [
-	$$_TRIGGERS_DISABLED_SCRIPTS		= "" ;
-	$$_TRIGGERS_DISABLED		= "" ;
-	$_triggers_disabled_key	= ""
-] ;
-	""
+Let (
+  [
+	$$_TRIGGERS_DISABLED_SCRIPTS	= devp.Nil ;
+	$$_TRIGGERS_DISABLED			= devp.Nil ;
+	$_triggers_disabled_key			= devp.Nil
+  ] ;
+
+  devp.Nil
 )

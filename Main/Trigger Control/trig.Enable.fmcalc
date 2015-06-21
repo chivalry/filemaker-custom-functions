@@ -21,30 +21,32 @@
 // // When called within a script but a calling script has already disabled triggers…
 // trig.Enable = False
 
-If ( not IsEmpty ( $_triggers_disabled_key ) ;
-	Let ( [
-		_scripts_len = Length ( $$_TRIGGERS_DISABLED_SCRIPTS ) ;
-		_script_pos =
-			Position (
-				$$_TRIGGERS_DISABLED_SCRIPTS ;
-				Char ( 9 ) /* tab */ & $_triggers_disabled_key & ¶ ;
-				_scripts_len ;
-				-1
-			) ;
-		_break_pos =
-			If ( _script_pos > 0 ;
-				Position ( $$_TRIGGERS_DISABLED_SCRIPTS ; ¶ ; _script_pos ; 1 ) ;
-				/* Else */ 0
-			) ;
-		$$_TRIGGERS_DISABLED_SCRIPTS =
-			Right ( $$_TRIGGERS_DISABLED_SCRIPTS ; _scripts_len - _break_pos ) ;
-		$$_TRIGGERS_DISABLED =
-			If ( not IsEmpty ( $$_TRIGGERS_DISABLED_SCRIPTS ) and $$_TRIGGERS_DISABLED ;
-				True ;
-				/* Else */ ""
-			) ;
-		$_triggers_disabled_key = ""
-	] ;
-		""
-	)
+Case (
+  not IsEmpty ( $_triggers_disabled_key ) ;
+  Let (
+    [
+      // Remove this script's entry from the list of scripts that have disabled triggers.
+      _scripts_len		= Length ( $$_TRIGGERS_DISABLED_SCRIPTS ) ;
+      _script_pos		= Position ( $$_TRIGGERS_DISABLED_SCRIPTS ; trig.ScriptKey ; _scripts_len ; -1 ) ;
+
+      _break_pos = Case (
+        _script_pos > 0 ;	Position ( $$_TRIGGERS_DISABLED_SCRIPTS ; ¶ ; _script_pos ; 1 ) ;
+					0
+      ) ;
+
+      $$_TRIGGERS_DISABLED_SCRIPTS =
+        Right ( $$_TRIGGERS_DISABLED_SCRIPTS ; _scripts_len - _break_pos ) ;
+
+      // Only enable the triggers if no other calling scripts have disabled them.
+      $$_TRIGGERS_DISABLED = Case (
+        not IsEmpty ( $$_TRIGGERS_DISABLED_SCRIPTS ) and $$_TRIGGERS_DISABLED ;	True ;
+
+        devp.Nil
+      ) ;
+
+      $_triggers_disabled_key = devp.Nil
+    ] ;
+
+    devp.Nil
+  )
 )
