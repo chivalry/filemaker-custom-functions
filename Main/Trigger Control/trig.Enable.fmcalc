@@ -1,69 +1,49 @@
-/**
- * =====================================
- * TriggersEnable
- * https://github.com/jbante/FileMaker-Techniques/blob/master/CustomFunctions/Triggers/TriggersEnable.fmfn
- *
- * PURPOSE:
- *		TriggersEnable sets global variables to indicate that the current script
- *		is no longer suppressing triggers. This function will also turn off
- *		trigger suppression altogether if there are no other scripts suppressing
- *		triggers. In order to be suppressed, a script called via trigger should
- *		use the TriggersAreActive function to decide whether or not to run.
- *
- * RETURNS:
- *		True (1) if TriggersEnable successfully removed the current script from
- *		the list of scripts suppressing triggers; False (0) otherwise.
- *
- * PARAMETERS: none
- *
- * REFERENCED VARIABLES:
- *		$$~DISABLETRIGGERS (deprecated)
- *		$$~TRIGGERS_DISABLE
- *		$$~TRIGGERS_SCRIPTS
- *		$~triggers_disableKey
- *
- * DEPENDENCIES: none
- *
- * EXAMPLE (script):
- *		Set Variable [$!; Value:TriggersDisable]
- *		# Do something
- *		Set Variable [$!; Value:TriggersEnable]
- *
- * NOTES:
- *		This function should *always* be used in pairs with the TriggersDisable
- *		function.
- *
- * RELEASE: 2013-04-08
- *
- * REFERENCES:
- *		Supressible Triggered Scripts Best Practice: http://filemakerstandards.org/display/bp/Suppressible+Triggered+Scripts
- * =====================================
- */
+// trig.Enable
+//
+// Purpose:		Sets global variables to indicate that the current script is no longer suppressing
+//				triggers.
+//
+// Requirements: 	$$_TRIGGERS_DISABLED
+//				$$_TRIGGERS_DISABLED_SCRIPTS
+//				$_triggers_disabled_key
+//
+// Author:			Jeremy Bante
+// Version:		1.0 written 13-04-08
+//
+// Notes:			https://github.com/jbante/FileMaker-Techniques/blob/master/CustomFunctions/Triggers/TriggersAreActive.fmfn
+//				http://filemakerstandards.org/display/bp/Suppressible+Triggered+Scripts
+//
+//				This function checks to see if there are other scripts that are suppressing triggers
+//				before enabling them, preventing subscripts for enabling triggers that calling
+//				scripts have disabled.
+//
+// Example:
+// // When called within a script but a calling script has already disabled triggers…
+// trig.Enable = False
 
-If ( not IsEmpty ( $~triggers_disableKey ) ;
+If ( not IsEmpty ( $_triggers_disabled_key ) ;
 	Let ( [
-		~scriptsLength = Length ( $$~TRIGGERS_SCRIPTS ) ;
-		~scriptPosition =
+		_scripts_len = Length ( $$_TRIGGERS_DISABLED_SCRIPTS ) ;
+		_script_pos =
 			Position (
-				$$~TRIGGERS_SCRIPTS ;
-				Char ( 9 ) /* tab */ & $~triggers_disableKey & ¶ ;
-				~scriptsLength ;
+				$$_TRIGGERS_DISABLED_SCRIPTS ;
+				Char ( 9 ) /* tab */ & $_triggers_disabled_key & ¶ ;
+				_scripts_len ;
 				-1
 			) ;
-		~breakPosition =
-			If ( ~scriptPosition > 0 ;
-				Position ( $$~TRIGGERS_SCRIPTS ; ¶ ; ~scriptPosition ; 1 ) ;
+		_break_pos =
+			If ( _script_pos > 0 ;
+				Position ( $$_TRIGGERS_DISABLED_SCRIPTS ; ¶ ; _script_pos ; 1 ) ;
 				/* Else */ 0
 			) ;
-		$$~TRIGGERS_SCRIPTS =
-			Right ( $$~TRIGGERS_SCRIPTS ; ~scriptsLength - ~breakPosition ) ;
-		$$~TRIGGERS_DISABLE =
-			If ( not IsEmpty ( $$~TRIGGERS_SCRIPTS ) and $$~TRIGGERS_DISABLE ;
+		$$_TRIGGERS_DISABLED_SCRIPTS =
+			Right ( $$_TRIGGERS_DISABLED_SCRIPTS ; _scripts_len - _break_pos ) ;
+		$$_TRIGGERS_DISABLED =
+			If ( not IsEmpty ( $$_TRIGGERS_DISABLED_SCRIPTS ) and $$_TRIGGERS_DISABLED ;
 				True ;
 				/* Else */ ""
 			) ;
-		$$~DISABLETRIGGERS = $$~TRIGGERS_DISABLE ;
-		$~triggers_disableKey = ""
+		$_triggers_disabled_key = ""
 	] ;
 		""
 	)

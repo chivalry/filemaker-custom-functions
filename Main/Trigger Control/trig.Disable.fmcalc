@@ -1,68 +1,45 @@
-/**
- * =====================================
- * TriggersDisable
- * https://github.com/jbante/FileMaker-Techniques/blob/master/CustomFunctions/Triggers/TriggersDisable.fmfn
- *
- * PURPOSE:
- *		TriggersDisable sets global variables to indicate that the current
- *		script is suppressing triggers. This script must be called from the
- *		context of a script; otherwise, it will not suppress triggers, and it
- *		will return False. In order to be suppressed, a script called via
- *		trigger should use the TriggersAreActive function to decide whether or
- *		not to run.
- *
- * RETURNS:
- *		True (1) if called from the context of a script, and therefore triggers
- *		have been suppressed; False (0) otherwise.
- *
- * PARAMETERS: none
- *
- * REFERENCED VARIABLES:
- *		$$~DISABLETRIGGERS (deprecated)
- *		$$~TRIGGERS_DISABLE
- *		$$~TRIGGERS_SCRIPTS
- *		$~triggers_disableKey
- *
- * DEPENDENCIES: none
- *
- * EXAMPLE (script):
- *		Set Variable [$!; Value:TriggersDisable]
- *			# Do something
- *		Set Variable [$!; Value:TriggersEnable]
- *
- * NOTES:
- *		This function should *always* be used in pairs with the TriggersEnable
- *		function.
- *
- * RELEASE: 2013-04-08
- *
- * REFERENCES:
- *		Supressible Triggered Scripts Best Practice: http://filemakerstandards.org/display/bp/Suppressible+Triggered+Scripts
- * =====================================
- */
+// trig.Disable
+//
+// Purpose:		Sets global variables to indicate that the current script is suppressing triggers.
+//
+// Requirements: 	$$_TRIGGERS_DISABLED
+//				$$_TRIGGERS_DISABLED_SCRIPTS
+//				$_triggers_disabled_key
+//
+// Author:			Jeremy Bante
+// Version:		1.0 written 13-04-08
+//
+// Notes:			https://github.com/jbante/FileMaker-Techniques/blob/master/CustomFunctions/Triggers/TriggersAreActive.fmfn
+//				http://filemakerstandards.org/display/bp/Suppressible+Triggered+Scripts
+//
+//				This function must be called from within a script. Otherwise it will not supress
+//				triggers and will return False.
+//
+// Example:
+// // When called within a script…
+// trig.Disable = True
 
 Let ( [
-	~scriptName			= Get ( ScriptName ) ;
-	~scriptIsRunning	= not IsEmpty ( Get ( ScriptName ) ) ;
-	~disableIsRunning	= not IsEmpty ( $~triggers_disableKey ) ;
-	$~triggers_disableKey =
+	_script_name			= Get ( ScriptName ) ;
+	_script_is_running	= not IsEmpty ( Get ( ScriptName ) ) ;
+	_disable_is_running	= not IsEmpty ( $_triggers_disabled_key ) ;
+	$_triggers_disabled_key =
 		Case (
-			~disableIsRunning	; $~triggers_disableKey ;
-			~scriptIsRunning	; Get ( UUID )
+			_disable_is_running	; $_triggers_disabled_key ;
+			_script_is_running	; Get ( UUID )
 		) ;
-	$$~TRIGGERS_SCRIPTS =
-		If ( ~scriptIsRunning and not ~disableIsRunning ;
-			~scriptName
+	$$_TRIGGERS_DISABLED_SCRIPTS =
+		If ( _script_is_running and not _disable_is_running ;
+			_script_name
 			& Char ( 9 )	// tab
-			& $~triggers_disableKey
+			& $_triggers_disabled_key
 			& ¶
-			& $$~TRIGGERS_SCRIPTS ;
+			& $$_TRIGGERS_DISABLED_SCRIPTS ;
 		/* Else */
-			$$~TRIGGERS_SCRIPTS
+			$$_TRIGGERS_DISABLED_SCRIPTS
 		) ;
-	$$~TRIGGERS_DISABLE =
-		If ( ~scriptIsRunning ; True ; /* Else */ $$~TRIGGERS_DISABLE ) ;
-	$$~DISABLETRIGGERS = $$~TRIGGERS_DISABLE
+	$$_TRIGGERS_DISABLED =
+		If ( _script_is_running ; True ; /* Else */ $$_TRIGGERS_DISABLED ) 
 ] ;
-	~scriptIsRunning
+	_script_is_running
 )
