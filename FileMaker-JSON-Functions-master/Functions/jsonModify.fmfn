@@ -1,0 +1,33 @@
+/**
+ * =====================================
+ * jsonModify ( json ; keyOrIndex ; newValue )
+ *
+ * PURPOSE:
+ *		Add or modify an object by it's key, or array by it's index.
+ *
+ * RETURNS:
+ *		The modified JSON.
+ *
+ * PARAMETERS:
+ *		json = the json string
+ *		keyOrIndex = object property key (name) or array index (position)
+ *		newValue = string, number, or a named constant:
+ *			json:true, json:false, json:null
+ *			should NOT be an object or array (these will be encoded as strings)
+ *
+ * DEPENDENCIES:
+ *		Custom Functions:
+ *			z_jsonParseSupport1
+ *
+ * LICENSE:
+ *		See the LICENSE.md file for license rights and limitations (MIT):
+ *		https://raw.githubusercontent.com/dansmith65/FileMaker-JSON-Functions/master/LICENSE.md
+ *
+ * LINK: https://github.com/dansmith65/FileMaker-JSON-Functions
+ *
+ * HISTORY:
+ *		v1.0.0 RELEASED on 2015-APR-27 by Daniel Smith dansmith65@gmail.com
+ * =====================================
+ */
+
+z_jsonParseSupport1 ( 131 /* jsonModify */ ; json ; keyOrIndex ; newValue ; "" )
